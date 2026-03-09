@@ -1650,9 +1650,7 @@
                 statusEl.innerHTML = `<i class="fa-solid fa-user-group text-[10px]"></i> ${chat.status}`;
                 infoBtn.classList.remove('hidden');
                 renderGroupInfo(chat);
-                if (window.innerWidth >= 1024) {
-                    openGroupInfoPanel();
-                }
+                closeGroupInfoPanel();
             } else
             if (chat.status === 'Online' || chat.status.includes('online')) {
                 statusEl.className = "text-xs text-green-500 flex items-center gap-1";
