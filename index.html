@@ -1502,7 +1502,7 @@
                 ]
             },
             {
-                id: 2, name: "AI Research Group", avatar: "https://source.unsplash.com/random/100x100/?library", status: "35 members online", unread: 0, lastMsg: "Meeting at 3 PM tomorrow", time: "1 hour ago",
+                id: 2, name: "AI Research Group", avatar: "https://ui-avatars.com/api/?name=AI+Research+Group&background=0f766e&color=ffffff&rounded=true&bold=true&size=150", status: "Group chat • 35 members online", isGroup: true, unread: 0, lastMsg: "Meeting at 3 PM tomorrow", time: "1 hour ago",
                 messages: [
                     { type: "received", text: "Guys, don't forget the deadline for the Teknofest submission!", time: "09:00 AM", senderName: "Ali" },
                     { type: "sent", text: "I'm almost done with the backend documentation.", time: "09:15 AM" },
@@ -1536,6 +1536,7 @@
             conversationsData.forEach(chat => {
                 const isActive = chat.id === currentChatId ? 'bg-primary/5 border-l-4 border-primary' : 'hover:bg-gray-50 border-l-4 border-transparent';
                 const unreadBadge = chat.unread > 0 ? `<span class="bg-gray-800 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">${chat.unread}</span>` : '';
+                const groupBadge = chat.isGroup ? `<span class="bg-primary/10 text-primary text-[10px] px-1.5 py-0.5 rounded-full font-semibold">Group</span>` : '';
 
                 const html = `
                     <div onclick="loadChat(${chat.id})" class="flex items-center space-x-3 p-4 cursor-pointer transition ${isActive}">
@@ -1548,7 +1549,10 @@
                                 <h4 class="font-bold text-sm truncate text-gray-800">${chat.name}</h4>
                                 <span class="text-xs text-gray-500">${chat.time}</span>
                             </div>
-                            <p class="text-xs text-gray-500 truncate">${chat.lastMsg}</p>
+                            <div class="flex items-center gap-1.5">
+                                <p class="text-xs text-gray-500 truncate">${chat.lastMsg}</p>
+                                ${groupBadge}
+                            </div>
                         </div>
                         ${unreadBadge}
                     </div>
@@ -1565,6 +1569,10 @@
             document.getElementById('chatHeaderImage').src = chat.avatar;
             document.getElementById('chatHeaderName').innerText = chat.name;
             const statusEl = document.getElementById('chatHeaderStatus');
+            if (chat.isGroup) {
+                statusEl.className = "text-xs text-primary flex items-center gap-1";
+                statusEl.innerHTML = `<i class="fa-solid fa-user-group text-[10px]"></i> ${chat.status}`;
+            } else
             if (chat.status === 'Online' || chat.status.includes('online')) {
                 statusEl.className = "text-xs text-green-500 flex items-center gap-1";
                 statusEl.innerHTML = `<span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span> ${chat.status}`;
