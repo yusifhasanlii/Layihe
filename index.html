@@ -1,0 +1,1769 @@
+<!DOCTYPE html>
+<html lang="az">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AcademicHub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#009688',
+                        secondary: '#E0F2F1',
+                        bglight: '#F5F7FA',
+                        darktext: '#1F2937',
+                        lighttext: '#6B7280'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Scrollbar Stilləri */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 4px;
+        }
+
+        /* Custom scroll class for hiding scrollbar visually but keeping functionality if needed */
+        .custom-scroll::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .custom-scroll:hover::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-item.active {
+            background-color: #E0F2F1;
+            color: #009688;
+            border-right: 3px solid #009688;
+        }
+    </style>
+</head>
+
+<body class="bg-bglight font-sans text-darktext min-h-screen md:h-screen flex overflow-x-hidden md:overflow-hidden">
+
+    <div id="mobileSidebarBackdrop" onclick="closeMobileSidebar()"
+        class="fixed inset-0 bg-black/40 z-30 hidden md:hidden"></div>
+
+    <aside id="sidebar"
+        class="fixed inset-y-0 left-0 z-40 w-72 max-w-[85%] bg-white border-r border-gray-200 flex flex-col h-full flex-shrink-0 transform -translate-x-full transition-transform duration-300 md:static md:z-auto md:w-64 md:max-w-none md:translate-x-0">
+        <div class="p-5 flex items-center space-x-3">
+            <div class="w-8 h-8 bg-primary rounded flex items-center justify-center text-white">
+                <i class="fa-solid fa-book-open"></i>
+            </div>
+            <span class="text-xl font-bold tracking-tight">AcademicHub</span>
+        </div>
+
+        <nav class="flex-1 px-4 space-y-2 mt-4 overflow-y-auto">
+            <a href="#" onclick="showPage('home', this)"
+                class="nav-item active flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-50 transition">
+                <i class="fa-solid fa-house w-5 text-center"></i>
+                <span class="font-medium">Home</span>
+            </a>
+            <a href="#" onclick="showPage('messages', this)"
+                class="nav-item flex items-center justify-between px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-50 transition">
+                <div class="flex items-center space-x-3">
+                    <i class="fa-regular fa-comment-dots w-5 text-center"></i>
+                    <span class="font-medium">Messages</span>
+                </div>
+                <span class="bg-gray-200 text-xs font-bold px-2 py-0.5 rounded-full">3</span>
+            </a>
+            <a href="#" onclick="showPage('groups', this)"
+                class="nav-item flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-50 transition">
+                <i class="fa-solid fa-user-group w-5 text-center"></i>
+                <span class="font-medium">Groups</span>
+            </a>
+            <a href="#" onclick="showPage('library', this)"
+                class="nav-item flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-50 transition">
+                <i class="fa-solid fa-book-bookmark w-5 text-center"></i>
+                <span class="font-medium">Library</span>
+            </a>
+            <a href="#" onclick="showPage('profile', this)"
+                class="nav-item flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-50 transition">
+                <img src="https://bootdey.com/img/Content/avatar/avatar7.png"
+                    class="w-6 h-6 rounded-full object-cover border border-gray-300">
+                <span class="font-medium">My Profile</span>
+            </a>
+            <a href="#" onclick="showPage('saved', this)"
+                class="nav-item flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-50 transition">
+                <i class="fa-regular fa-bookmark w-5 text-center"></i>
+                <span class="font-medium">Saved</span>
+            </a>
+        </nav>
+
+        <div class="p-4 mt-auto">
+            <div class="bg-primary rounded-xl p-4 text-white shadow-lg">
+                <h3 class="font-bold text-lg mb-1">Join AI & Data Science</h3>
+                <p class="text-xs text-white/80 mb-3">Connect with researchers worldwide</p>
+                <button
+                    class="w-full bg-white text-primary font-semibold py-2 rounded-lg text-sm hover:bg-gray-100 transition">Join</button>
+            </div>
+        </div>
+    </aside>
+
+    <main class="flex-1 flex flex-col h-full overflow-hidden relative">
+
+        <header
+            class="bg-white border-b border-gray-200 h-16 flex items-center justify-between px-4 md:px-8 gap-3 flex-shrink-0 z-20 relative">
+            <div class="flex items-center gap-3 w-full md:w-1/3">
+                <button onclick="toggleMobileSidebar()"
+                    class="md:hidden w-10 h-10 rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50 transition flex items-center justify-center flex-shrink-0">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <div class="relative flex-1">
+                    <i
+                        class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                    <input type="text" placeholder="Search..."
+                        class="w-full pl-10 pr-4 py-2 bg-gray-100 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50">
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-3 md:space-x-6">
+                <button class="text-gray-500 hover:text-primary transition"><i class="fa-solid fa-video"></i></button>
+
+                <button onclick="showPage('notifications', this)"
+                    class="text-gray-500 hover:text-primary relative transition">
+                    <i class="fa-regular fa-bell text-xl"></i>
+                    <span
+                        class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-[10px] font-bold flex items-center justify-center rounded-full border-2 border-white">3</span>
+                </button>
+
+                <div class="relative">
+                    <button onclick="toggleProfileDropdown()" class="flex items-center space-x-2 focus:outline-none">
+                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png"
+                            class="w-9 h-9 rounded-full border border-gray-200 object-cover">
+                        <span class="text-sm font-medium text-gray-700 hidden md:block">you</span>
+                        <i class="fa-solid fa-chevron-down text-xs text-gray-400"></i>
+                    </button>
+
+                    <div id="profileDropdownMenu"
+                        class="hidden absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-100 py-2 z-50 animate-fade-in">
+                        <a href="#" onclick="showPage('profile', this); toggleProfileDropdown()"
+                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2">
+                            <i class="fa-regular fa-user w-5 text-center text-gray-400"></i> Profile
+                        </a>
+                        <a href="#" onclick="showPage('saved', this); toggleProfileDropdown()"
+                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2">
+                            <i class="fa-regular fa-bookmark w-5 text-center text-gray-400"></i> Saved
+                        </a>
+                        <div class="border-t border-gray-100 my-1"></div>
+                        <a href="#"
+                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2">
+                            <i class="fa-solid fa-gear w-5 text-center text-gray-400"></i> Settings
+                        </a>
+                        <a href="#"
+                            class="block px-4 py-2 text-sm text-red-600 hover:bg-red-50 flex items-center gap-2">
+                            <i class="fa-solid fa-arrow-right-from-bracket w-5 text-center text-red-400"></i> Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="flex-1 overflow-hidden p-4 md:p-8 bg-bglight" id="content-container">
+
+            <div id="home" class="page-section active-page max-w-6xl mx-auto h-full">
+                <div class="grid grid-cols-1 xl:grid-cols-12 gap-4 md:gap-8 h-full">
+
+                    <div class="xl:col-span-8 space-y-6 h-full overflow-y-auto pr-0 md:pr-2 pb-20 custom-scroll">
+
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+                            <div class="flex items-center space-x-4 mb-4">
+                                <img src="https://bootdey.com/img/Content/avatar/avatar7.png"
+                                    class="w-10 h-10 rounded-full object-cover shadow-sm">
+                                <input type="text" placeholder="What do you want to share?"
+                                    class="flex-1 bg-gray-50 rounded-full px-5 py-3 text-sm focus:outline-none hover:bg-gray-100 transition">
+                            </div>
+                            <div class="flex flex-wrap gap-2 justify-between items-center pt-2 px-1">
+                                <button onclick="openPostModal('photo')"
+                                    class="flex items-center space-x-2 text-gray-500 hover:bg-gray-50 px-3 py-2 rounded-lg transition group">
+                                    <i class="fa-regular fa-image text-lg group-hover:text-green-600"></i>
+                                    <span class="text-sm font-medium">Photo</span>
+                                </button>
+                                <button onclick="openPostModal('video')"
+                                    class="flex items-center space-x-2 text-gray-500 hover:bg-gray-50 px-3 py-2 rounded-lg transition group">
+                                    <i class="fa-solid fa-video text-lg group-hover:text-blue-600"></i>
+                                    <span class="text-sm font-medium">Video</span>
+                                </button>
+                                <button onclick="openPostModal('file')"
+                                    class="flex items-center space-x-2 text-gray-500 hover:bg-gray-50 px-3 py-2 rounded-lg transition group">
+                                    <i class="fa-regular fa-file text-lg group-hover:text-orange-600"></i>
+                                    <span class="text-sm font-medium">File</span>
+                                </button>
+                                <button onclick="openPostModal('question')"
+                                    class="flex items-center space-x-2 text-gray-500 hover:bg-gray-50 px-3 py-2 rounded-lg transition group">
+                                    <i class="fa-solid fa-circle-question text-lg group-hover:text-pink-600"></i>
+                                    <span class="text-sm font-medium">Question</span>
+                                </button>
+                                <button onclick="openPostModal('announcement')"
+                                    class="flex items-center space-x-2 text-gray-500 hover:bg-gray-50 px-3 py-2 rounded-lg transition group">
+                                    <i class="fa-solid fa-bullhorn text-lg group-hover:text-purple-600"></i>
+                                    <span class="text-sm font-medium">Announcement</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                            <div class="p-4 flex justify-between items-start">
+                                <div class="flex space-x-3">
+                                    <img src="https://i.pravatar.cc/150?u=muhammad" class="w-10 h-10 rounded-full">
+                                    <div>
+                                        <h4 class="font-bold text-sm">Muhammad Yilmaz <span
+                                                class="font-normal text-xs text-gray-500 bg-gray-100 px-2 py-0.5 rounded ml-2">Hacettepe
+                                                University</span></h4>
+                                        <p class="text-xs text-gray-500">PhD Student</p>
+                                        <p class="text-xs text-gray-400 mt-0.5">5 hours ago • <span
+                                                class="text-primary font-medium">#ComputerScience</span></p>
+                                    </div>
+                                </div>
+                                <button class="text-gray-400 hover:text-gray-600"><i
+                                        class="fa-solid fa-ellipsis"></i></button>
+                            </div>
+                            <div class="px-4 pb-3">
+                                <p class="text-sm text-gray-800">Explaining Convolutional Neural Networks step by step.
+                                    This architecture is fundamental for modern Computer Vision tasks! 🧠</p>
+                            </div>
+                            <div class="bg-gray-200 h-72 w-full relative group cursor-pointer">
+                                <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                    alt="Post Image" class="w-full h-full object-cover">
+                                <div
+                                    class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition">
+                                    <div
+                                        class="w-14 h-14 bg-white/90 rounded-full flex items-center justify-center shadow-lg transform group-hover:scale-110 transition">
+                                        <i class="fa-solid fa-play ml-1 text-xl text-darktext"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-3 border-t border-gray-100 flex justify-between text-gray-500 text-sm px-6">
+                                <button class="flex items-center gap-2 hover:text-primary"><i
+                                        class="fa-regular fa-heart"></i> Like</button>
+                                <button class="flex items-center gap-2 hover:text-primary"><i
+                                        class="fa-regular fa-comment"></i> Comment</button>
+                                <button class="flex items-center gap-2 hover:text-primary"><i
+                                        class="fa-solid fa-share"></i> Share</button>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                            <div class="p-4 flex justify-between items-start">
+                                <div class="flex space-x-3">
+                                    <img src="https://i.pravatar.cc/150?u=leyla"
+                                        class="w-10 h-10 rounded-full border border-gray-200">
+                                    <div>
+                                        <h4 class="font-bold text-sm">Leyla Aslan <span
+                                                class="font-normal text-xs text-gray-500 bg-gray-100 px-2 py-0.5 rounded ml-2">Baku
+                                                State University</span></h4>
+                                        <p class="text-xs text-gray-500">MSc in Data Science</p>
+                                        <p class="text-xs text-gray-400 mt-0.5">2 hours ago • <span
+                                                class="text-primary font-medium">#DataAnalysis</span></p>
+                                    </div>
+                                </div>
+                                <button class="text-gray-400 hover:text-gray-600"><i
+                                        class="fa-solid fa-ellipsis"></i></button>
+                            </div>
+                            <div class="px-4 pb-3">
+                                <p class="text-sm text-gray-800">Just finished visualizing the climate change dataset.
+                                    The trends over the last decade are alarming but the data quality is improving.
+                                    Check out this plot created with Python & Matplotlib! 📊</p>
+                            </div>
+                            <div class="px-4 pb-4">
+                                <div class="bg-gray-50 rounded-lg p-4 border border-gray-200"><code
+                                        class="text-xs text-pink-600">import matplotlib.pyplot as plt<br>import pandas as pd<br>...</code>
+                                </div>
+                            </div>
+                            <div class="p-3 border-t border-gray-100 flex justify-between text-gray-500 text-sm px-6">
+                                <button class="flex items-center gap-2 hover:text-primary"><i
+                                        class="fa-regular fa-heart"></i> 24 Likes</button>
+                                <button class="flex items-center gap-2 hover:text-primary"><i
+                                        class="fa-regular fa-comment"></i> 5 Comments</button>
+                                <button class="flex items-center gap-2 hover:text-primary"><i
+                                        class="fa-solid fa-share"></i> Share</button>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                            <div class="p-4 flex justify-between items-start">
+                                <div class="flex space-x-3">
+                                    <img src="https://i.pravatar.cc/150?u=mark" class="w-10 h-10 rounded-full">
+                                    <div>
+                                        <h4 class="font-bold text-sm">Dr. Mark Chen <span
+                                                class="font-normal text-xs text-gray-500 bg-gray-100 px-2 py-0.5 rounded ml-2">MIT</span>
+                                        </h4>
+                                        <p class="text-xs text-gray-500">Professor of Physics</p>
+                                        <p class="text-xs text-gray-400 mt-0.5">Yesterday • <span
+                                                class="text-primary font-medium">#QuantumComputing</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="px-4 pb-3">
+                                <p class="text-sm text-gray-800">We are hosting a webinar on "The Future of Qubits" next
+                                    Tuesday. Everyone is welcome to join! Link in bio.</p>
+                            </div>
+                            <div class="bg-gray-200 h-64 w-full"><img
+                                    src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                    alt="Quantum" class="w-full h-full object-cover"></div>
+                            <div class="p-3 border-t border-gray-100 flex justify-between text-gray-500 text-sm px-6">
+                                <button class="flex items-center gap-2 hover:text-primary"><i
+                                        class="fa-regular fa-heart"></i> 156 Likes</button>
+                                <button class="flex items-center gap-2 hover:text-primary"><i
+                                        class="fa-regular fa-comment"></i> 42 Comments</button>
+                                <button class="flex items-center gap-2 hover:text-primary"><i
+                                        class="fa-solid fa-share"></i> Share</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="xl:col-span-4 h-full overflow-y-auto pl-0 md:pl-2 pb-20 custom-scroll">
+                        <div class="space-y-6">
+
+                            <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100">
+                                <div class="flex justify-between items-center mb-4">
+                                    <h3 class="font-bold text-gray-800">Suggested Groups</h3>
+                                    <a href="#" class="text-xs text-primary font-medium hover:underline">See all</a>
+                                </div>
+                                <div class="space-y-4">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center space-x-3">
+                                            <div
+                                                class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center text-blue-600">
+                                                <i class="fa-solid fa-laptop-code"></i>
+                                            </div>
+                                            <div>
+                                                <p class="text-sm font-bold">Computer Science</p>
+                                                <p class="text-xs text-gray-500">Turkic Univ. • 35.3k</p>
+                                            </div>
+                                        </div>
+                                        <button
+                                            class="text-xs border border-gray-300 px-3 py-1 rounded-full hover:bg-gray-50 font-medium transition">Join</button>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center space-x-3">
+                                            <div
+                                                class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center text-purple-600">
+                                                <i class="fa-solid fa-chart-pie"></i>
+                                            </div>
+                                            <div>
+                                                <p class="text-sm font-bold">Economics Res.</p>
+                                                <p class="text-xs text-gray-500">Turkic Univ. • 30.3k</p>
+                                            </div>
+                                        </div>
+                                        <button
+                                            class="text-xs border border-gray-300 px-3 py-1 rounded-full hover:bg-gray-50 font-medium transition">Join</button>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center space-x-3">
+                                            <div
+                                                class="w-10 h-10 bg-teal-100 rounded-lg flex items-center justify-center text-teal-600">
+                                                <i class="fa-solid fa-staff-snake"></i>
+                                            </div>
+                                            <div>
+                                                <p class="text-sm font-bold">Medicine & Health</p>
+                                                <p class="text-xs text-gray-500">Turkic Univ. • 30.5k</p>
+                                            </div>
+                                        </div>
+                                        <button
+                                            class="text-xs border border-gray-300 px-3 py-1 rounded-full hover:bg-gray-50 font-medium transition">Join</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100">
+                                <div class="flex justify-between items-center mb-4">
+                                    <h3 class="font-bold text-gray-800 text-lg">Online Friends</h3><span
+                                        class="bg-gray-100 text-xs font-bold px-2 py-1 rounded text-gray-600">4</span>
+                                </div>
+                                <div class="space-y-4">
+                                    <div
+                                        class="flex items-center space-x-3 cursor-pointer hover:bg-gray-50 p-1 rounded-lg transition">
+                                        <div class="relative"><img src="https://i.pravatar.cc/150?u=ai_friend"
+                                                class="w-10 h-10 rounded-full object-cover"><span
+                                                class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white rounded-full"></span>
+                                        </div>
+                                        <div>
+                                            <p class="text-sm font-bold text-gray-800">Artificial Intelligence</p>
+                                            <p class="text-xs text-gray-400">4.8k discussions</p>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="flex items-center space-x-3 cursor-pointer hover:bg-gray-50 p-1 rounded-lg transition">
+                                        <div class="relative"><img src="https://i.pravatar.cc/150?u=quantum"
+                                                class="w-10 h-10 rounded-full object-cover"><span
+                                                class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white rounded-full"></span>
+                                        </div>
+                                        <div>
+                                            <p class="text-sm font-bold text-gray-800">Quantum Computing</p>
+                                            <p class="text-xs text-gray-400">3.9k discussions</p>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="flex items-center space-x-3 cursor-pointer hover:bg-gray-50 p-1 rounded-lg transition">
+                                        <div class="relative"><img src="https://i.pravatar.cc/150?u=sustain"
+                                                class="w-10 h-10 rounded-full object-cover"><span
+                                                class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white rounded-full"></span>
+                                        </div>
+                                        <div>
+                                            <p class="text-sm font-bold text-gray-800">Sustainable Development</p>
+                                            <p class="text-xs text-gray-400">3.2k discussions</p>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="flex items-center space-x-3 cursor-pointer hover:bg-gray-50 p-1 rounded-lg transition">
+                                        <div class="relative"><img src="https://i.pravatar.cc/150?u=robot"
+                                                class="w-10 h-10 rounded-full object-cover"><span
+                                                class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white rounded-full"></span>
+                                        </div>
+                                        <div>
+                                            <p class="text-sm font-bold text-gray-800">Robotics</p>
+                                            <p class="text-xs text-gray-400">2.8k discussions</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100">
+                                <div class="flex items-center gap-2 mb-4"><i
+                                        class="fa-solid fa-arrow-trend-up text-gray-800"></i>
+                                    <h3 class="font-bold text-gray-800 text-lg">Trending Topics</h3>
+                                </div>
+                                <div class="space-y-4">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <p class="text-sm font-bold text-gray-800">Artificial Intelligence</p>
+                                            <p class="text-xs text-gray-400">4.5k discussions</p>
+                                        </div><span
+                                            class="bg-gray-200 text-xs font-bold px-2 py-1 rounded-md text-gray-700 flex items-center gap-1"><i
+                                                class="fa-solid fa-arrow-trend-up text-[10px]"></i> 45%</span>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <p class="text-sm font-bold text-gray-800">Quantum Computing</p>
+                                            <p class="text-xs text-gray-400">3.5k discussions</p>
+                                        </div><span
+                                            class="bg-gray-200 text-xs font-bold px-2 py-1 rounded-md text-gray-700 flex items-center gap-1"><i
+                                                class="fa-solid fa-arrow-trend-up text-[10px]"></i> 32%</span>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <p class="text-sm font-bold text-gray-800">Sustainable Development</p>
+                                            <p class="text-xs text-gray-400">3.3k discussions</p>
+                                        </div><span
+                                            class="bg-gray-200 text-xs font-bold px-2 py-1 rounded-md text-gray-700 flex items-center gap-1"><i
+                                                class="fa-solid fa-arrow-trend-up text-[10px]"></i> 28%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="messages" class="page-section hidden h-full flex flex-col">
+                <div
+                    class="flex flex-col md:flex-row h-full md:h-[calc(100vh-140px)] bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                    <div class="w-full md:w-1/3 border-b md:border-b-0 md:border-r border-gray-200 flex flex-col max-h-72 md:max-h-none">
+                        <div class="p-4 border-b border-gray-100">
+                            <h2 class="text-lg font-bold mb-3">Messages</h2>
+                            <div class="relative">
+                                <i
+                                    class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs"></i>
+                                <input type="text" placeholder="Search conversations..."
+                                    class="w-full bg-gray-50 pl-8 pr-3 py-2 rounded-lg text-sm focus:outline-none">
+                            </div>
+                        </div>
+                        <div class="overflow-y-auto flex-1" id="conversationList">
+                        </div>
+                    </div>
+
+                    <div class="w-full md:w-2/3 flex flex-col min-h-0">
+                        <div class="p-4 border-b border-gray-100 flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <img id="chatHeaderImage" src="https://i.pravatar.cc/150?u=sarah"
+                                    class="w-10 h-10 rounded-full">
+                                <div>
+                                    <h3 id="chatHeaderName" class="font-bold text-sm">Dr. Sarah Mitchell</h3>
+                                    <p id="chatHeaderStatus" class="text-xs text-green-500 flex items-center gap-1">
+                                        <span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span> Online
+                                    </p>
+                                </div>
+                            </div>
+                            <button class="text-gray-400 hover:text-gray-600"><i
+                                    class="fa-solid fa-circle-info"></i></button>
+                        </div>
+
+                        <div id="chatContainer" class="flex-1 p-6 space-y-4 overflow-y-auto bg-gray-50 custom-scroll">
+                        </div>
+
+                        <div class="p-4 bg-white border-t border-gray-100 flex items-center space-x-3">
+                            <button class="text-gray-400 hover:text-gray-600"><i
+                                    class="fa-solid fa-paperclip"></i></button>
+
+                            <input type="text" id="messageInput" placeholder="Type a message..."
+                                class="flex-1 bg-gray-50 border border-gray-200 rounded-full px-4 py-2 text-sm focus:outline-none focus:border-primary"
+                                onkeypress="handleKeyPress(event)">
+
+                            <button onclick="sendMessage()"
+                                class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center hover:bg-teal-700 transition transform active:scale-95">
+                                <i class="fa-solid fa-paper-plane text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="groups" class="page-section hidden h-full overflow-y-auto custom-scroll pr-2">
+                <h2 class="text-2xl font-bold text-gray-800 mb-2">Discover Groups</h2>
+                <p class="text-gray-500 mb-6">Find and join academic communities that match your interests</p>
+
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 mb-6">
+                    <div class="relative mb-4">
+                        <i
+                            class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                        <input type="text" id="groupSearchInput" onkeyup="filterGroups()" placeholder="Search groups..."
+                            class="w-full bg-gray-50 pl-10 pr-4 py-2.5 rounded-lg text-sm border border-gray-200 focus:outline-none focus:border-primary transition">
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="text-xs font-semibold text-gray-700 block mb-1">Field</label>
+                            <select id="fieldSelect" onchange="filterGroups()"
+                                class="w-full bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-primary cursor-pointer">
+                                <option value="">All Fields</option>
+                                <option value="Computer Science">Computer Science</option>
+                                <option value="Physics">Physics</option>
+                                <option value="Biology">Biology</option>
+                                <option value="Environmental Science">Environmental Science</option>
+                                <option value="Economics">Economics</option>
+                                <option value="History">History</option>
+                                <option value="Neuroscience">Neuroscience</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="text-xs font-semibold text-gray-700 block mb-1">Country</label>
+                            <select id="countrySelect" onchange="filterGroups()"
+                                class="w-full bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-primary cursor-pointer">
+                                <option value="">All Countries</option>
+                                <option value="Global">Global</option>
+                                <option value="Azerbaijan">Azerbaijan</option>
+                                <option value="USA">USA</option>
+                                <option value="UK">UK</option>
+                                <option value="Germany">Germany</option>
+                                <option value="China">China</option>
+                                <option value="Japan">Japan</option>
+                                <option value="Turkey">Turkey</option>
+                                <option value="Egypt">Egypt</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="text-xs font-semibold text-gray-700 block mb-1">University</label>
+                            <select id="universitySelect" onchange="filterGroups()"
+                                class="w-full bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-primary cursor-pointer">
+                                <option value="">All Universities</option>
+                                <option value="Karabakh University">Karabakh University</option>
+                                <option value="Multiple Universities">Multiple Universities</option>
+                                <option value="MIT">MIT</option>
+                                <option value="Stanford University">Stanford University</option>
+                                <option value="Cambridge University">Cambridge University</option>
+                                <option value="Harvard University">Harvard University</option>
+                                <option value="Oxford University">Oxford University</option>
+                                <option value="Cairo University">Cairo University</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="text-sm text-gray-500 mb-4">Found <span id="groupCount"
+                        class="font-bold text-gray-800">0</span> groups</p>
+
+                <div id="groupsList" class="grid grid-cols-1 md:grid-cols-2 gap-6 pb-20">
+                </div>
+            </div>
+
+            <div id="library" class="page-section hidden">
+                <h2 class="text-2xl font-bold text-gray-800 mb-2 flex items-center gap-2"><i
+                        class="fa-solid fa-book-open"></i> Library & Resources</h2>
+                <p class="text-gray-500 mb-6">Access research papers, datasets, and learning materials</p>
+
+                <div class="bg-gray-100 p-1 rounded-xl flex mb-6 max-w-4xl">
+                    <button onclick="switchLibTab('resources')"
+                        class="flex-1 py-2 text-sm font-semibold rounded-lg bg-white shadow-sm text-gray-800 text-center transition lib-tab-btn"
+                        id="btn-resources">Resources</button>
+                    <button onclick="switchLibTab('saved-posts')"
+                        class="flex-1 py-2 text-sm font-semibold rounded-lg text-gray-500 hover:bg-white/50 text-center transition lib-tab-btn"
+                        id="btn-saved-posts">Saved Posts</button>
+                    <button onclick="switchLibTab('collections')"
+                        class="flex-1 py-2 text-sm font-semibold rounded-lg text-gray-500 hover:bg-white/50 text-center transition lib-tab-btn"
+                        id="btn-collections">My Collections</button>
+                </div>
+
+                <div id="view-resources" class="lib-view">
+                    <div class="flex items-center space-x-3 mb-4 flex-wrap">
+                        <div class="relative flex-1 max-w-md">
+                            <i
+                                class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                            <input type="text" placeholder="Search resources..."
+                                class="w-full bg-white pl-10 pr-4 py-2 rounded-lg border border-gray-200 text-sm focus:outline-none">
+                        </div>
+                        <button class="bg-gray-900 text-white text-sm px-4 py-2 rounded-lg">All Categories</button>
+                        <button
+                            class="bg-white border border-gray-200 text-gray-600 text-sm px-4 py-2 rounded-lg hover:bg-gray-50">Machine
+                            Learning</button>
+                        <button
+                            class="bg-white border border-gray-200 text-gray-600 text-sm px-4 py-2 rounded-lg hover:bg-gray-50">Physics</button>
+                    </div>
+
+                    <p class="text-sm text-gray-500 mb-4">Found 6 resources</p>
+
+                    <div class="space-y-4">
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex items-start gap-4">
+                            <div
+                                class="w-12 h-12 bg-teal-50 rounded-lg flex items-center justify-center text-primary text-xl flex-shrink-0">
+                                <i class="fa-regular fa-file-lines"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between">
+                                    <h3 class="font-bold text-gray-800">Introduction to Deep Learning</h3>
+                                    <i class="fa-solid fa-bookmark text-primary"></i>
+                                </div>
+                                <p class="text-sm text-gray-500 mb-2">by Dr. Andrew Ng</p>
+                                <div class="flex items-center gap-3 text-xs text-gray-400">
+                                    <span class="bg-gray-100 text-gray-600 px-2 py-0.5 rounded">Machine Learning</span>
+                                    <span class="bg-gray-100 text-gray-600 px-2 py-0.5 rounded">PDF</span>
+                                    <span><i class="fa-solid fa-download mr-1"></i> 12,453 downloads</span>
+                                    <span>• 5.2 MB</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-col gap-2">
+                                <button
+                                    class="bg-gray-900 text-white text-xs font-bold px-4 py-2 rounded-lg flex items-center gap-2"><i
+                                        class="fa-solid fa-download"></i> Download</button>
+                                <button
+                                    class="border border-gray-200 text-gray-600 text-xs font-bold px-4 py-2 rounded-lg">View</button>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex items-start gap-4">
+                            <div
+                                class="w-12 h-12 bg-green-50 rounded-lg flex items-center justify-center text-green-600 text-xl flex-shrink-0">
+                                <i class="fa-regular fa-file-lines"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between">
+                                    <h3 class="font-bold text-gray-800">Quantum Computing Fundamentals</h3>
+                                    <i class="fa-regular fa-bookmark text-gray-400"></i>
+                                </div>
+                                <p class="text-sm text-gray-500 mb-2">by MIT Press</p>
+                                <div class="flex items-center gap-3 text-xs text-gray-400">
+                                    <span class="bg-gray-100 text-gray-600 px-2 py-0.5 rounded">Physics</span>
+                                    <span class="bg-gray-100 text-gray-600 px-2 py-0.5 rounded">PDF</span>
+                                    <span><i class="fa-solid fa-download mr-1"></i> 8,234 downloads</span>
+                                    <span>• 3.8 MB</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-col gap-2">
+                                <button
+                                    class="bg-gray-900 text-white text-xs font-bold px-4 py-2 rounded-lg flex items-center gap-2"><i
+                                        class="fa-solid fa-download"></i> Download</button>
+                                <button
+                                    class="border border-gray-200 text-gray-600 text-xs font-bold px-4 py-2 rounded-lg">View</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="view-saved-posts" class="lib-view hidden">
+                    <div class="space-y-4">
+                        <div
+                            class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex items-center justify-between">
+                            <div class="flex items-center gap-4">
+                                <div
+                                    class="w-10 h-10 bg-gray-100 rounded flex items-center justify-center text-gray-500">
+                                    <i class="fa-solid fa-bookmark"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800">Explaining Convolutional Neural Networks</h4>
+                                    <p class="text-xs text-gray-500">by Muhammad Yilmaz • Video Post</p>
+                                </div>
+                            </div>
+                            <button class="border border-gray-200 text-sm px-4 py-1.5 rounded-lg hover:bg-gray-50">View
+                                Post</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="view-collections" class="lib-view hidden">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div
+                            class="border-2 border-dashed border-gray-300 rounded-xl flex flex-col items-center justify-center p-8 cursor-pointer hover:bg-gray-50">
+                            <div
+                                class="w-12 h-12 bg-teal-50 rounded-full flex items-center justify-center text-primary mb-3">
+                                <i class="fa-regular fa-folder-open"></i>
+                            </div>
+                            <h3 class="font-bold text-gray-700">Create Collection</h3>
+                            <p class="text-xs text-gray-400">Organize your resources</p>
+                        </div>
+                        <div
+                            class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col items-center text-center">
+                            <div
+                                class="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center text-blue-500 mb-3">
+                                <i class="fa-regular fa-file-lines"></i>
+                            </div>
+                            <h3 class="font-bold text-gray-800">Machine Learning</h3>
+                            <p class="text-xs text-gray-500 mb-4">12 resources</p>
+                            <span class="bg-gray-100 text-xs px-2 py-1 rounded text-gray-500">Personal</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="profile" class="page-section hidden h-full overflow-y-auto custom-scroll pb-20">
+                <div class="h-40 bg-gray-800 w-full rounded-t-xl overflow-hidden relative flex-shrink-0">
+                    <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80"
+                        class="w-full h-full object-cover opacity-60">
+                </div>
+
+                <div
+                    class="bg-white rounded-b-xl shadow-sm border border-gray-100 px-6 pb-6 relative mb-6 flex-shrink-0">
+                    <div class="flex justify-between items-end -mt-10 mb-4">
+                        <div class="relative">
+                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png"
+                                class="w-24 h-24 rounded-full border-4 border-white bg-white shadow-md">
+                        </div>
+                        <button
+                            class="bg-primary text-white px-4 py-1.5 rounded-lg text-sm font-semibold hover:bg-teal-700 transition shadow-sm">
+                            <i class="fa-solid fa-pen-to-square mr-1"></i> Edit Profile
+                        </button>
+                    </div>
+
+                    <div class="mb-6">
+                        <h2 class="text-xl font-bold text-gray-800">Yusif Hasanli</h2>
+                        <div class="flex flex-wrap gap-2 mt-2">
+                            <span
+                                class="bg-blue-50 text-blue-700 text-xs px-2.5 py-1 rounded-md font-medium border border-blue-100">
+                                <i class="fa-solid fa-graduation-cap mr-1"></i> Karabakh University
+                            </span>
+                            <span
+                                class="bg-purple-50 text-purple-700 text-xs px-2.5 py-1 rounded-md font-medium border border-purple-100">
+                                <i class="fa-solid fa-code mr-1"></i> Computer Engineering
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-8 border-b border-gray-100 pb-0">
+                        <button onclick="switchProfileTab('posts')" id="ptab-posts"
+                            class="ptab-btn pb-3 font-semibold text-primary border-b-2 border-primary transition">Posts</button>
+                        <button onclick="switchProfileTab('about')" id="ptab-about"
+                            class="ptab-btn pb-3 font-medium text-gray-500 hover:text-gray-800 transition">About</button>
+                        <button onclick="switchProfileTab('groups')" id="ptab-groups"
+                            class="ptab-btn pb-3 font-medium text-gray-500 hover:text-gray-800 transition">Groups</button>
+                        <button onclick="switchProfileTab('saved')" id="ptab-saved"
+                            class="ptab-btn pb-3 font-medium text-gray-500 hover:text-gray-800 transition">Saved</button>
+                    </div>
+                </div>
+
+                <div id="pview-posts" class="pview-content px-1">
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 mb-4">
+                        <div class="flex justify-between items-start mb-3">
+                            <div class="flex space-x-3">
+                                <img src="https://bootdey.com/img/Content/avatar/avatar7.png"
+                                    class="w-10 h-10 rounded-full">
+                                <div>
+                                    <h4 class="font-bold text-sm">Yusif Hasanli</h4>
+                                    <p class="text-xs text-gray-500">5 hours ago</p>
+                                </div>
+                            </div>
+                            <button class="text-gray-400 hover:text-gray-600"><i
+                                    class="fa-solid fa-ellipsis"></i></button>
+                        </div>
+                        <p class="text-sm text-gray-700 mb-3">
+                            Finally finished the final project for Algorithms class! The complexity analysis was tougher
+                            than I expected. Time to sleep! 😴📚
+                        </p>
+                        <div class="flex items-center gap-4 text-xs text-gray-500 border-t border-gray-100 pt-3 mt-3">
+                            <button class="flex items-center gap-1 hover:text-primary"><i
+                                    class="fa-regular fa-heart"></i> 45 Likes</button>
+                            <button class="flex items-center gap-1 hover:text-primary"><i
+                                    class="fa-regular fa-comment"></i> 12 Comments</button>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 mb-4">
+                        <div class="flex justify-between items-start mb-3">
+                            <div class="flex space-x-3">
+                                <img src="https://bootdey.com/img/Content/avatar/avatar7.png"
+                                    class="w-10 h-10 rounded-full">
+                                <div>
+                                    <h4 class="font-bold text-sm">Yusif Hasanli</h4>
+                                    <p class="text-xs text-gray-500">Yesterday</p>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-700 mb-2">Anyone knows a good resource for learning React Native? 🤔
+                        </p>
+                        <div class="flex items-center gap-4 text-xs text-gray-500 border-t border-gray-100 pt-3 mt-3">
+                            <button class="flex items-center gap-1 hover:text-primary"><i
+                                    class="fa-regular fa-heart"></i> 8 Likes</button>
+                            <button class="flex items-center gap-1 hover:text-primary"><i
+                                    class="fa-regular fa-comment"></i> 15 Comments</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="pview-about" class="pview-content hidden px-1">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                        <h3 class="font-bold text-lg mb-4 text-gray-800">Bio</h3>
+                        <p class="text-sm text-gray-600 mb-6 leading-relaxed">
+                            Technology enthusiast and software developer in the making. Always eager to learn new
+                            technologies and apply them to solve real-world problems. Currently exploring the world of
+                            Cloud Computing and Mobile App Development.
+                        </p>
+
+                        <h3 class="font-bold text-lg mb-4 text-gray-800">Info</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center text-sm text-gray-600">
+                                <i class="fa-solid fa-location-dot w-6 text-center text-gray-400"></i>
+                                <span>Khankendi, Azerbaijan</span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <i class="fa-regular fa-envelope w-6 text-center text-gray-400"></i>
+                                <span>s300533@karabakh.edu.az</span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <i class="fa-brands fa-github w-6 text-center text-gray-400"></i>
+                                <a href="#" class="text-primary hover:underline">github.com/yusif-dev</a>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <i class="fa-regular fa-calendar w-6 text-center text-gray-400"></i>
+                                <span>Joined September 2024</span>
+                            </div>
+                        </div>
+
+                        <h3 class="font-bold text-lg mt-6 mb-3 text-gray-800">Skills</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span
+                                class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full font-medium">Java</span>
+                            <span
+                                class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full font-medium">SQL</span>
+                            <span
+                                class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full font-medium">Git</span>
+                            <span
+                                class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full font-medium">Linux</span>
+                            <span
+                                class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full font-medium">Docker</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="pview-groups" class="pview-content hidden px-1">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex items-center gap-3">
+                            <div
+                                class="w-10 h-10 bg-indigo-100 text-indigo-600 rounded-lg flex items-center justify-center">
+                                <i class="fa-solid fa-gamepad"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm">Game Dev Club</h4>
+                                <p class="text-xs text-gray-500">Member</p>
+                            </div>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex items-center gap-3">
+                            <div
+                                class="w-10 h-10 bg-orange-100 text-orange-600 rounded-lg flex items-center justify-center">
+                                <i class="fa-solid fa-basketball"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm">Uni Sports</h4>
+                                <p class="text-xs text-gray-500">Member</p>
+                            </div>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex items-center gap-3">
+                            <div
+                                class="w-10 h-10 bg-teal-100 text-teal-600 rounded-lg flex items-center justify-center">
+                                <i class="fa-solid fa-book-open"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm">Book Lovers</h4>
+                                <p class="text-xs text-gray-500">Moderator</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="pview-saved" class="pview-content hidden px-1">
+                    <div
+                        class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex justify-between items-center mb-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-red-50 text-red-600 rounded-lg flex items-center justify-center"><i
+                                    class="fa-brands fa-youtube"></i></div>
+                            <div>
+                                <h4 class="font-bold text-sm text-gray-800">Advanced CSS Tutorial</h4>
+                                <p class="text-xs text-gray-500">Video • Saved 2 days ago</p>
+                            </div>
+                        </div>
+                        <button class="text-gray-400 hover:text-gray-600"><i
+                                class="fa-solid fa-chevron-right"></i></button>
+                    </div>
+                    <div
+                        class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex justify-between items-center">
+                        <div class="flex items-center gap-3">
+                            <div
+                                class="w-10 h-10 bg-gray-100 text-gray-600 rounded-lg flex items-center justify-center">
+                                <i class="fa-solid fa-file-lines"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm text-gray-800">Exam Schedule Spring 2026</h4>
+                                <p class="text-xs text-gray-500">PDF • Saved last week</p>
+                            </div>
+                        </div>
+                        <button class="text-gray-400 hover:text-gray-600"><i
+                                class="fa-solid fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="saved" class="page-section hidden">
+                <h2 class="text-2xl font-bold text-gray-800 mb-2 flex items-center gap-2"><i
+                        class="fa-regular fa-bookmark"></i> Saved Items</h2>
+
+                <div class="flex flex-wrap gap-3 mb-6 mt-4">
+                    <button
+                        class="bg-white px-6 py-2 rounded-full shadow-sm text-sm font-bold text-gray-800">Resources</button>
+                    <button class="bg-white px-6 py-2 rounded-full shadow-sm text-sm font-medium text-gray-500">Saved
+                        Posts</button>
+                    <button class="bg-gray-200 px-6 py-2 rounded-full shadow-inner text-sm font-medium text-gray-600">My
+                        Collections</button>
+                </div>
+
+                <div class="space-y-4">
+                    <div
+                        class="bg-white p-5 rounded-xl shadow-sm border border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-center gap-4">
+                            <div
+                                class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center text-gray-500">
+                                <i class="fa-solid fa-bookmark"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Explaining Convolutional Neural Networks</h4>
+                                <p class="text-xs text-gray-500 mt-1">by Muhammad Yilmaz</p>
+                                <div class="flex gap-2 mt-1">
+                                    <span
+                                        class="bg-gray-100 text-[10px] px-1.5 py-0.5 rounded text-gray-600 font-bold">Video
+                                        Post</span>
+                                    <span class="text-[10px] text-gray-400">Saved 2 days ago</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button
+                            class="border border-gray-200 text-sm font-medium px-4 py-2 rounded-lg hover:bg-gray-50">View
+                            Post</button>
+                    </div>
+
+                    <div
+                        class="bg-white p-5 rounded-xl shadow-sm border border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-center gap-4">
+                            <div
+                                class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center text-gray-500">
+                                <i class="fa-solid fa-bookmark"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Study notes on Differential Equations</h4>
+                                <p class="text-xs text-gray-500 mt-1">by Leyla Aslan</p>
+                                <div class="flex gap-2 mt-1">
+                                    <span
+                                        class="bg-gray-100 text-[10px] px-1.5 py-0.5 rounded text-gray-600 font-bold">Photo
+                                        Post</span>
+                                    <span class="text-[10px] text-gray-400">Saved 5 days ago</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button
+                            class="border border-gray-200 text-sm font-medium px-4 py-2 rounded-lg hover:bg-gray-50">View
+                            Post</button>
+                    </div>
+
+                    <div
+                        class="bg-white p-5 rounded-xl shadow-sm border border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-center gap-4">
+                            <div
+                                class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center text-gray-500">
+                                <i class="fa-solid fa-bookmark"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">PhD Opportunities in Marine Biology</h4>
+                                <p class="text-xs text-gray-500 mt-1">by Dr. Sarah Mitchell</p>
+                                <div class="flex gap-2 mt-1">
+                                    <span
+                                        class="bg-gray-100 text-[10px] px-1.5 py-0.5 rounded text-gray-600 font-bold">Announcement</span>
+                                    <span class="text-[10px] text-gray-400">Saved 1 week ago</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button
+                            class="border border-gray-200 text-sm font-medium px-4 py-2 rounded-lg hover:bg-gray-50">View
+                            Post</button>
+                    </div>
+                </div>
+            </div>
+            <div id="notifications" class="page-section hidden h-full overflow-y-auto custom-scroll pb-20">
+                <div class="max-w-4xl mx-auto mt-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-bold text-gray-800 flex items-center gap-3">
+                            <i class="fa-regular fa-bell"></i> Notifications
+                        </h2>
+                        <button
+                            class="flex items-center gap-2 text-sm font-semibold text-gray-600 bg-white border border-gray-200 px-4 py-2 rounded-lg hover:bg-gray-50 transition shadow-sm">
+                            <i class="fa-solid fa-check-double text-primary"></i> Mark all as read
+                        </button>
+                    </div>
+
+                    <div class="bg-gray-100 p-1 rounded-xl flex mb-6 w-full sticky top-0 z-10">
+                        <button onclick="switchNotificationTab('all')" id="ntab-all"
+                            class="ntab-btn flex-1 py-2 text-sm font-semibold rounded-lg bg-white shadow-sm text-gray-800 text-center transition relative">
+                            All <span class="bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded-full ml-1">3</span>
+                        </button>
+                        <button onclick="switchNotificationTab('unread')" id="ntab-unread"
+                            class="ntab-btn flex-1 py-2 text-sm font-semibold rounded-lg text-gray-500 hover:bg-white/50 text-center transition">Unread</button>
+                        <button onclick="switchNotificationTab('reactions')" id="ntab-reactions"
+                            class="ntab-btn flex-1 py-2 text-sm font-semibold rounded-lg text-gray-500 hover:bg-white/50 text-center transition">Reactions</button>
+                        <button onclick="switchNotificationTab('comments')" id="ntab-comments"
+                            class="ntab-btn flex-1 py-2 text-sm font-semibold rounded-lg text-gray-500 hover:bg-white/50 text-center transition">Comments</button>
+                    </div>
+
+                    <div id="nview-all" class="nview-content space-y-4">
+                        <div
+                            class="bg-teal-50/50 border border-primary/20 p-5 rounded-2xl flex items-start gap-4 transition hover:shadow-sm">
+                            <img src="https://i.pravatar.cc/150?u=sarah"
+                                class="w-12 h-12 rounded-full border border-white shadow-sm object-cover">
+                            <div class="flex-1">
+                                <p class="text-sm text-gray-800 mb-1">
+                                    <span class="font-bold">Dr. Sarah Mitchell</span> liked your post
+                                    <span class="font-medium text-primary">"Explaining Convolutional Neural
+                                        Networks"</span>
+                                </p>
+                                <span class="text-xs text-gray-400">5 minutes ago</span>
+                            </div>
+                            <div
+                                class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm">
+                                <i class="fa-solid fa-thumbs-up"></i></div>
+                        </div>
+
+                        <div
+                            class="bg-teal-50/50 border border-primary/20 p-5 rounded-2xl flex items-start gap-4 transition hover:shadow-sm">
+                            <img src="https://i.pravatar.cc/150?u=leyla"
+                                class="w-12 h-12 rounded-full border border-white shadow-sm object-cover">
+                            <div class="flex-1">
+                                <p class="text-sm text-gray-800">
+                                    <span class="font-bold">Leyla Aslan</span> started following you
+                                </p>
+                                <span class="text-xs text-gray-400">2 hours ago</span>
+                            </div>
+                            <div
+                                class="w-8 h-8 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center text-sm">
+                                <i class="fa-solid fa-user-plus"></i></div>
+                        </div>
+
+                        <div
+                            class="bg-white border border-gray-100 p-5 rounded-2xl flex items-center gap-4 transition hover:shadow-sm">
+                            <div class="flex -space-x-3 overflow-hidden">
+                                <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white"
+                                    src="https://i.pravatar.cc/150?u=muhammad" alt="" />
+                                <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white"
+                                    src="https://i.pravatar.cc/150?u=emily" alt="" />
+                                <div
+                                    class="h-10 w-10 rounded-full ring-2 ring-white bg-gray-100 flex items-center justify-center text-xs font-bold text-gray-500">
+                                    +14</div>
+                            </div>
+                            <div class="flex-1 pl-2">
+                                <p class="text-sm text-gray-800"><span class="font-bold">Muhammad Yilmaz</span> and
+                                    others reacted to your post</p>
+                                <span class="text-xs text-gray-400">5 hours ago</span>
+                            </div>
+                            <div
+                                class="w-8 h-8 bg-blue-50 text-blue-500 rounded-full flex items-center justify-center text-sm">
+                                <i class="fa-solid fa-thumbs-up"></i></div>
+                        </div>
+                    </div>
+
+                    <div id="nview-unread" class="nview-content hidden space-y-4">
+                        <div
+                            class="bg-teal-50/50 border border-primary/20 p-5 rounded-2xl flex items-start gap-4 transition hover:shadow-sm">
+                            <div class="relative">
+                                <img src="https://source.unsplash.com/random/100x100/?university"
+                                    class="w-12 h-12 rounded-full border border-white shadow-sm object-cover">
+                                <div class="absolute -bottom-1 -right-1 bg-white rounded-full p-0.5">
+                                    <div
+                                        class="w-4 h-4 bg-red-500 rounded-full flex items-center justify-center text-[8px] text-white">
+                                        <i class="fa-solid fa-bell"></i></div>
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-sm text-gray-800"><span class="font-bold">Karabakh University</span>
+                                    posted a new announcement: <span class="font-medium text-primary">"Spring Semester
+                                        Exam Schedule"</span></p>
+                                <span class="text-xs text-gray-400">10 minutes ago</span>
+                            </div>
+                            <button
+                                class="text-xs bg-white border border-gray-200 px-3 py-1 rounded shadow-sm">View</button>
+                        </div>
+
+                        <div
+                            class="bg-teal-50/50 border border-primary/20 p-5 rounded-2xl flex items-start gap-4 transition hover:shadow-sm">
+                            <img src="https://i.pravatar.cc/150?u=sarah"
+                                class="w-12 h-12 rounded-full border border-white shadow-sm object-cover">
+                            <div class="flex-1">
+                                <p class="text-sm text-gray-800 mb-1"><span class="font-bold">Dr. Sarah Mitchell</span>
+                                    liked your post</p>
+                                <span class="text-xs text-gray-400">5 minutes ago</span>
+                            </div>
+                            <div
+                                class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm">
+                                <i class="fa-solid fa-thumbs-up"></i></div>
+                        </div>
+
+                        <div
+                            class="bg-teal-50/50 border border-primary/20 p-5 rounded-2xl flex items-start gap-4 transition hover:shadow-sm">
+                            <img src="https://i.pravatar.cc/150?u=leyla"
+                                class="w-12 h-12 rounded-full border border-white shadow-sm object-cover">
+                            <div class="flex-1">
+                                <p class="text-sm text-gray-800"><span class="font-bold">Leyla Aslan</span> started
+                                    following you</p>
+                                <span class="text-xs text-gray-400">2 hours ago</span>
+                            </div>
+                            <div
+                                class="w-8 h-8 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center text-sm">
+                                <i class="fa-solid fa-user-plus"></i></div>
+                        </div>
+                    </div>
+
+                    <div id="nview-reactions" class="nview-content hidden space-y-4">
+                        <div
+                            class="bg-white border border-gray-100 p-5 rounded-2xl flex items-start gap-4 transition hover:shadow-sm">
+                            <img src="https://i.pravatar.cc/150?u=mark"
+                                class="w-12 h-12 rounded-full border border-white shadow-sm object-cover">
+                            <div class="flex-1">
+                                <p class="text-sm text-gray-800"><span class="font-bold">Mark Chen</span> loved your
+                                    comment in <span class="font-medium">"Quantum Computing Future"</span></p>
+                                <span class="text-xs text-gray-400">Yesterday</span>
+                            </div>
+                            <div
+                                class="w-8 h-8 bg-red-100 text-red-600 rounded-full flex items-center justify-center text-sm">
+                                <i class="fa-solid fa-heart"></i></div>
+                        </div>
+
+                        <div
+                            class="bg-white border border-gray-100 p-5 rounded-2xl flex items-start gap-4 transition hover:shadow-sm">
+                            <div class="flex -space-x-3 overflow-hidden">
+                                <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white"
+                                    src="https://i.pravatar.cc/150?u=student1" alt="" />
+                                <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white"
+                                    src="https://i.pravatar.cc/150?u=student2" alt="" />
+                                <div
+                                    class="h-10 w-10 rounded-full ring-2 ring-white bg-gray-100 flex items-center justify-center text-xs font-bold text-gray-500">
+                                    +5</div>
+                            </div>
+                            <div class="flex-1 pl-2">
+                                <p class="text-sm text-gray-800"><span class="font-bold">Teknofest Team</span> reacted
+                                    to your file <span class="font-medium">"Project_Presentation.pptx"</span></p>
+                                <span class="text-xs text-gray-400">2 days ago</span>
+                            </div>
+                            <div
+                                class="w-8 h-8 bg-yellow-100 text-yellow-600 rounded-full flex items-center justify-center text-sm">
+                                <i class="fa-solid fa-fire"></i></div>
+                        </div>
+                    </div>
+
+                    <div id="nview-comments" class="nview-content hidden space-y-4">
+                        <div
+                            class="bg-white border border-gray-100 p-5 rounded-2xl flex items-start gap-4 transition hover:shadow-sm">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                class="w-12 h-12 rounded-full border border-white shadow-sm object-cover">
+                            <div class="flex-1">
+                                <p class="text-sm text-gray-800 mb-2">
+                                    <span class="font-bold">James Wilson</span> commented on <span
+                                        class="font-medium text-primary">"Study notes on Differential Equations"</span>
+                                </p>
+                                <div
+                                    class="bg-gray-50 p-3 rounded-lg border-l-4 border-gray-300 text-sm text-gray-600 italic">
+                                    "Great notes! Very helpful for my exam prep."
+                                </div>
+                                <span class="text-xs text-gray-400 mt-2 block">1 hour ago</span>
+                            </div>
+                            <div
+                                class="w-8 h-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-sm">
+                                <i class="fa-regular fa-comment-dots"></i></div>
+                        </div>
+
+                        <div
+                            class="bg-white border border-gray-100 p-5 rounded-2xl flex items-start gap-4 transition hover:shadow-sm">
+                            <img src="https://i.pravatar.cc/150?u=kenan"
+                                class="w-12 h-12 rounded-full border border-white shadow-sm object-cover">
+                            <div class="flex-1">
+                                <p class="text-sm text-gray-800 mb-2">
+                                    <span class="font-bold">Kənan Qasımov</span> replied to your comment
+                                </p>
+                                <div
+                                    class="bg-gray-50 p-3 rounded-lg border-l-4 border-gray-300 text-sm text-gray-600 italic">
+                                    "Bəli, Holberton təqaüdü barədə məlumatı ofisdən ala bilərsən."
+                                </div>
+                                <span class="text-xs text-gray-400 mt-2 block">Yesterday</span>
+                            </div>
+                            <div
+                                class="w-8 h-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-sm">
+                                <i class="fa-solid fa-reply"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="createPostModal"
+        class="fixed inset-0 bg-black/50 z-50 hidden flex items-center justify-center transition-opacity duration-300">
+        <div
+            class="bg-white rounded-xl w-full max-w-lg mx-4 overflow-hidden shadow-2xl transform transition-all scale-100">
+            <div class="flex justify-between items-center p-4 border-b border-gray-100">
+                <h3 class="font-bold text-lg text-gray-800">Create Post</h3>
+                <button onclick="closePostModal()" class="text-gray-400 hover:text-gray-600 transition">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+
+            <div class="p-4 space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 mb-1">Post Type</label>
+                    <div class="relative">
+                        <select id="postTypeSelect" onchange="updateModalContent()"
+                            class="w-full bg-gray-50 border border-gray-200 text-gray-700 text-sm rounded-lg focus:ring-2 focus:ring-primary focus:border-primary block p-2.5 appearance-none cursor-pointer">
+                            <option value="text">Text Post</option>
+                            <option value="photo">Photo</option>
+                            <option value="video">Video</option>
+                            <option value="file">File</option>
+                            <option value="question">Question</option>
+                            <option value="announcement">Announcement</option>
+                        </select>
+                        <div
+                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-500">
+                            <i class="fa-solid fa-chevron-down text-xs"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <textarea id="postTextInput" rows="3"
+                    class="w-full bg-gray-50 border border-gray-200 rounded-lg p-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 resize-none transition"
+                    placeholder="Write something..."></textarea>
+
+                <div id="uploadArea"
+                    class="border-2 border-dashed border-gray-300 rounded-xl p-8 flex flex-col items-center justify-center text-gray-400 hover:bg-gray-50 transition cursor-pointer group">
+                    <div
+                        class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition">
+                        <i id="uploadIcon" class="fa-regular fa-image text-xl text-gray-500"></i>
+                    </div>
+                    <p class="text-sm font-medium text-gray-500">Click to upload or drag and drop</p>
+                    <p class="text-xs text-gray-400 mt-1">SVG, PNG, JPG or GIF (max. 800x400px)</p>
+                </div>
+            </div>
+
+            <div class="p-4 border-t border-gray-100 flex justify-between items-center bg-gray-50/50">
+                <div class="flex space-x-4 text-gray-500">
+                    <button onclick="setPostType('photo')" class="hover:text-primary transition tooltip-btn"
+                        title="Photo"><i class="fa-regular fa-image"></i></button>
+                    <button onclick="setPostType('video')" class="hover:text-primary transition tooltip-btn"
+                        title="Video"><i class="fa-solid fa-video"></i></button>
+                    <button onclick="setPostType('file')" class="hover:text-primary transition tooltip-btn"
+                        title="File"><i class="fa-regular fa-file"></i></button>
+                </div>
+                <button
+                    class="bg-gray-900 text-white font-bold py-2 px-6 rounded-lg hover:bg-black transition transform active:scale-95 text-sm">Post</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- 1. NAVIGATION & UI FUNCTIONS ---
+
+        function toggleMobileSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const backdrop = document.getElementById('mobileSidebarBackdrop');
+            sidebar.classList.toggle('-translate-x-full');
+            backdrop.classList.toggle('hidden');
+        }
+
+        function closeMobileSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const backdrop = document.getElementById('mobileSidebarBackdrop');
+            if (!sidebar.classList.contains('-translate-x-full')) {
+                sidebar.classList.add('-translate-x-full');
+            }
+            backdrop.classList.add('hidden');
+        }
+
+        function showPage(pageId, element) {
+            // Səhifələri gizlət
+            const pages = document.querySelectorAll('.page-section');
+            pages.forEach(page => {
+                page.classList.add('hidden');
+            });
+
+            // Seçiləni göstər
+            const activePage = document.getElementById(pageId);
+            if (activePage) {
+                activePage.classList.remove('hidden');
+            }
+
+            // Menyu rənglərini dəyiş
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                item.classList.add('text-gray-600');
+            });
+
+            element.classList.add('active');
+            element.classList.remove('text-gray-600');
+
+            // Əlavə: Əgər Groups səhifəsidirsə, filtri yenilə
+            if (pageId === 'groups') {
+                filterGroups();
+            }
+            // Əgər Messages səhifəsidirsə, siyahını yenilə
+            if (pageId === 'messages') {
+                renderConversationList();
+            }
+
+            if (window.innerWidth < 768) {
+                closeMobileSidebar();
+            }
+        }
+
+        // Library Tab Function
+        function switchLibTab(tabName) {
+            document.querySelectorAll('.lib-tab-btn').forEach(btn => {
+                btn.classList.remove('bg-white', 'shadow-sm', 'text-gray-800');
+                btn.classList.add('text-gray-500', 'hover:bg-white/50');
+            });
+
+            const activeBtn = document.getElementById('btn-' + tabName);
+            activeBtn.classList.remove('text-gray-500', 'hover:bg-white/50');
+            activeBtn.classList.add('bg-white', 'shadow-sm', 'text-gray-800');
+
+            document.querySelectorAll('.lib-view').forEach(view => view.classList.add('hidden'));
+
+            if (tabName === 'resources') document.getElementById('view-resources').classList.remove('hidden');
+            if (tabName === 'saved-posts') document.getElementById('view-saved-posts').classList.remove('hidden');
+            if (tabName === 'collections') document.getElementById('view-collections').classList.remove('hidden');
+        }
+
+        // --- Create Post Modal Logic ---
+        const postModal = document.getElementById('createPostModal');
+        const postTypeSelect = document.getElementById('postTypeSelect');
+        const uploadArea = document.getElementById('uploadArea');
+        const uploadIcon = document.getElementById('uploadIcon');
+        const postTextInput = document.getElementById('postTextInput');
+
+        function openPostModal(type) {
+            postModal.classList.remove('hidden');
+            setPostType(type || 'text');
+        }
+
+        function closePostModal() {
+            postModal.classList.add('hidden');
+        }
+
+        postModal.addEventListener('click', (e) => {
+            if (e.target === postModal) closePostModal();
+        });
+
+        function setPostType(type) {
+            postTypeSelect.value = type;
+            updateModalContent();
+        }
+
+        function updateModalContent() {
+            const type = postTypeSelect.value;
+            postTextInput.placeholder = `Write your ${type}...`;
+            if (type === 'text' || type === 'question') {
+                uploadArea.classList.add('hidden');
+            } else {
+                uploadArea.classList.remove('hidden');
+            }
+            if (type === 'photo') uploadIcon.className = 'fa-regular fa-image text-xl text-green-500';
+            else if (type === 'video') uploadIcon.className = 'fa-solid fa-video text-xl text-blue-500';
+            else if (type === 'file') uploadIcon.className = 'fa-regular fa-file text-xl text-orange-500';
+            else if (type === 'announcement') uploadIcon.className = 'fa-solid fa-bullhorn text-xl text-purple-500';
+        }
+
+
+        // --- 2. GROUPS SYSTEM LOGIC ---
+
+        const groupsData = [
+            { id: 1, name: "AI & Machine Learning Research", description: "A community for researchers and students working on artificial intelligence and machine learning models.", field: "Computer Science", country: "Global", university: "Multiple Universities", members: "15.4k", icon: "fa-solid fa-robot", color: "text-blue-600", bg: "bg-blue-100" },
+            { id: 2, name: "Karabakh Tech Innovators", description: "Official tech club for students of Karabakh University. Coding, hackathons and local startup ecosystem.", field: "Computer Science", country: "Azerbaijan", university: "Karabakh University", members: "2.1k", icon: "fa-solid fa-laptop-code", color: "text-green-600", bg: "bg-green-100" },
+            { id: 3, name: "Quantum Physics Discussion", description: "Exploring the mysteries of quantum mechanics and its applications in modern technology.", field: "Physics", country: "USA", university: "MIT", members: "9.2k", icon: "fa-solid fa-atom", color: "text-purple-600", bg: "bg-purple-100" },
+            { id: 4, name: "Molecular Biology & Genetics", description: "Discussion forum for molecular biology, genetics, CRISPR technology and DNA sequencing.", field: "Biology", country: "UK", university: "Cambridge University", members: "7.5k", icon: "fa-solid fa-dna", color: "text-red-500", bg: "bg-red-100" },
+            { id: 5, name: "Climate Change Research", description: "Collaborative space for researchers studying global warming trends and sustainable solutions.", field: "Environmental Science", country: "Germany", university: "Multiple Universities", members: "11.3k", icon: "fa-solid fa-earth-americas", color: "text-emerald-600", bg: "bg-emerald-100" },
+            { id: 6, name: "Global Macroeconomics", description: "Analyzing global market trends, inflation rates, and fiscal policies in developing nations.", field: "Economics", country: "USA", university: "Harvard University", members: "8.9k", icon: "fa-solid fa-chart-line", color: "text-yellow-600", bg: "bg-yellow-100" },
+            { id: 7, name: "Ancient Civilizations", description: "Digging into the past: From Egyptian pyramids to the Roman Empire and Mesopotamia.", field: "History", country: "Egypt", university: "Cairo University", members: "4.5k", icon: "fa-solid fa-landmark", color: "text-orange-600", bg: "bg-orange-100" },
+            { id: 8, name: "Cognitive Neuroscience", description: "Understanding brain function, neural pathways, and human behavior through modern science.", field: "Neuroscience", country: "UK", university: "Oxford University", members: "5.6k", icon: "fa-solid fa-brain", color: "text-pink-500", bg: "bg-pink-100" },
+            { id: 9, name: "Cyber Security Hub", description: "Latest trends in network security, ethical hacking, and data protection strategies.", field: "Computer Science", country: "Turkey", university: "Multiple Universities", members: "6.8k", icon: "fa-solid fa-shield-halved", color: "text-indigo-600", bg: "bg-indigo-100" },
+            { id: 10, name: "Astrophysics & Space", description: "Discussions about black holes, dark matter, and the future of space exploration.", field: "Physics", country: "USA", university: "Stanford University", members: "10.1k", icon: "fa-solid fa-meteor", color: "text-violet-600", bg: "bg-violet-100" },
+            { id: 11, name: "Renewable Energy Systems", description: "Engineering solar panels, wind turbines, and green energy storage solutions.", field: "Environmental Science", country: "China", university: "Multiple Universities", members: "8.2k", icon: "fa-solid fa-solar-panel", color: "text-lime-600", bg: "bg-lime-100" },
+            { id: 12, name: "Behavioral Economics", description: "Combining psychology and economics to understand human decision-making processes.", field: "Economics", country: "Japan", university: "Multiple Universities", members: "3.4k", icon: "fa-solid fa-coins", color: "text-amber-600", bg: "bg-amber-100" },
+            { id: 13, name: "Modern European History", description: "A deep dive into the political and social changes in Europe from 1900 to present.", field: "History", country: "Germany", university: "Multiple Universities", members: "2.8k", icon: "fa-solid fa-clock-rotate-left", color: "text-stone-600", bg: "bg-stone-100" },
+            { id: 14, name: "Marine Biology Explorers", description: "Study of ocean life, coral reefs, and marine ecosystems conservation.", field: "Biology", country: "Japan", university: "Multiple Universities", members: "5.9k", icon: "fa-solid fa-fish-fins", color: "text-cyan-600", bg: "bg-cyan-100" },
+            { id: 15, name: "Robotics & Automation", description: "Building the future with autonomous robots, drones, and industrial automation.", field: "Computer Science", country: "China", university: "Multiple Universities", members: "13.5k", icon: "fa-solid fa-microchip", color: "text-slate-600", bg: "bg-slate-200" }
+        ];
+
+        function renderGroups(groups) {
+            const list = document.getElementById('groupsList');
+            const countSpan = document.getElementById('groupCount');
+            list.innerHTML = "";
+            countSpan.innerText = groups.length;
+
+            if (groups.length === 0) {
+                list.innerHTML = `<div class="col-span-2 text-center py-10 text-gray-400">No groups found matching your criteria.</div>`;
+                return;
+            }
+
+            groups.forEach(group => {
+                const html = `
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col hover:shadow-md transition">
+                        <div class="flex justify-between items-start mb-3">
+                            <div class="w-12 h-12 ${group.bg} rounded-xl flex items-center justify-center ${group.color} text-xl">
+                                <i class="${group.icon}"></i>
+                            </div>
+                            ${group.university === 'Karabakh University' ? '<span class="bg-primary/10 text-primary text-xs px-2 py-1 rounded font-bold border border-primary/20">Featured</span>' : ''}
+                        </div>
+                        <h3 class="font-bold text-lg mb-1 text-gray-800">${group.name}</h3>
+                        <p class="text-sm text-gray-500 mb-4 flex-1 line-clamp-2">${group.description}</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-gray-100 text-xs px-2 py-1 rounded text-gray-600 font-medium">${group.field}</span>
+                            <span class="bg-gray-100 text-xs px-2 py-1 rounded text-gray-600"><i class="fa-solid fa-location-dot text-[10px] mr-1"></i>${group.country}</span>
+                        </div>
+                        <div class="flex items-center justify-between mt-auto pt-3 border-t border-gray-50">
+                            <div class="text-xs text-gray-500">
+                                <span class="font-bold text-gray-700"><i class="fa-solid fa-user-group mr-1"></i> ${group.members}</span> members
+                            </div>
+                            <button class="border border-gray-200 text-gray-700 text-sm font-semibold px-4 py-2 rounded-lg hover:bg-gray-900 hover:text-white transition">View</button>
+                        </div>
+                    </div>
+                `;
+                list.insertAdjacentHTML('beforeend', html);
+            });
+        }
+
+        function filterGroups() {
+            const searchText = document.getElementById('groupSearchInput').value.toLowerCase();
+            const fieldVal = document.getElementById('fieldSelect').value;
+            const countryVal = document.getElementById('countrySelect').value;
+            const uniVal = document.getElementById('universitySelect').value;
+
+            const filtered = groupsData.filter(group => {
+                const matchesSearch = group.name.toLowerCase().includes(searchText) || group.description.toLowerCase().includes(searchText);
+                const matchesField = fieldVal === "" || group.field === fieldVal;
+                const matchesCountry = countryVal === "" || group.country === countryVal;
+                const matchesUni = uniVal === "" || group.university === uniVal;
+                return matchesSearch && matchesField && matchesCountry && matchesUni;
+            });
+            renderGroups(filtered);
+        }
+
+
+        // --- 3. MESSAGING SYSTEM LOGIC ---
+
+        const conversationsData = [
+            {
+                id: 1, name: "Dr. Sarah Mitchell", avatar: "https://i.pravatar.cc/150?u=sarah", status: "Online", unread: 2, lastMsg: "Thanks for sharing that paper!", time: "2 min ago",
+                messages: [
+                    { type: "received", text: "Hi! I saw your post about neural networks. Very interesting approach!", time: "10:30 AM" },
+                    { type: "sent", text: "Thank you! I've been working on this for months.", time: "10:32 AM" },
+                    { type: "received", text: "I have a paper that might be relevant to your research. Let me send it to you.", time: "10:36 AM" },
+                    { type: "file", fileName: "Neural_Network_Architecture_2024.pdf", size: "2.4 MB", time: "10:36 AM" }
+                ]
+            },
+            {
+                id: 2, name: "AI Research Group", avatar: "https://source.unsplash.com/random/100x100/?library", status: "35 members online", unread: 0, lastMsg: "Meeting at 3 PM tomorrow", time: "1 hour ago",
+                messages: [
+                    { type: "received", text: "Guys, don't forget the deadline for the Teknofest submission!", time: "09:00 AM", senderName: "Ali" },
+                    { type: "sent", text: "I'm almost done with the backend documentation.", time: "09:15 AM" },
+                    { type: "received", text: "Great! We will review it in the meeting at 3 PM.", time: "09:20 AM", senderName: "Team Lead" }
+                ]
+            },
+            {
+                id: 3, name: "Kənan Qasımov", avatar: "https://i.pravatar.cc/150?u=kenan", status: "Offline", unread: 1, lastMsg: "Qarabağ Universitetinin saytına baxdın?", time: "Yesterday",
+                messages: [
+                    { type: "received", text: "Salam, necəsən? Layihə nə yerdədi?", time: "Yesterday 14:00" },
+                    { type: "sent", text: "Salam, yaxşıyam. Frontendi bitirmək üzrəyəm.", time: "Yesterday 14:10" },
+                    { type: "received", text: "Əla! Qarabağ Universitetinin saytına baxdın? Dizaynı səninknə oxşayır.", time: "Yesterday 14:15" }
+                ]
+            },
+            {
+                id: 4, name: "Emily Chen", avatar: "https://i.pravatar.cc/150?u=emily", status: "Online", unread: 0, lastMsg: "Do you have the Python script?", time: "2 days ago",
+                messages: [
+                    { type: "sent", text: "Hey Emily, are you joining the hackathon?", time: "Monday" },
+                    { type: "received", text: "I'm not sure yet. Do you have the Python script for the data scraping?", time: "Monday" }
+                ]
+            }
+        ];
+
+        let currentChatId = 1;
+
+        function renderConversationList() {
+            const listContainer = document.getElementById('conversationList');
+            if (!listContainer) return; // Əgər mesaj səhifəsi hələ DOM-da yoxdursa
+
+            listContainer.innerHTML = "";
+            conversationsData.forEach(chat => {
+                const isActive = chat.id === currentChatId ? 'bg-primary/5 border-l-4 border-primary' : 'hover:bg-gray-50 border-l-4 border-transparent';
+                const unreadBadge = chat.unread > 0 ? `<span class="bg-gray-800 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">${chat.unread}</span>` : '';
+
+                const html = `
+                    <div onclick="loadChat(${chat.id})" class="flex items-center space-x-3 p-4 cursor-pointer transition ${isActive}">
+                        <div class="relative">
+                            <img src="${chat.avatar}" class="w-10 h-10 rounded-full object-cover">
+                            ${chat.status === 'Online' ? '<span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-white rounded-full"></span>' : ''}
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex justify-between">
+                                <h4 class="font-bold text-sm truncate text-gray-800">${chat.name}</h4>
+                                <span class="text-xs text-gray-500">${chat.time}</span>
+                            </div>
+                            <p class="text-xs text-gray-500 truncate">${chat.lastMsg}</p>
+                        </div>
+                        ${unreadBadge}
+                    </div>
+                `;
+                listContainer.insertAdjacentHTML('beforeend', html);
+            });
+        }
+
+        function loadChat(id) {
+            currentChatId = id;
+            const chat = conversationsData.find(c => c.id === id);
+
+            // Header
+            document.getElementById('chatHeaderImage').src = chat.avatar;
+            document.getElementById('chatHeaderName').innerText = chat.name;
+            const statusEl = document.getElementById('chatHeaderStatus');
+            if (chat.status === 'Online' || chat.status.includes('online')) {
+                statusEl.className = "text-xs text-green-500 flex items-center gap-1";
+                statusEl.innerHTML = `<span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span> ${chat.status}`;
+            } else {
+                statusEl.className = "text-xs text-gray-400";
+                statusEl.innerText = chat.status;
+            }
+
+            // Messages
+            const container = document.getElementById('chatContainer');
+            container.innerHTML = "";
+
+            chat.messages.forEach(msg => {
+                let msgHtml = "";
+                if (msg.type === 'received') {
+                    msgHtml = `
+                        <div class="flex items-start space-x-3">
+                            <img src="${chat.avatar}" class="w-8 h-8 rounded-full">
+                            <div>
+                                ${msg.senderName ? `<p class="text-[10px] text-gray-400 ml-1 mb-0.5">${msg.senderName}</p>` : ''}
+                                <div class="bg-white p-3 rounded-lg rounded-tl-none shadow-sm text-sm text-gray-700 max-w-md border border-gray-100">${msg.text}</div>
+                                <p class="text-[10px] text-gray-400 mt-1 ml-1">${msg.time}</p>
+                            </div>
+                        </div>`;
+                } else if (msg.type === 'sent') {
+                    msgHtml = `
+                        <div class="flex items-end justify-end space-x-3">
+                            <div>
+                                <div class="bg-primary text-white p-3 rounded-lg rounded-tr-none shadow-sm text-sm max-w-md text-left">${msg.text}</div>
+                                <div class="flex justify-end items-center gap-1 mt-1 mr-1">
+                                    <p class="text-[10px] text-gray-400">${msg.time}</p>
+                                    <i class="fa-solid fa-check-double text-[10px] text-primary"></i>
+                                </div>
+                            </div>
+                        </div>`;
+                } else if (msg.type === 'file') {
+                    msgHtml = `
+                        <div class="flex items-start space-x-3">
+                            <img src="${chat.avatar}" class="w-8 h-8 rounded-full">
+                            <div>
+                                 <div class="bg-white p-2 rounded-lg rounded-tl-none shadow-sm border border-gray-100 flex items-center space-x-3 max-w-md">
+                                    <div class="w-10 h-10 bg-gray-100 rounded flex items-center justify-center text-gray-500"><i class="fa-regular fa-file-pdf text-xl"></i></div>
+                                    <div class="flex-1 min-w-0">
+                                        <p class="text-sm font-medium truncate">${msg.fileName}</p>
+                                        <p class="text-xs text-gray-500">${msg.size}</p>
+                                    </div>
+                                </div>
+                                <p class="text-[10px] text-gray-400 mt-1 ml-1">${msg.time}</p>
+                            </div>
+                        </div>`;
+                }
+                container.insertAdjacentHTML('beforeend', msgHtml);
+            });
+            container.scrollTop = container.scrollHeight;
+            renderConversationList();
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const text = input.value.trim();
+            if (text === "") return;
+
+            const container = document.getElementById('chatContainer');
+            const now = new Date();
+            const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+            // Show sent message
+            const myHtml = `
+                <div class="flex items-end justify-end space-x-3 animate-fade-in">
+                    <div>
+                        <div class="bg-primary text-white p-3 rounded-lg rounded-tr-none shadow-sm text-sm max-w-md text-left">${text}</div>
+                        <div class="flex justify-end items-center gap-1 mt-1 mr-1">
+                            <p class="text-[10px] text-gray-400">${timeString}</p>
+                            <i class="fa-solid fa-check text-[10px] text-primary"></i>
+                        </div>
+                    </div>
+                </div>`;
+            container.insertAdjacentHTML('beforeend', myHtml);
+            container.scrollTop = container.scrollHeight;
+            input.value = "";
+
+            // Update Data
+            const chat = conversationsData.find(c => c.id === currentChatId);
+            chat.messages.push({ type: "sent", text: text, time: timeString });
+            chat.lastMsg = text;
+            chat.time = "Just now";
+            renderConversationList();
+
+            // Fake Reply logic
+            if (currentChatId === 1 || currentChatId === 3) {
+                setTimeout(() => {
+                    const replyText = currentChatId === 1 ? "That's interesting!" : "Oldu, danışarıq.";
+                    const replyHtml = `
+                        <div class="flex items-start space-x-3 animate-fade-in">
+                            <img src="${chat.avatar}" class="w-8 h-8 rounded-full">
+                            <div>
+                                <div class="bg-white p-3 rounded-lg rounded-tl-none shadow-sm text-sm text-gray-700 max-w-md border border-gray-100">${replyText}</div>
+                                <p class="text-[10px] text-gray-400 mt-1 ml-1">${timeString}</p>
+                            </div>
+                        </div>`;
+                    container.insertAdjacentHTML('beforeend', replyHtml);
+                    container.scrollTop = container.scrollHeight;
+                    chat.messages.push({ type: "received", text: replyText, time: timeString });
+                    chat.lastMsg = replyText;
+                    renderConversationList();
+                }, 1500);
+            }
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === "Enter") sendMessage();
+        }
+
+        // --- 3.5 PROFILE TAB SYSTEM ---
+        function switchProfileTab(tabName) {
+            // 1. Bütün tab düymələrini deaktiv et (boz rəng)
+            document.querySelectorAll('.ptab-btn').forEach(btn => {
+                btn.className = 'ptab-btn pb-3 font-medium text-gray-500 hover:text-gray-800 transition';
+            });
+
+            // 2. Seçilmiş tab düyməsini aktiv et (yaşıl rəng və alt xətt)
+            const activeBtn = document.getElementById('ptab-' + tabName);
+            if (activeBtn) {
+                activeBtn.className = 'ptab-btn pb-3 font-semibold text-primary border-b-2 border-primary transition';
+            }
+
+            // 3. Bütün kontentləri gizlət
+            document.querySelectorAll('.pview-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+
+            // 4. Seçilmiş kontenti göstər
+            const activeContent = document.getElementById('pview-' + tabName);
+            if (activeContent) {
+                activeContent.classList.remove('hidden');
+            }
+        }
+
+        // --- 4. PROFILE DROPDOWN LOGIC ---
+        function toggleProfileDropdown() {
+            const dropdown = document.getElementById('profileDropdownMenu');
+            if (dropdown.classList.contains('hidden')) {
+                dropdown.classList.remove('hidden');
+            } else {
+                dropdown.classList.add('hidden');
+            }
+        }
+
+        // Ekranda boş yerə klikləyəndə dropdown-u bağlamaq üçün
+        document.addEventListener('click', function (event) {
+            const dropdown = document.getElementById('profileDropdownMenu');
+            const button = event.target.closest('button');
+
+            // Əgər kliklənən yer dropdown və ya onun düyməsi deyilsə, bağla
+            if (!dropdown.classList.contains('hidden') && (!button || !button.onclick || !button.onclick.toString().includes('toggleProfileDropdown'))) {
+                dropdown.classList.add('hidden');
+            }
+        });
+
+        // --- 5. NOTIFICATION TABS LOGIC ---
+        function switchNotificationTab(tabName) {
+            // Düymələrin rəngini sıfırla
+            document.querySelectorAll('.ntab-btn').forEach(btn => {
+                btn.classList.remove('bg-white', 'shadow-sm', 'text-gray-800');
+                btn.classList.add('text-gray-500', 'hover:bg-white/50');
+            });
+
+            // Seçilən düyməni aktiv et
+            const activeBtn = document.getElementById('ntab-' + tabName);
+            if (activeBtn) {
+                activeBtn.classList.remove('text-gray-500', 'hover:bg-white/50');
+                activeBtn.classList.add('bg-white', 'shadow-sm', 'text-gray-800');
+            }
+
+            // Bütün contentləri gizlət
+            document.querySelectorAll('.nview-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+
+            // Seçilən contenti göstər
+            const activeContent = document.getElementById('nview-' + tabName);
+            if (activeContent) {
+                activeContent.classList.remove('hidden');
+            }
+        }
+        // --- 4. INITIALIZATION ---
+        document.addEventListener("DOMContentLoaded", () => {
+            renderGroups(groupsData); // Qrupları yüklə
+            renderConversationList(); // Çat siyahısını yüklə
+            loadChat(1); // İlk çatı aç
+
+            window.addEventListener('resize', () => {
+                if (window.innerWidth >= 768) {
+                    closeMobileSidebar();
+                }
+            });
+        });
+
+    </script>
+</body>
+
+</html>
