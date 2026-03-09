@@ -498,7 +498,7 @@
                         </div>
                     </div>
 
-                    <div class="w-full md:w-2/3 flex flex-col min-h-0">
+                    <div class="w-full md:flex-1 flex flex-col min-h-0">
                         <div class="p-4 border-b border-gray-100 flex items-center justify-between">
                             <div class="flex items-center space-x-3">
                                 <img id="chatHeaderImage" src="https://i.pravatar.cc/150?u=sarah"
@@ -510,7 +510,8 @@
                                     </p>
                                 </div>
                             </div>
-                            <button class="text-gray-400 hover:text-gray-600"><i
+                            <button id="chatInfoBtn" onclick="toggleGroupInfoPanel()"
+                                class="hidden text-gray-400 hover:text-gray-600"><i
                                     class="fa-solid fa-circle-info"></i></button>
                         </div>
 
@@ -531,6 +532,36 @@
                             </button>
                         </div>
                     </div>
+
+                    <aside id="groupInfoPanel"
+                        class="hidden w-full lg:w-80 border-t lg:border-t-0 lg:border-l border-gray-200 bg-white p-4 space-y-4 overflow-y-auto custom-scroll">
+                        <div class="flex items-start justify-between">
+                            <div>
+                                <p class="text-xs uppercase tracking-wide text-primary font-semibold">Group Info</p>
+                                <h3 id="groupInfoName" class="font-bold text-gray-800">AI Research Group</h3>
+                            </div>
+                            <button onclick="closeGroupInfoPanel()" class="text-gray-400 hover:text-gray-600">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                        </div>
+
+                        <div class="bg-gray-50 border border-gray-100 rounded-xl p-3">
+                            <p class="text-xs text-gray-500 mb-1">Members</p>
+                            <p id="groupInfoMembers" class="text-sm font-semibold text-gray-800">35 members online</p>
+                        </div>
+
+                        <div class="bg-gray-50 border border-gray-100 rounded-xl p-3">
+                            <p class="text-xs text-gray-500 mb-1">Description</p>
+                            <p id="groupInfoDescription" class="text-sm text-gray-700">Research talks, papers, and weekly meeting updates.</p>
+                        </div>
+
+                        <div class="bg-gray-50 border border-gray-100 rounded-xl p-3">
+                            <p class="text-xs text-gray-500 mb-2">Pinned</p>
+                            <ul id="groupInfoPinned" class="space-y-2 text-sm text-gray-700">
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-thumbtack mt-1 text-primary text-xs"></i><span>Weekly meeting: Tuesday, 3 PM</span></li>
+                            </ul>
+                        </div>
+                    </aside>
                 </div>
             </div>
 
@@ -1510,7 +1541,7 @@
                 ]
             },
             {
-                id: 3, name: "Kənan Qasımov", avatar: "https://i.pravatar.cc/150?u=kenan", status: "Offline", unread: 1, lastMsg: "Qarabağ Universitetinin saytına baxdın?", time: "Yesterday",
+                id: 3, name: "Kənan Qasımov", avatar: "https://ui-avatars.com/api/?name=Kenan+Qasimov&background=1f2937&color=ffffff&rounded=true&bold=true&size=150", status: "Offline", unread: 1, lastMsg: "Qarabağ Universitetinin saytına baxdın?", time: "Yesterday",
                 messages: [
                     { type: "received", text: "Salam, necəsən? Layihə nə yerdədi?", time: "Yesterday 14:00" },
                     { type: "sent", text: "Salam, yaxşıyam. Frontendi bitirmək üzrəyəm.", time: "Yesterday 14:10" },
@@ -1526,7 +1557,51 @@
             }
         ];
 
+        const groupProfiles = {
+            2: {
+                membersText: "35 members online • 128 total",
+                description: "AI papers, model discussions, and weekly project syncs for all members.",
+                pinned: [
+                    "Weekly meeting: Tuesday 3:00 PM",
+                    "Paper review deadline: Friday 11:59 PM",
+                    "Use #help channel for technical blockers"
+                ]
+            }
+        };
+
         let currentChatId = 1;
+
+        function renderGroupInfo(chat) {
+            const profile = groupProfiles[chat.id];
+            if (!profile) return;
+
+            document.getElementById('groupInfoName').innerText = chat.name;
+            document.getElementById('groupInfoMembers').innerText = profile.membersText;
+            document.getElementById('groupInfoDescription').innerText = profile.description;
+
+            const pinnedEl = document.getElementById('groupInfoPinned');
+            pinnedEl.innerHTML = '';
+            profile.pinned.forEach(item => {
+                pinnedEl.insertAdjacentHTML('beforeend', `<li class="flex items-start gap-2"><i class="fa-solid fa-thumbtack mt-1 text-primary text-xs"></i><span>${item}</span></li>`);
+            });
+        }
+
+        function openGroupInfoPanel() {
+            document.getElementById('groupInfoPanel').classList.remove('hidden');
+        }
+
+        function closeGroupInfoPanel() {
+            document.getElementById('groupInfoPanel').classList.add('hidden');
+        }
+
+        function toggleGroupInfoPanel() {
+            const panel = document.getElementById('groupInfoPanel');
+            if (panel.classList.contains('hidden')) {
+                panel.classList.remove('hidden');
+            } else {
+                panel.classList.add('hidden');
+            }
+        }
 
         function renderConversationList() {
             const listContainer = document.getElementById('conversationList');
@@ -1564,6 +1639,7 @@
         function loadChat(id) {
             currentChatId = id;
             const chat = conversationsData.find(c => c.id === id);
+            const infoBtn = document.getElementById('chatInfoBtn');
 
             // Header
             document.getElementById('chatHeaderImage').src = chat.avatar;
@@ -1572,13 +1648,22 @@
             if (chat.isGroup) {
                 statusEl.className = "text-xs text-primary flex items-center gap-1";
                 statusEl.innerHTML = `<i class="fa-solid fa-user-group text-[10px]"></i> ${chat.status}`;
+                infoBtn.classList.remove('hidden');
+                renderGroupInfo(chat);
+                if (window.innerWidth >= 1024) {
+                    openGroupInfoPanel();
+                }
             } else
             if (chat.status === 'Online' || chat.status.includes('online')) {
                 statusEl.className = "text-xs text-green-500 flex items-center gap-1";
                 statusEl.innerHTML = `<span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span> ${chat.status}`;
+                infoBtn.classList.add('hidden');
+                closeGroupInfoPanel();
             } else {
                 statusEl.className = "text-xs text-gray-400";
                 statusEl.innerText = chat.status;
+                infoBtn.classList.add('hidden');
+                closeGroupInfoPanel();
             }
 
             // Messages
