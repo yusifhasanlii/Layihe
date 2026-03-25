@@ -62,6 +62,67 @@
             border-right: 3px solid #009688;
         }
 
+        body.dark-mode {
+            background: #0f172a;
+            color: #e5e7eb;
+        }
+
+        body.dark-mode .bg-bglight {
+            background: #0f172a;
+        }
+
+        body.dark-mode .bg-white {
+            background: #111827;
+        }
+
+        body.dark-mode .bg-gray-50 {
+            background: #1f2937;
+        }
+
+        body.dark-mode .bg-gray-100,
+        body.dark-mode .bg-gray-200 {
+            background: #1e293b;
+        }
+
+        body.dark-mode .border-gray-100,
+        body.dark-mode .border-gray-200,
+        body.dark-mode .border-gray-300 {
+            border-color: #334155;
+        }
+
+        body.dark-mode .text-gray-800,
+        body.dark-mode .text-gray-700,
+        body.dark-mode .text-darktext {
+            color: #f3f4f6;
+        }
+
+        body.dark-mode .text-gray-600,
+        body.dark-mode .text-gray-500,
+        body.dark-mode .text-gray-400 {
+            color: #cbd5e1;
+        }
+
+        body.dark-mode .hover\:bg-gray-50:hover,
+        body.dark-mode .hover\:bg-red-50:hover {
+            background: #1f2937;
+        }
+
+        body.dark-mode .nav-item.active {
+            background-color: rgba(15, 118, 110, 0.25);
+            color: #5eead4;
+            border-right: 3px solid #14b8a6;
+        }
+
+        body.dark-mode input,
+        body.dark-mode textarea,
+        body.dark-mode select {
+            color: #e5e7eb;
+        }
+
+        body.dark-mode #profileDropdownMenu {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
+        }
+
         .page-section {
             min-width: 0;
         }
@@ -165,6 +226,11 @@
                     <i class="fa-regular fa-bell text-xl"></i>
                     <span
                         class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-[10px] font-bold flex items-center justify-center rounded-full border-2 border-white">3</span>
+                </button>
+
+                <button id="themeToggleBtn" onclick="toggleTheme()" title="Toggle theme"
+                    class="w-10 h-10 rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50 transition flex items-center justify-center">
+                    <i id="themeToggleIcon" class="fa-solid fa-moon"></i>
                 </button>
 
                 <div class="relative">
@@ -1399,6 +1465,32 @@
             backdrop.classList.add('hidden');
         }
 
+        function applyTheme(theme) {
+            const body = document.body;
+            const icon = document.getElementById('themeToggleIcon');
+            const isDark = theme === 'dark';
+
+            body.classList.toggle('dark-mode', isDark);
+            if (icon) {
+                icon.className = isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+            }
+            localStorage.setItem('bilig-theme', isDark ? 'dark' : 'light');
+        }
+
+        function toggleTheme() {
+            const isDark = document.body.classList.contains('dark-mode');
+            applyTheme(isDark ? 'light' : 'dark');
+        }
+
+        function initTheme() {
+            const saved = localStorage.getItem('bilig-theme');
+            if (saved === 'dark' || saved === 'light') {
+                applyTheme(saved);
+                return;
+            }
+            applyTheme('light');
+        }
+
         function showPage(pageId, element) {
             // Səhifələri gizlət
             const pages = document.querySelectorAll('.page-section');
@@ -2452,6 +2544,8 @@
 
         // --- 4. INITIALIZATION ---
         document.addEventListener("DOMContentLoaded", () => {
+            initTheme();
+
             const languageSelect = document.getElementById('languageSelect');
             if (languageSelect) {
                 languageSelect.addEventListener('change', (event) => {
