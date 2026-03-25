@@ -325,9 +325,9 @@
                                         class="fa-solid fa-ellipsis"></i></button>
                             </div>
                             <div class="px-4 pb-3">
-                                <p class="post-translatable text-sm text-gray-800">Joint AI symposium between Baku and Ankara is now
-                                    open for paper submissions. We are especially looking for work on multimodal
-                                    learning and educational AI systems.</p>
+                                <p class="post-translatable text-sm text-gray-800">Bakü ve Ankara arasında ortak AI sempozyumu için bildiri çağrısı açıldı.
+                                    Özellikle çok kipli öğrenme ve eğitim odaklı AI sistemleri üzerine çalışmalar
+                                    bekleniyor.</p>
                                 <div class="post-translation hidden mt-3 p-3 bg-primary/5 border border-primary/20 rounded-lg"></div>
                             </div>
                             <div class="bg-gray-200 h-72 w-full relative group cursor-pointer">
@@ -371,9 +371,9 @@
                                         class="fa-solid fa-ellipsis"></i></button>
                             </div>
                             <div class="px-4 pb-3">
-                                <p class="post-translatable text-sm text-gray-800">New dataset on Turkic languages natural language
-                                    processing has been published today. It includes aligned corpora for Azerbaijani,
-                                    Turkish, Kazakh, Uzbek, Turkmen, and Kyrgyz.</p>
+                                <p class="post-translatable text-sm text-gray-800">Türk dillərinin təbii dil emalı üzrə yeni dataset bu gün dərc olunub.
+                                    Buraya Azərbaycan, türk, qazax, özbək, türkmən və qırğız dilləri üçün
+                                    uyğunlaşdırılmış korpuslar daxildir.</p>
                                 <div class="post-translation hidden mt-3 p-3 bg-primary/5 border border-primary/20 rounded-lg"></div>
                             </div>
                             <div class="px-4 pb-4">
@@ -408,8 +408,8 @@
                                 </div>
                             </div>
                             <div class="px-4 pb-3">
-                                <p class="post-translatable text-sm text-gray-800">PhD opportunities at Kyrgyz-Turkish Manas University
-                                    are now available for regional candidates in Physics and Computational Modeling.</p>
+                                <p class="post-translatable text-sm text-gray-800">Қырғыз-Түрік Манас университетінде физика және есептеу модельдеуі
+                                    бағыттары бойынша өңірлік үміткерлер үшін PhD мүмкіндіктері ашылды.</p>
                                 <div class="post-translation hidden mt-3 p-3 bg-primary/5 border border-primary/20 rounded-lg"></div>
                             </div>
                             <div class="bg-gray-200 h-64 w-full"><img
@@ -1538,6 +1538,7 @@
 
         const postTranslations = {
             post1: {
+                EN: 'Joint AI symposium between Baku and Ankara is now open for paper submissions. We are especially looking for work on multimodal learning and educational AI systems.',
                 AZ: 'Bakı və Ankara arasında birgə AI simpoziumu üçün məqalə qəbulu açılıb. Xüsusilə multimodal öyrənmə və təhsil üçün AI sistemləri üzrə işlər gözlənilir.',
                 TR: 'Bakü ve Ankara arasında ortak AI sempozyumu için bildiri çağrısı açıldı. Özellikle çok kipli öğrenme ve eğitim odaklı AI sistemleri üzerine çalışmalar bekleniyor.',
                 KZ: 'Баку мен Анкара арасындағы ортақ AI симпозиумына мақала қабылдау басталды. Біз әсіресе мультимодалды оқыту және білім беру AI жүйелері туралы жұмыстарды күтеміз.',
@@ -1547,6 +1548,7 @@
                 OTK: 'Baqu birle Ankara arasynda birikmis AI yigini ucun bitig sunum acildi. Kop koruklug ogrenis hem bilig AI tizimleri tagi isler kolenur.'
             },
             post2: {
+                EN: 'New dataset on Turkic languages natural language processing has been published today. It includes aligned corpora for Azerbaijani, Turkish, Kazakh, Uzbek, Turkmen, and Kyrgyz.',
                 AZ: 'Türk dillərinin təbii dil emalı üzrə yeni dataset bu gün dərc olundu. Buraya Azərbaycan, türk, qazax, özbək, türkmən və qırğız dilləri üçün uyğunlaşdırılmış korpuslar daxildir.',
                 TR: 'Türk dilleri doğal dil işleme için yeni bir veri seti bugün yayımlandı. Azerbaycan Türkçesi, Türkçe, Kazakça, Özbekçe, Türkmence ve Kırgızca için hizalanmış derlemler içeriyor.',
                 KZ: 'Түркі тілдерінің табиғи тіл өңдеуіне арналған жаңа dataset бүгін жарияланды. Онда әзербайжан, түрік, қазақ, өзбек, түрікмен және қырғыз тілдері үшін сәйкестендірілген корпустар бар.',
@@ -1556,6 +1558,7 @@
                 OTK: 'Turkik tiller ucun tabigi til islemi yeni dataset bugun tarqadi. Anda Azar, Turk, Qazaq, Ozbek, Turkmen, Qirghiz til birikmis yazuklar bar.'
             },
             post3: {
+                EN: 'PhD opportunities at Kyrgyz-Turkish Manas University are now available for regional candidates in Physics and Computational Modeling.',
                 AZ: 'Qırğız-Türk Manas Universitetində fizika və hesablama modelləşdirməsi üzrə regional namizədlər üçün PhD imkanları artıq açıqdır.',
                 TR: 'Kırgız-Türk Manas Üniversitesinde Fizik ve Hesaplamalı Modelleme alanlarında bölgesel adaylar için doktora imkanları açıldı.',
                 KZ: 'Қырғыз-Түрік Манас университетінде физика және есептеу модельдеуі бағыттары бойынша өңірлік үміткерлер үшін PhD мүмкіндіктері ашылды.',
@@ -1620,11 +1623,9 @@
 
             const originalText = sourceEl.innerText.trim();
             const uiText = translateUiBySiteLanguage[currentLanguage] || translateUiBySiteLanguage.en;
-            const translatedText = langCode === 'EN'
-                ? originalText
-                : (postTranslations[postKey] && postTranslations[postKey][langCode])
-                    ? postTranslations[postKey][langCode]
-                    : originalText;
+            const translatedText = (postTranslations[postKey] && postTranslations[postKey][langCode])
+                ? postTranslations[postKey][langCode]
+                : originalText;
 
             outputEl.innerHTML = `
                 <div class="flex items-center justify-between gap-2 mb-1">
