@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="az">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AcademicHub</title>
+    <title>Bilig</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -61,6 +61,7 @@
             color: #009688;
             border-right: 3px solid #009688;
         }
+
     </style>
 </head>
 
@@ -75,54 +76,46 @@
             <div class="w-8 h-8 bg-primary rounded flex items-center justify-center text-white">
                 <i class="fa-solid fa-book-open"></i>
             </div>
-            <span class="text-xl font-bold tracking-tight">AcademicHub</span>
+            <span id="brandName" data-i18n="brandName" class="text-xl font-bold tracking-tight">Bilig</span>
         </div>
 
         <nav class="flex-1 px-4 space-y-2 mt-4 overflow-y-auto">
             <a href="#" onclick="showPage('home', this)"
                 class="nav-item active flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-50 transition">
                 <i class="fa-solid fa-house w-5 text-center"></i>
-                <span class="font-medium">Home</span>
+                <span id="navHome" data-i18n="navHome" class="font-medium">Home</span>
             </a>
             <a href="#" onclick="showPage('messages', this)"
                 class="nav-item flex items-center justify-between px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-50 transition">
                 <div class="flex items-center space-x-3">
                     <i class="fa-regular fa-comment-dots w-5 text-center"></i>
-                    <span class="font-medium">Messages</span>
+                    <span id="navMessages" data-i18n="navMessages" class="font-medium">Messages</span>
                 </div>
                 <span class="bg-gray-200 text-xs font-bold px-2 py-0.5 rounded-full">3</span>
             </a>
             <a href="#" onclick="showPage('groups', this)"
                 class="nav-item flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-50 transition">
                 <i class="fa-solid fa-user-group w-5 text-center"></i>
-                <span class="font-medium">Groups</span>
+                <span id="navGroups" data-i18n="navGroups" class="font-medium">Groups</span>
             </a>
             <a href="#" onclick="showPage('library', this)"
                 class="nav-item flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-50 transition">
                 <i class="fa-solid fa-book-bookmark w-5 text-center"></i>
-                <span class="font-medium">Library</span>
+                <span id="navLibrary" data-i18n="navLibrary" class="font-medium">Library</span>
             </a>
             <a href="#" onclick="showPage('profile', this)"
                 class="nav-item flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-50 transition">
                 <img src="https://bootdey.com/img/Content/avatar/avatar7.png"
                     class="w-6 h-6 rounded-full object-cover border border-gray-300">
-                <span class="font-medium">My Profile</span>
+                <span id="navProfile" data-i18n="navProfile" class="font-medium">My Profile</span>
             </a>
             <a href="#" onclick="showPage('saved', this)"
                 class="nav-item flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-50 transition">
                 <i class="fa-regular fa-bookmark w-5 text-center"></i>
-                <span class="font-medium">Saved</span>
+                <span id="navSaved" data-i18n="navSaved" class="font-medium">Saved</span>
             </a>
         </nav>
 
-        <div class="p-4 mt-auto">
-            <div class="bg-primary rounded-xl p-4 text-white shadow-lg">
-                <h3 class="font-bold text-lg mb-1">Join AI & Data Science</h3>
-                <p class="text-xs text-white/80 mb-3">Connect with researchers worldwide</p>
-                <button
-                    class="w-full bg-white text-primary font-semibold py-2 rounded-lg text-sm hover:bg-gray-100 transition">Join</button>
-            </div>
-        </div>
     </aside>
 
     <main class="flex-1 flex flex-col h-full overflow-hidden relative">
@@ -137,13 +130,25 @@
                 <div class="relative flex-1">
                     <i
                         class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
-                    <input type="text" placeholder="Search..."
+                    <input id="globalSearchInput" data-i18n-placeholder="globalSearchInput" type="text" placeholder="Search..."
                         class="w-full pl-10 pr-4 py-2 bg-gray-100 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50">
                 </div>
             </div>
 
             <div class="flex items-center space-x-3 md:space-x-6">
-                <button class="text-gray-500 hover:text-primary transition"><i class="fa-solid fa-video"></i></button>
+                <div class="flex items-center gap-2">
+                    <select id="languageSelect" aria-label="Language selector"
+                        class="bg-white border border-gray-200 rounded-full text-xs font-bold px-3 py-1.5 text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary/50 tracking-wide">
+                        <option value="en" selected>EN</option>
+                        <option value="az">AZ</option>
+                        <option value="tr">TR</option>
+                        <option value="kk">KZ</option>
+                        <option value="uz">UZ</option>
+                        <option value="tk">TM</option>
+                        <option value="ky">KY</option>
+                        <option value="otk">ORK</option>
+                    </select>
+                </div>
 
                 <button onclick="showPage('notifications', this)"
                     class="text-gray-500 hover:text-primary relative transition">
@@ -156,7 +161,7 @@
                     <button onclick="toggleProfileDropdown()" class="flex items-center space-x-2 focus:outline-none">
                         <img src="https://bootdey.com/img/Content/avatar/avatar7.png"
                             class="w-9 h-9 rounded-full border border-gray-200 object-cover">
-                        <span class="text-sm font-medium text-gray-700 hidden md:block">you</span>
+                        <span id="userMenuLabel" data-i18n="userMenuLabel" class="text-sm font-medium text-gray-700 hidden md:block">You</span>
                         <i class="fa-solid fa-chevron-down text-xs text-gray-400"></i>
                     </button>
 
@@ -164,27 +169,27 @@
                         class="hidden absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-100 py-2 z-50 animate-fade-in">
                         <a href="#" onclick="showPage('profile', this); toggleProfileDropdown()"
                             class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2">
-                            <i class="fa-regular fa-user w-5 text-center text-gray-400"></i> Profile
+                            <i class="fa-regular fa-user w-5 text-center text-gray-400"></i> <span id="ddProfile" data-i18n="ddProfile">Profile</span>
                         </a>
                         <a href="#" onclick="showPage('saved', this); toggleProfileDropdown()"
                             class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2">
-                            <i class="fa-regular fa-bookmark w-5 text-center text-gray-400"></i> Saved
+                            <i class="fa-regular fa-bookmark w-5 text-center text-gray-400"></i> <span id="ddSaved" data-i18n="ddSaved">Saved</span>
                         </a>
                         <div class="border-t border-gray-100 my-1"></div>
                         <a href="#"
                             class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2">
-                            <i class="fa-solid fa-gear w-5 text-center text-gray-400"></i> Settings
+                            <i class="fa-solid fa-gear w-5 text-center text-gray-400"></i> <span id="ddSettings" data-i18n="ddSettings">Settings</span>
                         </a>
                         <a href="#"
                             class="block px-4 py-2 text-sm text-red-600 hover:bg-red-50 flex items-center gap-2">
-                            <i class="fa-solid fa-arrow-right-from-bracket w-5 text-center text-red-400"></i> Logout
+                            <i class="fa-solid fa-arrow-right-from-bracket w-5 text-center text-red-400"></i> <span id="ddLogout" data-i18n="ddLogout">Logout</span>
                         </a>
                     </div>
                 </div>
             </div>
         </header>
 
-        <div class="flex-1 overflow-hidden p-4 md:p-8 bg-bglight" id="content-container">
+        <div class="flex-1 overflow-y-auto md:overflow-hidden p-3 md:p-8 bg-bglight" id="content-container">
 
             <div id="home" class="page-section active-page max-w-6xl mx-auto h-full">
                 <div class="grid grid-cols-1 xl:grid-cols-12 gap-4 md:gap-8 h-full">
@@ -195,34 +200,34 @@
                             <div class="flex items-center space-x-4 mb-4">
                                 <img src="https://bootdey.com/img/Content/avatar/avatar7.png"
                                     class="w-10 h-10 rounded-full object-cover shadow-sm">
-                                <input type="text" placeholder="What do you want to share?"
+                                <input id="shareInput" data-i18n-placeholder="shareInput" type="text" placeholder="What do you want to share?"
                                     class="flex-1 bg-gray-50 rounded-full px-5 py-3 text-sm focus:outline-none hover:bg-gray-100 transition">
                             </div>
                             <div class="flex flex-wrap gap-2 justify-between items-center pt-2 px-1">
                                 <button onclick="openPostModal('photo')"
                                     class="flex items-center space-x-2 text-gray-500 hover:bg-gray-50 px-3 py-2 rounded-lg transition group">
                                     <i class="fa-regular fa-image text-lg group-hover:text-green-600"></i>
-                                    <span class="text-sm font-medium">Photo</span>
+                                    <span id="postBtnPhoto" data-i18n="postBtnPhoto" class="text-sm font-medium">Photo</span>
                                 </button>
                                 <button onclick="openPostModal('video')"
                                     class="flex items-center space-x-2 text-gray-500 hover:bg-gray-50 px-3 py-2 rounded-lg transition group">
                                     <i class="fa-solid fa-video text-lg group-hover:text-blue-600"></i>
-                                    <span class="text-sm font-medium">Video</span>
+                                    <span id="postBtnVideo" data-i18n="postBtnVideo" class="text-sm font-medium">Video</span>
                                 </button>
                                 <button onclick="openPostModal('file')"
                                     class="flex items-center space-x-2 text-gray-500 hover:bg-gray-50 px-3 py-2 rounded-lg transition group">
                                     <i class="fa-regular fa-file text-lg group-hover:text-orange-600"></i>
-                                    <span class="text-sm font-medium">File</span>
+                                    <span id="postBtnFile" data-i18n="postBtnFile" class="text-sm font-medium">File</span>
                                 </button>
                                 <button onclick="openPostModal('question')"
                                     class="flex items-center space-x-2 text-gray-500 hover:bg-gray-50 px-3 py-2 rounded-lg transition group">
                                     <i class="fa-solid fa-circle-question text-lg group-hover:text-pink-600"></i>
-                                    <span class="text-sm font-medium">Question</span>
+                                    <span id="postBtnQuestion" data-i18n="postBtnQuestion" class="text-sm font-medium">Question</span>
                                 </button>
                                 <button onclick="openPostModal('announcement')"
                                     class="flex items-center space-x-2 text-gray-500 hover:bg-gray-50 px-3 py-2 rounded-lg transition group">
                                     <i class="fa-solid fa-bullhorn text-lg group-hover:text-purple-600"></i>
-                                    <span class="text-sm font-medium">Announcement</span>
+                                    <span id="postBtnAnnouncement" data-i18n="postBtnAnnouncement" class="text-sm font-medium">Announcement</span>
                                 </button>
                             </div>
                         </div>
@@ -230,13 +235,13 @@
                         <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                             <div class="p-4 flex justify-between items-start">
                                 <div class="flex space-x-3">
-                                    <img src="https://i.pravatar.cc/150?u=muhammad" class="w-10 h-10 rounded-full">
+                                    <img src="https://randomuser.me/api/portraits/men/36.jpg" class="w-10 h-10 rounded-full">
                                     <div>
-                                        <h4 class="font-bold text-sm">Muhammad Yilmaz <span
+                                        <h4 class="font-bold text-sm">Ilkin Yilmaz <span
                                                 class="font-normal text-xs text-gray-500 bg-gray-100 px-2 py-0.5 rounded ml-2">Hacettepe
                                                 University</span></h4>
                                         <p class="text-xs text-gray-500">PhD Student</p>
-                                        <p class="text-xs text-gray-400 mt-0.5">5 hours ago • <span
+                                        <p class="text-xs text-gray-400 mt-0.5"><span data-i18n="time5HoursAgo">5 hours ago</span> • <span
                                                 class="text-primary font-medium">#ComputerScience</span></p>
                                     </div>
                                 </div>
@@ -244,8 +249,9 @@
                                         class="fa-solid fa-ellipsis"></i></button>
                             </div>
                             <div class="px-4 pb-3">
-                                <p class="text-sm text-gray-800">Explaining Convolutional Neural Networks step by step.
-                                    This architecture is fundamental for modern Computer Vision tasks! 🧠</p>
+                                <p class="text-sm text-gray-800">Joint AI symposium between Baku and Ankara is now
+                                    open for paper submissions. We are especially looking for work on multimodal
+                                    learning and educational AI systems.</p>
                             </div>
                             <div class="bg-gray-200 h-72 w-full relative group cursor-pointer">
                                 <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
@@ -260,35 +266,35 @@
                             </div>
                             <div class="p-3 border-t border-gray-100 flex justify-between text-gray-500 text-sm px-6">
                                 <button class="flex items-center gap-2 hover:text-primary"><i
-                                        class="fa-regular fa-heart"></i> Like</button>
+                                    class="fa-regular fa-heart"></i> 124 <span data-i18n="likesLabel">Likes</span></button>
                                 <button class="flex items-center gap-2 hover:text-primary"><i
-                                        class="fa-regular fa-comment"></i> Comment</button>
+                                    class="fa-regular fa-comment"></i> 29 <span data-i18n="commentsLabel">Comments</span></button>
                                 <button class="flex items-center gap-2 hover:text-primary"><i
-                                        class="fa-solid fa-share"></i> Share</button>
+                                    class="fa-solid fa-share-nodes"></i> 17 <span data-i18n="shareLabel">Share</span></button>
                             </div>
                         </div>
 
                         <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                             <div class="p-4 flex justify-between items-start">
                                 <div class="flex space-x-3">
-                                    <img src="https://i.pravatar.cc/150?u=leyla"
+                                    <img src="https://randomuser.me/api/portraits/women/63.jpg"
                                         class="w-10 h-10 rounded-full border border-gray-200">
                                     <div>
-                                        <h4 class="font-bold text-sm">Leyla Aslan <span
+                                        <h4 class="font-bold text-sm">Ayse Demir <span
                                                 class="font-normal text-xs text-gray-500 bg-gray-100 px-2 py-0.5 rounded ml-2">Baku
                                                 State University</span></h4>
                                         <p class="text-xs text-gray-500">MSc in Data Science</p>
-                                        <p class="text-xs text-gray-400 mt-0.5">2 hours ago • <span
-                                                class="text-primary font-medium">#DataAnalysis</span></p>
+                                        <p class="text-xs text-gray-400 mt-0.5"><span data-i18n="time2HoursAgo">2 hours ago</span> • <span
+                                            class="text-primary font-medium">#NLP</span></p>
                                     </div>
                                 </div>
                                 <button class="text-gray-400 hover:text-gray-600"><i
                                         class="fa-solid fa-ellipsis"></i></button>
                             </div>
                             <div class="px-4 pb-3">
-                                <p class="text-sm text-gray-800">Just finished visualizing the climate change dataset.
-                                    The trends over the last decade are alarming but the data quality is improving.
-                                    Check out this plot created with Python & Matplotlib! 📊</p>
+                                <p class="text-sm text-gray-800">New dataset on Turkic languages natural language
+                                    processing has been published today. It includes aligned corpora for Azerbaijani,
+                                    Turkish, Kazakh, Uzbek, Turkmen, and Kyrgyz.</p>
                             </div>
                             <div class="px-4 pb-4">
                                 <div class="bg-gray-50 rounded-lg p-4 border border-gray-200"><code
@@ -297,42 +303,42 @@
                             </div>
                             <div class="p-3 border-t border-gray-100 flex justify-between text-gray-500 text-sm px-6">
                                 <button class="flex items-center gap-2 hover:text-primary"><i
-                                        class="fa-regular fa-heart"></i> 24 Likes</button>
+                                    class="fa-regular fa-heart"></i> 87 <span data-i18n="likesLabel">Likes</span></button>
                                 <button class="flex items-center gap-2 hover:text-primary"><i
-                                        class="fa-regular fa-comment"></i> 5 Comments</button>
+                                    class="fa-regular fa-comment"></i> 14 <span data-i18n="commentsLabel">Comments</span></button>
                                 <button class="flex items-center gap-2 hover:text-primary"><i
-                                        class="fa-solid fa-share"></i> Share</button>
+                                    class="fa-solid fa-share-nodes"></i> 9 <span data-i18n="shareLabel">Share</span></button>
                             </div>
                         </div>
 
                         <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                             <div class="p-4 flex justify-between items-start">
                                 <div class="flex space-x-3">
-                                    <img src="https://i.pravatar.cc/150?u=mark" class="w-10 h-10 rounded-full">
+                                        <img src="https://randomuser.me/api/portraits/men/65.jpg" class="w-10 h-10 rounded-full">
                                     <div>
-                                        <h4 class="font-bold text-sm">Dr. Mark Chen <span
-                                                class="font-normal text-xs text-gray-500 bg-gray-100 px-2 py-0.5 rounded ml-2">MIT</span>
+                                        <h4 class="font-bold text-sm">Timur Bekzhanov <span
+                                            class="font-normal text-xs text-gray-500 bg-gray-100 px-2 py-0.5 rounded ml-2">Al-Farabi Kazakh National University</span>
                                         </h4>
                                         <p class="text-xs text-gray-500">Professor of Physics</p>
-                                        <p class="text-xs text-gray-400 mt-0.5">Yesterday • <span
+                                        <p class="text-xs text-gray-400 mt-0.5"><span data-i18n="timeYesterday">Yesterday</span> • <span
                                                 class="text-primary font-medium">#QuantumComputing</span></p>
                                     </div>
                                 </div>
                             </div>
                             <div class="px-4 pb-3">
-                                <p class="text-sm text-gray-800">We are hosting a webinar on "The Future of Qubits" next
-                                    Tuesday. Everyone is welcome to join! Link in bio.</p>
+                                <p class="text-sm text-gray-800">PhD opportunities at Kyrgyz-Turkish Manas University
+                                    are now available for regional candidates in Physics and Computational Modeling.</p>
                             </div>
                             <div class="bg-gray-200 h-64 w-full"><img
                                     src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
                                     alt="Quantum" class="w-full h-full object-cover"></div>
                             <div class="p-3 border-t border-gray-100 flex justify-between text-gray-500 text-sm px-6">
                                 <button class="flex items-center gap-2 hover:text-primary"><i
-                                        class="fa-regular fa-heart"></i> 156 Likes</button>
+                                    class="fa-regular fa-heart"></i> 203 <span data-i18n="likesLabel">Likes</span></button>
                                 <button class="flex items-center gap-2 hover:text-primary"><i
-                                        class="fa-regular fa-comment"></i> 42 Comments</button>
+                                    class="fa-regular fa-comment"></i> 46 <span data-i18n="commentsLabel">Comments</span></button>
                                 <button class="flex items-center gap-2 hover:text-primary"><i
-                                        class="fa-solid fa-share"></i> Share</button>
+                                    class="fa-solid fa-share-nodes"></i> 31 <span data-i18n="shareLabel">Share</span></button>
                             </div>
                         </div>
                     </div>
@@ -342,8 +348,8 @@
 
                             <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100">
                                 <div class="flex justify-between items-center mb-4">
-                                    <h3 class="font-bold text-gray-800">Suggested Groups</h3>
-                                    <a href="#" class="text-xs text-primary font-medium hover:underline">See all</a>
+                                    <h3 data-i18n="suggestedGroups" class="font-bold text-gray-800">Suggested Groups</h3>
+                                    <a href="#" data-i18n="seeAll" class="text-xs text-primary font-medium hover:underline">See all</a>
                                 </div>
                                 <div class="space-y-4">
                                     <div class="flex items-center justify-between">
@@ -353,8 +359,8 @@
                                                 <i class="fa-solid fa-laptop-code"></i>
                                             </div>
                                             <div>
-                                                <p class="text-sm font-bold">Computer Science</p>
-                                                <p class="text-xs text-gray-500">Turkic Univ. • 35.3k</p>
+                                                <p class="text-sm font-bold">Turkic AI Alliance</p>
+                                                <p class="text-xs text-gray-500">Bilig Network • 35.3k</p>
                                             </div>
                                         </div>
                                         <button
@@ -367,8 +373,8 @@
                                                 <i class="fa-solid fa-chart-pie"></i>
                                             </div>
                                             <div>
-                                                <p class="text-sm font-bold">Economics Res.</p>
-                                                <p class="text-xs text-gray-500">Turkic Univ. • 30.3k</p>
+                                                <p class="text-sm font-bold">Eurasian Economics Lab</p>
+                                                <p class="text-xs text-gray-500">Bilig Network • 30.3k</p>
                                             </div>
                                         </div>
                                         <button
@@ -381,8 +387,8 @@
                                                 <i class="fa-solid fa-staff-snake"></i>
                                             </div>
                                             <div>
-                                                <p class="text-sm font-bold">Medicine & Health</p>
-                                                <p class="text-xs text-gray-500">Turkic Univ. • 30.5k</p>
+                                                <p class="text-sm font-bold">Public Health Research</p>
+                                                <p class="text-xs text-gray-500">Bilig Network • 30.5k</p>
                                             </div>
                                         </div>
                                         <button
@@ -393,52 +399,52 @@
 
                             <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100">
                                 <div class="flex justify-between items-center mb-4">
-                                    <h3 class="font-bold text-gray-800 text-lg">Online Friends</h3><span
+                                    <h3 data-i18n="onlineFriends" class="font-bold text-gray-800 text-lg">Online Friends</h3><span
                                         class="bg-gray-100 text-xs font-bold px-2 py-1 rounded text-gray-600">4</span>
                                 </div>
                                 <div class="space-y-4">
                                     <div
                                         class="flex items-center space-x-3 cursor-pointer hover:bg-gray-50 p-1 rounded-lg transition">
-                                        <div class="relative"><img src="https://i.pravatar.cc/150?u=ai_friend"
+                                        <div class="relative"><img src="https://randomuser.me/api/portraits/women/33.jpg"
                                                 class="w-10 h-10 rounded-full object-cover"><span
                                                 class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white rounded-full"></span>
                                         </div>
                                         <div>
-                                            <p class="text-sm font-bold text-gray-800">Artificial Intelligence</p>
-                                            <p class="text-xs text-gray-400">4.8k discussions</p>
+                                            <p class="text-sm font-bold text-gray-800">Aylin Mammadova</p>
+                                            <p data-i18n="onlineFriend1Meta" class="text-xs text-gray-400">Baku, Azerbaijan • PhD Student</p>
                                         </div>
                                     </div>
                                     <div
                                         class="flex items-center space-x-3 cursor-pointer hover:bg-gray-50 p-1 rounded-lg transition">
-                                        <div class="relative"><img src="https://i.pravatar.cc/150?u=quantum"
+                                        <div class="relative"><img src="https://randomuser.me/api/portraits/men/52.jpg"
                                                 class="w-10 h-10 rounded-full object-cover"><span
                                                 class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white rounded-full"></span>
                                         </div>
                                         <div>
-                                            <p class="text-sm font-bold text-gray-800">Quantum Computing</p>
-                                            <p class="text-xs text-gray-400">3.9k discussions</p>
+                                            <p class="text-sm font-bold text-gray-800">Nursultan Bekov</p>
+                                            <p data-i18n="onlineFriend2Meta" class="text-xs text-gray-400">Almaty, Kazakhstan • Researcher</p>
                                         </div>
                                     </div>
                                     <div
                                         class="flex items-center space-x-3 cursor-pointer hover:bg-gray-50 p-1 rounded-lg transition">
-                                        <div class="relative"><img src="https://i.pravatar.cc/150?u=sustain"
+                                        <div class="relative"><img src="https://randomuser.me/api/portraits/women/68.jpg"
                                                 class="w-10 h-10 rounded-full object-cover"><span
                                                 class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white rounded-full"></span>
                                         </div>
                                         <div>
-                                            <p class="text-sm font-bold text-gray-800">Sustainable Development</p>
-                                            <p class="text-xs text-gray-400">3.2k discussions</p>
+                                            <p class="text-sm font-bold text-gray-800">Dilnoza Karimova</p>
+                                            <p data-i18n="onlineFriend3Meta" class="text-xs text-gray-400">Tashkent, Uzbekistan • MSc Student</p>
                                         </div>
                                     </div>
                                     <div
                                         class="flex items-center space-x-3 cursor-pointer hover:bg-gray-50 p-1 rounded-lg transition">
-                                        <div class="relative"><img src="https://i.pravatar.cc/150?u=robot"
+                                        <div class="relative"><img src="https://randomuser.me/api/portraits/men/71.jpg"
                                                 class="w-10 h-10 rounded-full object-cover"><span
                                                 class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white rounded-full"></span>
                                         </div>
                                         <div>
-                                            <p class="text-sm font-bold text-gray-800">Robotics</p>
-                                            <p class="text-xs text-gray-400">2.8k discussions</p>
+                                            <p class="text-sm font-bold text-gray-800">Begench Atayev</p>
+                                            <p data-i18n="onlineFriend4Meta" class="text-xs text-gray-400">Ashgabat, Turkmenistan • Engineer</p>
                                         </div>
                                     </div>
                                 </div>
@@ -447,13 +453,13 @@
                             <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100">
                                 <div class="flex items-center gap-2 mb-4"><i
                                         class="fa-solid fa-arrow-trend-up text-gray-800"></i>
-                                    <h3 class="font-bold text-gray-800 text-lg">Trending Topics</h3>
+                                    <h3 data-i18n="trendingTopics" class="font-bold text-gray-800 text-lg">Trending Topics</h3>
                                 </div>
                                 <div class="space-y-4">
                                     <div class="flex items-center justify-between">
                                         <div>
                                             <p class="text-sm font-bold text-gray-800">Artificial Intelligence</p>
-                                            <p class="text-xs text-gray-400">4.5k discussions</p>
+                                            <p class="text-xs text-gray-400">4.5k <span data-i18n="discussionsWord">discussions</span></p>
                                         </div><span
                                             class="bg-gray-200 text-xs font-bold px-2 py-1 rounded-md text-gray-700 flex items-center gap-1"><i
                                                 class="fa-solid fa-arrow-trend-up text-[10px]"></i> 45%</span>
@@ -461,7 +467,7 @@
                                     <div class="flex items-center justify-between">
                                         <div>
                                             <p class="text-sm font-bold text-gray-800">Quantum Computing</p>
-                                            <p class="text-xs text-gray-400">3.5k discussions</p>
+                                            <p class="text-xs text-gray-400">3.5k <span data-i18n="discussionsWord">discussions</span></p>
                                         </div><span
                                             class="bg-gray-200 text-xs font-bold px-2 py-1 rounded-md text-gray-700 flex items-center gap-1"><i
                                                 class="fa-solid fa-arrow-trend-up text-[10px]"></i> 32%</span>
@@ -469,7 +475,7 @@
                                     <div class="flex items-center justify-between">
                                         <div>
                                             <p class="text-sm font-bold text-gray-800">Sustainable Development</p>
-                                            <p class="text-xs text-gray-400">3.3k discussions</p>
+                                            <p class="text-xs text-gray-400">3.3k <span data-i18n="discussionsWord">discussions</span></p>
                                         </div><span
                                             class="bg-gray-200 text-xs font-bold px-2 py-1 rounded-md text-gray-700 flex items-center gap-1"><i
                                                 class="fa-solid fa-arrow-trend-up text-[10px]"></i> 28%</span>
@@ -483,14 +489,14 @@
 
             <div id="messages" class="page-section hidden h-full flex flex-col">
                 <div
-                    class="flex flex-col md:flex-row h-full md:h-[calc(100vh-140px)] bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                    class="flex flex-col md:flex-row h-full min-h-[70vh] md:h-[calc(100vh-140px)] bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden relative">
                     <div class="w-full md:w-1/3 border-b md:border-b-0 md:border-r border-gray-200 flex flex-col max-h-72 md:max-h-none">
                         <div class="p-4 border-b border-gray-100">
-                            <h2 class="text-lg font-bold mb-3">Messages</h2>
+                            <h2 id="messagesTitle" data-i18n="messagesTitle" class="text-lg font-bold mb-3">Messages</h2>
                             <div class="relative">
                                 <i
                                     class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs"></i>
-                                <input type="text" placeholder="Search conversations..."
+                                <input id="searchConversationsInput" data-i18n-placeholder="searchConversationsInput" type="text" placeholder="Search conversations..."
                                     class="w-full bg-gray-50 pl-8 pr-3 py-2 rounded-lg text-sm focus:outline-none">
                             </div>
                         </div>
@@ -501,28 +507,28 @@
                     <div class="w-full md:flex-1 flex flex-col min-h-0">
                         <div class="p-4 border-b border-gray-100 flex items-center justify-between">
                             <div class="flex items-center space-x-3">
-                                <img id="chatHeaderImage" src="https://i.pravatar.cc/150?u=sarah"
+                                <img id="chatHeaderImage" src="https://randomuser.me/api/portraits/women/44.jpg"
                                     class="w-10 h-10 rounded-full">
                                 <div>
-                                    <h3 id="chatHeaderName" class="font-bold text-sm">Dr. Sarah Mitchell</h3>
+                                    <h3 id="chatHeaderName" class="font-bold text-sm">Leyla Mammadova</h3>
                                     <p id="chatHeaderStatus" class="text-xs text-green-500 flex items-center gap-1">
                                         <span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span> Online
                                     </p>
                                 </div>
                             </div>
                             <button id="chatInfoBtn" onclick="toggleGroupInfoPanel()"
-                                class="hidden text-gray-400 hover:text-gray-600"><i
+                                class="text-gray-400 hover:text-gray-600"><i
                                     class="fa-solid fa-circle-info"></i></button>
                         </div>
 
-                        <div id="chatContainer" class="flex-1 p-6 space-y-4 overflow-y-auto bg-gray-50 custom-scroll">
+                        <div id="chatContainer" class="flex-1 p-3 md:p-6 space-y-4 overflow-y-auto bg-gray-50 custom-scroll">
                         </div>
 
                         <div class="p-4 bg-white border-t border-gray-100 flex items-center space-x-3">
                             <button class="text-gray-400 hover:text-gray-600"><i
                                     class="fa-solid fa-paperclip"></i></button>
 
-                            <input type="text" id="messageInput" placeholder="Type a message..."
+                            <input type="text" id="messageInput" data-i18n-placeholder="messageInput" placeholder="Type a message..."
                                 class="flex-1 bg-gray-50 border border-gray-200 rounded-full px-4 py-2 text-sm focus:outline-none focus:border-primary"
                                 onkeypress="handleKeyPress(event)">
 
@@ -534,11 +540,11 @@
                     </div>
 
                     <aside id="groupInfoPanel"
-                        class="hidden w-full lg:w-80 border-t lg:border-t-0 lg:border-l border-gray-200 bg-white p-4 space-y-4 overflow-y-auto custom-scroll">
+                        class="hidden fixed md:absolute md:static inset-x-0 bottom-0 z-30 max-h-[70vh] md:max-h-none w-full md:w-80 lg:w-80 border-t md:border-t-0 md:border-l border-gray-200 bg-white p-4 space-y-4 overflow-y-auto custom-scroll rounded-t-2xl md:rounded-none shadow-2xl md:shadow-none">
                         <div class="flex items-start justify-between">
                             <div>
-                                <p class="text-xs uppercase tracking-wide text-primary font-semibold">Group Info</p>
-                                <h3 id="groupInfoName" class="font-bold text-gray-800">AI Research Group</h3>
+                                <p data-i18n="groupInfoTitle" class="text-xs uppercase tracking-wide text-primary font-semibold">Group Info</p>
+                                <h3 id="groupInfoName" class="font-bold text-gray-800">Bilig AI Collaboration Group</h3>
                             </div>
                             <button onclick="closeGroupInfoPanel()" class="text-gray-400 hover:text-gray-600">
                                 <i class="fa-solid fa-xmark"></i>
@@ -546,19 +552,19 @@
                         </div>
 
                         <div class="bg-gray-50 border border-gray-100 rounded-xl p-3">
-                            <p class="text-xs text-gray-500 mb-1">Members</p>
-                            <p id="groupInfoMembers" class="text-sm font-semibold text-gray-800">35 members online</p>
+                                <p data-i18n="groupInfoMembersLabel" class="text-xs text-gray-500 mb-1">Members</p>
+                            <p id="groupInfoMembers" class="text-sm font-semibold text-gray-800">41 members online</p>
                         </div>
 
                         <div class="bg-gray-50 border border-gray-100 rounded-xl p-3">
-                            <p class="text-xs text-gray-500 mb-1">Description</p>
-                            <p id="groupInfoDescription" class="text-sm text-gray-700">Research talks, papers, and weekly meeting updates.</p>
+                                <p data-i18n="groupInfoDescriptionLabel" class="text-xs text-gray-500 mb-1">Description</p>
+                            <p id="groupInfoDescription" class="text-sm text-gray-700">Cross-border research talks, paper reviews, and weekly coordination meetings.</p>
                         </div>
 
                         <div class="bg-gray-50 border border-gray-100 rounded-xl p-3">
-                            <p class="text-xs text-gray-500 mb-2">Pinned</p>
+                                <p data-i18n="groupInfoPinnedLabel" class="text-xs text-gray-500 mb-2">Pinned</p>
                             <ul id="groupInfoPinned" class="space-y-2 text-sm text-gray-700">
-                                <li class="flex items-start gap-2"><i class="fa-solid fa-thumbtack mt-1 text-primary text-xs"></i><span>Weekly meeting: Tuesday, 3 PM</span></li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-thumbtack mt-1 text-primary text-xs"></i><span>Weekly meeting: Tuesday, 3 PM (Baku/Ankara)</span></li>
                             </ul>
                         </div>
                     </aside>
@@ -566,87 +572,84 @@
             </div>
 
             <div id="groups" class="page-section hidden h-full overflow-y-auto custom-scroll pr-2">
-                <h2 class="text-2xl font-bold text-gray-800 mb-2">Discover Groups</h2>
-                <p class="text-gray-500 mb-6">Find and join academic communities that match your interests</p>
+                <h2 data-i18n="discoverGroupsTitle" class="text-2xl font-bold text-gray-800 mb-2">Discover Groups</h2>
+                <p data-i18n="discoverGroupsDesc" class="text-gray-500 mb-6">Find and join academic communities that match your interests</p>
 
                 <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 mb-6">
                     <div class="relative mb-4">
                         <i
                             class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
-                        <input type="text" id="groupSearchInput" onkeyup="filterGroups()" placeholder="Search groups..."
+                        <input data-i18n-placeholder="groupSearchInput" type="text" id="groupSearchInput" onkeyup="filterGroups()" placeholder="Search groups..."
                             class="w-full bg-gray-50 pl-10 pr-4 py-2.5 rounded-lg text-sm border border-gray-200 focus:outline-none focus:border-primary transition">
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div>
-                            <label class="text-xs font-semibold text-gray-700 block mb-1">Field</label>
+                            <label data-i18n="fieldLabel" class="text-xs font-semibold text-gray-700 block mb-1">Field</label>
                             <select id="fieldSelect" onchange="filterGroups()"
                                 class="w-full bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-primary cursor-pointer">
-                                <option value="">All Fields</option>
-                                <option value="Computer Science">Computer Science</option>
-                                <option value="Physics">Physics</option>
-                                <option value="Biology">Biology</option>
-                                <option value="Environmental Science">Environmental Science</option>
-                                <option value="Economics">Economics</option>
-                                <option value="History">History</option>
-                                <option value="Neuroscience">Neuroscience</option>
+                                <option data-i18n="allFields" value="">All Fields</option>
+                                <option data-i18n="fieldComputerScience" value="Computer Science">Computer Science</option>
+                                <option data-i18n="fieldPhysics" value="Physics">Physics</option>
+                                <option data-i18n="fieldBiology" value="Biology">Biology</option>
+                                <option data-i18n="fieldEnvironmentalScience" value="Environmental Science">Environmental Science</option>
+                                <option data-i18n="fieldEconomics" value="Economics">Economics</option>
+                                <option data-i18n="fieldHistory" value="History">History</option>
+                                <option data-i18n="fieldNeuroscience" value="Neuroscience">Neuroscience</option>
                             </select>
                         </div>
                         <div>
-                            <label class="text-xs font-semibold text-gray-700 block mb-1">Country</label>
+                            <label data-i18n="countryLabel" class="text-xs font-semibold text-gray-700 block mb-1">Country</label>
                             <select id="countrySelect" onchange="filterGroups()"
                                 class="w-full bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-primary cursor-pointer">
-                                <option value="">All Countries</option>
+                                <option data-i18n="allCountries" value="">All Countries</option>
                                 <option value="Global">Global</option>
                                 <option value="Azerbaijan">Azerbaijan</option>
-                                <option value="USA">USA</option>
-                                <option value="UK">UK</option>
-                                <option value="Germany">Germany</option>
-                                <option value="China">China</option>
-                                <option value="Japan">Japan</option>
                                 <option value="Turkey">Turkey</option>
-                                <option value="Egypt">Egypt</option>
+                                <option value="Kazakhstan">Kazakhstan</option>
+                                <option value="Uzbekistan">Uzbekistan</option>
+                                <option value="Turkmenistan">Turkmenistan</option>
+                                <option value="Kyrgyzstan">Kyrgyzstan</option>
                             </select>
                         </div>
                         <div>
-                            <label class="text-xs font-semibold text-gray-700 block mb-1">University</label>
+                            <label data-i18n="universityLabel" class="text-xs font-semibold text-gray-700 block mb-1">University</label>
                             <select id="universitySelect" onchange="filterGroups()"
                                 class="w-full bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-primary cursor-pointer">
-                                <option value="">All Universities</option>
+                                <option data-i18n="allUniversities" value="">All Universities</option>
                                 <option value="Karabakh University">Karabakh University</option>
+                                <option value="Hacettepe University">Hacettepe University</option>
+                                <option value="Al-Farabi Kazakh National University">Al-Farabi Kazakh National University</option>
+                                <option value="Tashkent State Technical University">Tashkent State Technical University</option>
+                                <option value="Kyrgyz-Turkish Manas University">Kyrgyz-Turkish Manas University</option>
+                                <option value="Baku State University">Baku State University</option>
                                 <option value="Multiple Universities">Multiple Universities</option>
-                                <option value="MIT">MIT</option>
-                                <option value="Stanford University">Stanford University</option>
-                                <option value="Cambridge University">Cambridge University</option>
-                                <option value="Harvard University">Harvard University</option>
-                                <option value="Oxford University">Oxford University</option>
-                                <option value="Cairo University">Cairo University</option>
                             </select>
                         </div>
                     </div>
                 </div>
 
-                <p class="text-sm text-gray-500 mb-4">Found <span id="groupCount"
-                        class="font-bold text-gray-800">0</span> groups</p>
+                <p class="text-sm text-gray-500 mb-4"><span data-i18n="foundLabel">Found</span> <span id="groupCount"
+                    class="font-bold text-gray-800">0</span> <span data-i18n="groupsLabel">groups</span></p>
 
                 <div id="groupsList" class="grid grid-cols-1 md:grid-cols-2 gap-6 pb-20">
                 </div>
             </div>
 
             <div id="library" class="page-section hidden">
-                <h2 class="text-2xl font-bold text-gray-800 mb-2 flex items-center gap-2"><i
+                <h2 data-i18n="libraryTitle" class="text-2xl font-bold text-gray-800 mb-2 flex items-center gap-2"><i
                         class="fa-solid fa-book-open"></i> Library & Resources</h2>
-                <p class="text-gray-500 mb-6">Access research papers, datasets, and learning materials</p>
+                <p data-i18n="libraryDesc" class="text-gray-500 mb-6">Access research papers, datasets, and learning materials</p>
 
                 <div class="bg-gray-100 p-1 rounded-xl flex mb-6 max-w-4xl">
                     <button onclick="switchLibTab('resources')"
                         class="flex-1 py-2 text-sm font-semibold rounded-lg bg-white shadow-sm text-gray-800 text-center transition lib-tab-btn"
-                        id="btn-resources">Resources</button>
+                        id="btn-resources" data-i18n="resourcesTab">Resources</button>
                     <button onclick="switchLibTab('saved-posts')"
                         class="flex-1 py-2 text-sm font-semibold rounded-lg text-gray-500 hover:bg-white/50 text-center transition lib-tab-btn"
-                        id="btn-saved-posts">Saved Posts</button>
+                        id="btn-saved-posts" data-i18n="savedPostsTab">Saved Posts</button>
                     <button onclick="switchLibTab('collections')"
                         class="flex-1 py-2 text-sm font-semibold rounded-lg text-gray-500 hover:bg-white/50 text-center transition lib-tab-btn"
-                        id="btn-collections">My Collections</button>
+                        id="btn-collections" data-i18n="myCollectionsTab">My Collections</button>
                 </div>
 
                 <div id="view-resources" class="lib-view">
@@ -654,10 +657,10 @@
                         <div class="relative flex-1 max-w-md">
                             <i
                                 class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
-                            <input type="text" placeholder="Search resources..."
+                            <input data-i18n-placeholder="searchResourcesInput" type="text" placeholder="Search resources..."
                                 class="w-full bg-white pl-10 pr-4 py-2 rounded-lg border border-gray-200 text-sm focus:outline-none">
                         </div>
-                        <button class="bg-gray-900 text-white text-sm px-4 py-2 rounded-lg">All Categories</button>
+                        <button data-i18n="allCategories" class="bg-gray-900 text-white text-sm px-4 py-2 rounded-lg">All Categories</button>
                         <button
                             class="bg-white border border-gray-200 text-gray-600 text-sm px-4 py-2 rounded-lg hover:bg-gray-50">Machine
                             Learning</button>
@@ -665,10 +668,10 @@
                             class="bg-white border border-gray-200 text-gray-600 text-sm px-4 py-2 rounded-lg hover:bg-gray-50">Physics</button>
                     </div>
 
-                    <p class="text-sm text-gray-500 mb-4">Found 6 resources</p>
+                    <p class="text-sm text-gray-500 mb-4"><span data-i18n="foundLabel">Found</span> 6 <span data-i18n="resourcesLabel">resources</span></p>
 
                     <div class="space-y-4">
-                        <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex items-start gap-4">
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col sm:flex-row items-start gap-4">
                             <div
                                 class="w-12 h-12 bg-teal-50 rounded-lg flex items-center justify-center text-primary text-xl flex-shrink-0">
                                 <i class="fa-regular fa-file-lines"></i>
@@ -682,20 +685,21 @@
                                 <div class="flex items-center gap-3 text-xs text-gray-400">
                                     <span class="bg-gray-100 text-gray-600 px-2 py-0.5 rounded">Machine Learning</span>
                                     <span class="bg-gray-100 text-gray-600 px-2 py-0.5 rounded">PDF</span>
-                                    <span><i class="fa-solid fa-download mr-1"></i> 12,453 downloads</span>
+                                    <span><i class="fa-solid fa-download mr-1"></i> 12,453 <span data-i18n="downloadsWord">downloads</span></span>
                                     <span>• 5.2 MB</span>
                                 </div>
                             </div>
-                            <div class="flex flex-col gap-2">
+                            <div class="flex sm:flex-col gap-2 w-full sm:w-auto">
                                 <button
-                                    class="bg-gray-900 text-white text-xs font-bold px-4 py-2 rounded-lg flex items-center gap-2"><i
-                                        class="fa-solid fa-download"></i> Download</button>
+                                    class="bg-gray-900 text-white text-xs font-bold px-4 py-2 rounded-lg flex items-center justify-center gap-2 w-full sm:w-auto"><i
+                                        class="fa-solid fa-download"></i> <span data-i18n="downloadBtn">Download</span></button>
                                 <button
-                                    class="border border-gray-200 text-gray-600 text-xs font-bold px-4 py-2 rounded-lg">View</button>
+                                    onclick="openPdfViewer('./pdfs/test_document.pdf', 'Discrete Mathematics')"
+                                    class="border border-gray-200 text-gray-600 text-xs font-bold px-4 py-2 rounded-lg w-full sm:w-auto" data-i18n="viewBtn">View</button>
                             </div>
                         </div>
 
-                        <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex items-start gap-4">
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col sm:flex-row items-start gap-4">
                             <div
                                 class="w-12 h-12 bg-green-50 rounded-lg flex items-center justify-center text-green-600 text-xl flex-shrink-0">
                                 <i class="fa-regular fa-file-lines"></i>
@@ -705,20 +709,21 @@
                                     <h3 class="font-bold text-gray-800">Quantum Computing Fundamentals</h3>
                                     <i class="fa-regular fa-bookmark text-gray-400"></i>
                                 </div>
-                                <p class="text-sm text-gray-500 mb-2">by MIT Press</p>
+                                <p class="text-sm text-gray-500 mb-2">by Al-Farabi Research Press</p>
                                 <div class="flex items-center gap-3 text-xs text-gray-400">
                                     <span class="bg-gray-100 text-gray-600 px-2 py-0.5 rounded">Physics</span>
                                     <span class="bg-gray-100 text-gray-600 px-2 py-0.5 rounded">PDF</span>
-                                    <span><i class="fa-solid fa-download mr-1"></i> 8,234 downloads</span>
+                                    <span><i class="fa-solid fa-download mr-1"></i> 8,234 <span data-i18n="downloadsWord">downloads</span></span>
                                     <span>• 3.8 MB</span>
                                 </div>
                             </div>
-                            <div class="flex flex-col gap-2">
+                            <div class="flex sm:flex-col gap-2 w-full sm:w-auto">
                                 <button
-                                    class="bg-gray-900 text-white text-xs font-bold px-4 py-2 rounded-lg flex items-center gap-2"><i
-                                        class="fa-solid fa-download"></i> Download</button>
+                                    class="bg-gray-900 text-white text-xs font-bold px-4 py-2 rounded-lg flex items-center justify-center gap-2 w-full sm:w-auto"><i
+                                        class="fa-solid fa-download"></i> <span data-i18n="downloadBtn">Download</span></button>
                                 <button
-                                    class="border border-gray-200 text-gray-600 text-xs font-bold px-4 py-2 rounded-lg">View</button>
+                                    onclick="openPdfViewer('./pdfs/test_document.pdf', 'Discrete Mathematics')"
+                                    class="border border-gray-200 text-gray-600 text-xs font-bold px-4 py-2 rounded-lg w-full sm:w-auto" data-i18n="viewBtn">View</button>
                             </div>
                         </div>
                     </div>
@@ -727,18 +732,18 @@
                 <div id="view-saved-posts" class="lib-view hidden">
                     <div class="space-y-4">
                         <div
-                            class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex items-center justify-between">
-                            <div class="flex items-center gap-4">
+                            class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                            <div class="flex items-center gap-4 min-w-0">
                                 <div
                                     class="w-10 h-10 bg-gray-100 rounded flex items-center justify-center text-gray-500">
                                     <i class="fa-solid fa-bookmark"></i>
                                 </div>
                                 <div>
-                                    <h4 class="font-bold text-gray-800">Explaining Convolutional Neural Networks</h4>
-                                    <p class="text-xs text-gray-500">by Muhammad Yilmaz • Video Post</p>
+                                    <h4 class="font-bold text-gray-800">Joint AI symposium between Baku and Ankara</h4>
+                                    <p class="text-xs text-gray-500">by Ilkin Yilmaz • <span data-i18n="videoPostLabel">Video Post</span></p>
                                 </div>
                             </div>
-                            <button class="border border-gray-200 text-sm px-4 py-1.5 rounded-lg hover:bg-gray-50">View
+                            <button data-i18n="viewPostBtn" class="border border-gray-200 text-sm px-4 py-1.5 rounded-lg hover:bg-gray-50 w-full sm:w-auto">View
                                 Post</button>
                         </div>
                     </div>
@@ -752,8 +757,8 @@
                                 class="w-12 h-12 bg-teal-50 rounded-full flex items-center justify-center text-primary mb-3">
                                 <i class="fa-regular fa-folder-open"></i>
                             </div>
-                            <h3 class="font-bold text-gray-700">Create Collection</h3>
-                            <p class="text-xs text-gray-400">Organize your resources</p>
+                            <h3 data-i18n="createCollection" class="font-bold text-gray-700">Create Collection</h3>
+                            <p data-i18n="organizeResources" class="text-xs text-gray-400">Organize your resources</p>
                         </div>
                         <div
                             class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col items-center text-center">
@@ -762,8 +767,8 @@
                                 <i class="fa-regular fa-file-lines"></i>
                             </div>
                             <h3 class="font-bold text-gray-800">Machine Learning</h3>
-                            <p class="text-xs text-gray-500 mb-4">12 resources</p>
-                            <span class="bg-gray-100 text-xs px-2 py-1 rounded text-gray-500">Personal</span>
+                            <p class="text-xs text-gray-500 mb-4">12 <span data-i18n="resourcesLabel">resources</span></p>
+                            <span data-i18n="personalLabel" class="bg-gray-100 text-xs px-2 py-1 rounded text-gray-500">Personal</span>
                         </div>
                     </div>
                 </div>
@@ -776,15 +781,15 @@
                 </div>
 
                 <div
-                    class="bg-white rounded-b-xl shadow-sm border border-gray-100 px-6 pb-6 relative mb-6 flex-shrink-0">
-                    <div class="flex justify-between items-end -mt-10 mb-4">
+                    class="bg-white rounded-b-xl shadow-sm border border-gray-100 px-4 md:px-6 pb-6 relative mb-6 flex-shrink-0">
+                    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-end items-start gap-3 -mt-10 mb-4">
                         <div class="relative">
                             <img src="https://bootdey.com/img/Content/avatar/avatar7.png"
                                 class="w-24 h-24 rounded-full border-4 border-white bg-white shadow-md">
                         </div>
                         <button
-                            class="bg-primary text-white px-4 py-1.5 rounded-lg text-sm font-semibold hover:bg-teal-700 transition shadow-sm">
-                            <i class="fa-solid fa-pen-to-square mr-1"></i> Edit Profile
+                            class="bg-primary text-white px-4 py-1.5 rounded-lg text-sm font-semibold hover:bg-teal-700 transition shadow-sm w-full sm:w-auto">
+                            <i class="fa-solid fa-pen-to-square mr-1"></i> <span data-i18n="editProfileBtn">Edit Profile</span>
                         </button>
                     </div>
 
@@ -802,15 +807,15 @@
                         </div>
                     </div>
 
-                    <div class="flex gap-8 border-b border-gray-100 pb-0">
+                    <div class="flex gap-6 md:gap-8 border-b border-gray-100 pb-0 overflow-x-auto">
                         <button onclick="switchProfileTab('posts')" id="ptab-posts"
-                            class="ptab-btn pb-3 font-semibold text-primary border-b-2 border-primary transition">Posts</button>
+                            class="ptab-btn pb-3 font-semibold text-primary border-b-2 border-primary transition whitespace-nowrap" data-i18n="profileTabPosts">Posts</button>
                         <button onclick="switchProfileTab('about')" id="ptab-about"
-                            class="ptab-btn pb-3 font-medium text-gray-500 hover:text-gray-800 transition">About</button>
+                            class="ptab-btn pb-3 font-medium text-gray-500 hover:text-gray-800 transition whitespace-nowrap" data-i18n="profileTabAbout">About</button>
                         <button onclick="switchProfileTab('groups')" id="ptab-groups"
-                            class="ptab-btn pb-3 font-medium text-gray-500 hover:text-gray-800 transition">Groups</button>
+                            class="ptab-btn pb-3 font-medium text-gray-500 hover:text-gray-800 transition whitespace-nowrap" data-i18n="profileTabGroups">Groups</button>
                         <button onclick="switchProfileTab('saved')" id="ptab-saved"
-                            class="ptab-btn pb-3 font-medium text-gray-500 hover:text-gray-800 transition">Saved</button>
+                            class="ptab-btn pb-3 font-medium text-gray-500 hover:text-gray-800 transition whitespace-nowrap" data-i18n="profileTabSaved">Saved</button>
                     </div>
                 </div>
 
@@ -822,7 +827,7 @@
                                     class="w-10 h-10 rounded-full">
                                 <div>
                                     <h4 class="font-bold text-sm">Yusif Hasanli</h4>
-                                    <p class="text-xs text-gray-500">5 hours ago</p>
+                                    <p class="text-xs text-gray-500" data-i18n="time5HoursAgo">5 hours ago</p>
                                 </div>
                             </div>
                             <button class="text-gray-400 hover:text-gray-600"><i
@@ -834,9 +839,9 @@
                         </p>
                         <div class="flex items-center gap-4 text-xs text-gray-500 border-t border-gray-100 pt-3 mt-3">
                             <button class="flex items-center gap-1 hover:text-primary"><i
-                                    class="fa-regular fa-heart"></i> 45 Likes</button>
+                                    class="fa-regular fa-heart"></i> 45 <span data-i18n="likesLabel">Likes</span></button>
                             <button class="flex items-center gap-1 hover:text-primary"><i
-                                    class="fa-regular fa-comment"></i> 12 Comments</button>
+                                    class="fa-regular fa-comment"></i> 12 <span data-i18n="commentsLabel">Comments</span></button>
                         </div>
                     </div>
 
@@ -847,7 +852,7 @@
                                     class="w-10 h-10 rounded-full">
                                 <div>
                                     <h4 class="font-bold text-sm">Yusif Hasanli</h4>
-                                    <p class="text-xs text-gray-500">Yesterday</p>
+                                    <p class="text-xs text-gray-500" data-i18n="timeYesterday">Yesterday</p>
                                 </div>
                             </div>
                         </div>
@@ -855,23 +860,23 @@
                         </p>
                         <div class="flex items-center gap-4 text-xs text-gray-500 border-t border-gray-100 pt-3 mt-3">
                             <button class="flex items-center gap-1 hover:text-primary"><i
-                                    class="fa-regular fa-heart"></i> 8 Likes</button>
+                                    class="fa-regular fa-heart"></i> 8 <span data-i18n="likesLabel">Likes</span></button>
                             <button class="flex items-center gap-1 hover:text-primary"><i
-                                    class="fa-regular fa-comment"></i> 15 Comments</button>
+                                    class="fa-regular fa-comment"></i> 15 <span data-i18n="commentsLabel">Comments</span></button>
                         </div>
                     </div>
                 </div>
 
                 <div id="pview-about" class="pview-content hidden px-1">
                     <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                        <h3 class="font-bold text-lg mb-4 text-gray-800">Bio</h3>
+                        <h3 data-i18n="bioTitle" class="font-bold text-lg mb-4 text-gray-800">Bio</h3>
                         <p class="text-sm text-gray-600 mb-6 leading-relaxed">
                             Technology enthusiast and software developer in the making. Always eager to learn new
                             technologies and apply them to solve real-world problems. Currently exploring the world of
                             Cloud Computing and Mobile App Development.
                         </p>
 
-                        <h3 class="font-bold text-lg mb-4 text-gray-800">Info</h3>
+                        <h3 data-i18n="infoTitle" class="font-bold text-lg mb-4 text-gray-800">Info</h3>
                         <div class="space-y-3">
                             <div class="flex items-center text-sm text-gray-600">
                                 <i class="fa-solid fa-location-dot w-6 text-center text-gray-400"></i>
@@ -891,7 +896,7 @@
                             </div>
                         </div>
 
-                        <h3 class="font-bold text-lg mt-6 mb-3 text-gray-800">Skills</h3>
+                        <h3 data-i18n="skillsTitle" class="font-bold text-lg mt-6 mb-3 text-gray-800">Skills</h3>
                         <div class="flex flex-wrap gap-2">
                             <span
                                 class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full font-medium">Java</span>
@@ -916,7 +921,7 @@
                             </div>
                             <div>
                                 <h4 class="font-bold text-sm">Game Dev Club</h4>
-                                <p class="text-xs text-gray-500">Member</p>
+                                <p class="text-xs text-gray-500" data-i18n="memberRole">Member</p>
                             </div>
                         </div>
                         <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex items-center gap-3">
@@ -926,7 +931,7 @@
                             </div>
                             <div>
                                 <h4 class="font-bold text-sm">Uni Sports</h4>
-                                <p class="text-xs text-gray-500">Member</p>
+                                <p class="text-xs text-gray-500" data-i18n="memberRole">Member</p>
                             </div>
                         </div>
                         <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex items-center gap-3">
@@ -936,7 +941,7 @@
                             </div>
                             <div>
                                 <h4 class="font-bold text-sm">Book Lovers</h4>
-                                <p class="text-xs text-gray-500">Moderator</p>
+                                <p class="text-xs text-gray-500" data-i18n="moderatorRole">Moderator</p>
                             </div>
                         </div>
                     </div>
@@ -950,7 +955,7 @@
                                     class="fa-brands fa-youtube"></i></div>
                             <div>
                                 <h4 class="font-bold text-sm text-gray-800">Advanced CSS Tutorial</h4>
-                                <p class="text-xs text-gray-500">Video • Saved 2 days ago</p>
+                                <p class="text-xs text-gray-500"><span data-i18n="videoWord">Video</span> • <span data-i18n="saved2DaysAgo">Saved 2 days ago</span></p>
                             </div>
                         </div>
                         <button class="text-gray-400 hover:text-gray-600"><i
@@ -965,7 +970,7 @@
                             </div>
                             <div>
                                 <h4 class="font-bold text-sm text-gray-800">Exam Schedule Spring 2026</h4>
-                                <p class="text-xs text-gray-500">PDF • Saved last week</p>
+                                <p class="text-xs text-gray-500"><span data-i18n="pdfWord">PDF</span> • <span data-i18n="savedLastWeek">Saved last week</span></p>
                             </div>
                         </div>
                         <button class="text-gray-400 hover:text-gray-600"><i
@@ -975,15 +980,15 @@
             </div>
 
             <div id="saved" class="page-section hidden">
-                <h2 class="text-2xl font-bold text-gray-800 mb-2 flex items-center gap-2"><i
+                <h2 data-i18n="savedItemsTitle" class="text-2xl font-bold text-gray-800 mb-2 flex items-center gap-2"><i
                         class="fa-regular fa-bookmark"></i> Saved Items</h2>
 
                 <div class="flex flex-wrap gap-3 mb-6 mt-4">
-                    <button
+                    <button data-i18n="resourcesTab"
                         class="bg-white px-6 py-2 rounded-full shadow-sm text-sm font-bold text-gray-800">Resources</button>
-                    <button class="bg-white px-6 py-2 rounded-full shadow-sm text-sm font-medium text-gray-500">Saved
+                    <button data-i18n="savedPostsTab" class="bg-white px-6 py-2 rounded-full shadow-sm text-sm font-medium text-gray-500">Saved
                         Posts</button>
-                    <button class="bg-gray-200 px-6 py-2 rounded-full shadow-inner text-sm font-medium text-gray-600">My
+                    <button data-i18n="myCollectionsTab" class="bg-gray-200 px-6 py-2 rounded-full shadow-inner text-sm font-medium text-gray-600">My
                         Collections</button>
                 </div>
 
@@ -996,19 +1001,17 @@
                                 <i class="fa-solid fa-bookmark"></i>
                             </div>
                             <div>
-                                <h4 class="font-bold text-gray-800">Explaining Convolutional Neural Networks</h4>
-                                <p class="text-xs text-gray-500 mt-1">by Muhammad Yilmaz</p>
+                                <h4 data-i18n="savedCard1Title" class="font-bold text-gray-800">Joint AI symposium between Baku and Ankara</h4>
+                                <p data-i18n="savedCard1By" class="text-xs text-gray-500 mt-1">by Ilkin Yilmaz</p>
                                 <div class="flex gap-2 mt-1">
                                     <span
-                                        class="bg-gray-100 text-[10px] px-1.5 py-0.5 rounded text-gray-600 font-bold">Video
-                                        Post</span>
-                                    <span class="text-[10px] text-gray-400">Saved 2 days ago</span>
+                                        class="bg-gray-100 text-[10px] px-1.5 py-0.5 rounded text-gray-600 font-bold" data-i18n="videoPostLabel">Video Post</span>
+                                    <span class="text-[10px] text-gray-400" data-i18n="saved2DaysAgo">Saved 2 days ago</span>
                                 </div>
                             </div>
                         </div>
-                        <button
-                            class="border border-gray-200 text-sm font-medium px-4 py-2 rounded-lg hover:bg-gray-50">View
-                            Post</button>
+                        <button data-i18n="viewPostBtn"
+                            class="border border-gray-200 text-sm font-medium px-4 py-2 rounded-lg hover:bg-gray-50">View Post</button>
                     </div>
 
                     <div
@@ -1019,19 +1022,17 @@
                                 <i class="fa-solid fa-bookmark"></i>
                             </div>
                             <div>
-                                <h4 class="font-bold text-gray-800">Study notes on Differential Equations</h4>
-                                <p class="text-xs text-gray-500 mt-1">by Leyla Aslan</p>
+                                <h4 data-i18n="savedCard2Title" class="font-bold text-gray-800">New dataset on Turkic languages NLP</h4>
+                                <p data-i18n="savedCard2By" class="text-xs text-gray-500 mt-1">by Ayse Demir</p>
                                 <div class="flex gap-2 mt-1">
                                     <span
-                                        class="bg-gray-100 text-[10px] px-1.5 py-0.5 rounded text-gray-600 font-bold">Photo
-                                        Post</span>
-                                    <span class="text-[10px] text-gray-400">Saved 5 days ago</span>
+                                        class="bg-gray-100 text-[10px] px-1.5 py-0.5 rounded text-gray-600 font-bold" data-i18n="photoPostLabel">Photo Post</span>
+                                    <span class="text-[10px] text-gray-400" data-i18n="saved5DaysAgo">Saved 5 days ago</span>
                                 </div>
                             </div>
                         </div>
-                        <button
-                            class="border border-gray-200 text-sm font-medium px-4 py-2 rounded-lg hover:bg-gray-50">View
-                            Post</button>
+                        <button data-i18n="viewPostBtn"
+                            class="border border-gray-200 text-sm font-medium px-4 py-2 rounded-lg hover:bg-gray-50">View Post</button>
                     </div>
 
                     <div
@@ -1042,58 +1043,57 @@
                                 <i class="fa-solid fa-bookmark"></i>
                             </div>
                             <div>
-                                <h4 class="font-bold text-gray-800">PhD Opportunities in Marine Biology</h4>
-                                <p class="text-xs text-gray-500 mt-1">by Dr. Sarah Mitchell</p>
+                                <h4 data-i18n="savedCard3Title" class="font-bold text-gray-800">PhD opportunities at Manas University</h4>
+                                <p data-i18n="savedCard3By" class="text-xs text-gray-500 mt-1">by Prof. Aygul Saparova</p>
                                 <div class="flex gap-2 mt-1">
                                     <span
-                                        class="bg-gray-100 text-[10px] px-1.5 py-0.5 rounded text-gray-600 font-bold">Announcement</span>
-                                    <span class="text-[10px] text-gray-400">Saved 1 week ago</span>
+                                        class="bg-gray-100 text-[10px] px-1.5 py-0.5 rounded text-gray-600 font-bold" data-i18n="optAnnouncement">Announcement</span>
+                                    <span class="text-[10px] text-gray-400" data-i18n="saved1WeekAgo">Saved 1 week ago</span>
                                 </div>
                             </div>
                         </div>
-                        <button
-                            class="border border-gray-200 text-sm font-medium px-4 py-2 rounded-lg hover:bg-gray-50">View
-                            Post</button>
+                        <button data-i18n="viewPostBtn"
+                            class="border border-gray-200 text-sm font-medium px-4 py-2 rounded-lg hover:bg-gray-50">View Post</button>
                     </div>
                 </div>
             </div>
             <div id="notifications" class="page-section hidden h-full overflow-y-auto custom-scroll pb-20">
                 <div class="max-w-4xl mx-auto mt-6">
                     <div class="flex justify-between items-center mb-6">
-                        <h2 class="text-2xl font-bold text-gray-800 flex items-center gap-3">
+                        <h2 data-i18n="notificationsTitle" class="text-2xl font-bold text-gray-800 flex items-center gap-3">
                             <i class="fa-regular fa-bell"></i> Notifications
                         </h2>
                         <button
                             class="flex items-center gap-2 text-sm font-semibold text-gray-600 bg-white border border-gray-200 px-4 py-2 rounded-lg hover:bg-gray-50 transition shadow-sm">
-                            <i class="fa-solid fa-check-double text-primary"></i> Mark all as read
+                            <i class="fa-solid fa-check-double text-primary"></i> <span data-i18n="markAllRead">Mark all as read</span>
                         </button>
                     </div>
 
-                    <div class="bg-gray-100 p-1 rounded-xl flex mb-6 w-full sticky top-0 z-10">
+                    <div class="bg-gray-100 p-1 rounded-xl flex mb-6 w-full sticky top-0 z-10 overflow-x-auto">
                         <button onclick="switchNotificationTab('all')" id="ntab-all"
-                            class="ntab-btn flex-1 py-2 text-sm font-semibold rounded-lg bg-white shadow-sm text-gray-800 text-center transition relative">
-                            All <span class="bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded-full ml-1">3</span>
+                            class="ntab-btn flex-1 min-w-[110px] py-2 text-sm font-semibold rounded-lg bg-white shadow-sm text-gray-800 text-center transition relative whitespace-nowrap">
+                            <span data-i18n="allTab">All</span> <span class="bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded-full ml-1">3</span>
                         </button>
                         <button onclick="switchNotificationTab('unread')" id="ntab-unread"
-                            class="ntab-btn flex-1 py-2 text-sm font-semibold rounded-lg text-gray-500 hover:bg-white/50 text-center transition">Unread</button>
+                            class="ntab-btn flex-1 min-w-[110px] py-2 text-sm font-semibold rounded-lg text-gray-500 hover:bg-white/50 text-center transition whitespace-nowrap" data-i18n="unreadTab">Unread</button>
                         <button onclick="switchNotificationTab('reactions')" id="ntab-reactions"
-                            class="ntab-btn flex-1 py-2 text-sm font-semibold rounded-lg text-gray-500 hover:bg-white/50 text-center transition">Reactions</button>
+                            class="ntab-btn flex-1 min-w-[110px] py-2 text-sm font-semibold rounded-lg text-gray-500 hover:bg-white/50 text-center transition whitespace-nowrap" data-i18n="reactionsTab">Reactions</button>
                         <button onclick="switchNotificationTab('comments')" id="ntab-comments"
-                            class="ntab-btn flex-1 py-2 text-sm font-semibold rounded-lg text-gray-500 hover:bg-white/50 text-center transition">Comments</button>
+                            class="ntab-btn flex-1 min-w-[110px] py-2 text-sm font-semibold rounded-lg text-gray-500 hover:bg-white/50 text-center transition whitespace-nowrap" data-i18n="commentsTab">Comments</button>
                     </div>
 
                     <div id="nview-all" class="nview-content space-y-4">
                         <div
                             class="bg-teal-50/50 border border-primary/20 p-5 rounded-2xl flex items-start gap-4 transition hover:shadow-sm">
-                            <img src="https://i.pravatar.cc/150?u=sarah"
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg"
                                 class="w-12 h-12 rounded-full border border-white shadow-sm object-cover">
                             <div class="flex-1">
                                 <p class="text-sm text-gray-800 mb-1">
-                                    <span class="font-bold">Dr. Sarah Mitchell</span> liked your post
-                                    <span class="font-medium text-primary">"Explaining Convolutional Neural
-                                        Networks"</span>
+                                    <span class="font-bold">Leyla Mammadova</span> <span data-i18n="notifLikedPost">liked your post</span>
+                                    <span class="font-medium text-primary">"Joint AI symposium between Baku and
+                                        Ankara"</span>
                                 </p>
-                                <span class="text-xs text-gray-400">5 minutes ago</span>
+                                <span class="text-xs text-gray-400" data-i18n="time5MinAgo">5 minutes ago</span>
                             </div>
                             <div
                                 class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm">
@@ -1102,13 +1102,13 @@
 
                         <div
                             class="bg-teal-50/50 border border-primary/20 p-5 rounded-2xl flex items-start gap-4 transition hover:shadow-sm">
-                            <img src="https://i.pravatar.cc/150?u=leyla"
+                            <img src="https://randomuser.me/api/portraits/women/63.jpg"
                                 class="w-12 h-12 rounded-full border border-white shadow-sm object-cover">
                             <div class="flex-1">
                                 <p class="text-sm text-gray-800">
-                                    <span class="font-bold">Leyla Aslan</span> started following you
+                                    <span class="font-bold">Ayse Demir</span> <span data-i18n="notifStartedFollowing">started following you</span>
                                 </p>
-                                <span class="text-xs text-gray-400">2 hours ago</span>
+                                <span class="text-xs text-gray-400" data-i18n="time2HoursAgo">2 hours ago</span>
                             </div>
                             <div
                                 class="w-8 h-8 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center text-sm">
@@ -1119,17 +1119,16 @@
                             class="bg-white border border-gray-100 p-5 rounded-2xl flex items-center gap-4 transition hover:shadow-sm">
                             <div class="flex -space-x-3 overflow-hidden">
                                 <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white"
-                                    src="https://i.pravatar.cc/150?u=muhammad" alt="" />
+                                    src="https://randomuser.me/api/portraits/men/36.jpg" alt="" />
                                 <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white"
-                                    src="https://i.pravatar.cc/150?u=emily" alt="" />
+                                    src="https://i.pravatar.cc/150?u=nurlan" alt="" />
                                 <div
                                     class="h-10 w-10 rounded-full ring-2 ring-white bg-gray-100 flex items-center justify-center text-xs font-bold text-gray-500">
                                     +14</div>
                             </div>
                             <div class="flex-1 pl-2">
-                                <p class="text-sm text-gray-800"><span class="font-bold">Muhammad Yilmaz</span> and
-                                    others reacted to your post</p>
-                                <span class="text-xs text-gray-400">5 hours ago</span>
+                                <p class="text-sm text-gray-800"><span class="font-bold">Ilkin Yilmaz</span> <span data-i18n="notifAndOthersReacted">and others reacted to your post</span></p>
+                                <span class="text-xs text-gray-400" data-i18n="time5HoursAgo">5 hours ago</span>
                             </div>
                             <div
                                 class="w-8 h-8 bg-blue-50 text-blue-500 rounded-full flex items-center justify-center text-sm">
@@ -1151,22 +1150,22 @@
                             </div>
                             <div class="flex-1">
                                 <p class="text-sm text-gray-800"><span class="font-bold">Karabakh University</span>
-                                    posted a new announcement: <span class="font-medium text-primary">"Spring Semester
+                                    <span data-i18n="notifPostedAnnouncement">posted a new announcement:</span> <span class="font-medium text-primary">"Spring Semester
                                         Exam Schedule"</span></p>
-                                <span class="text-xs text-gray-400">10 minutes ago</span>
+                                <span class="text-xs text-gray-400" data-i18n="time10MinAgo">10 minutes ago</span>
                             </div>
                             <button
-                                class="text-xs bg-white border border-gray-200 px-3 py-1 rounded shadow-sm">View</button>
+                                class="text-xs bg-white border border-gray-200 px-3 py-1 rounded shadow-sm" data-i18n="viewBtn">View</button>
                         </div>
 
                         <div
                             class="bg-teal-50/50 border border-primary/20 p-5 rounded-2xl flex items-start gap-4 transition hover:shadow-sm">
-                            <img src="https://i.pravatar.cc/150?u=sarah"
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg"
                                 class="w-12 h-12 rounded-full border border-white shadow-sm object-cover">
                             <div class="flex-1">
-                                <p class="text-sm text-gray-800 mb-1"><span class="font-bold">Dr. Sarah Mitchell</span>
-                                    liked your post</p>
-                                <span class="text-xs text-gray-400">5 minutes ago</span>
+                                <p class="text-sm text-gray-800 mb-1"><span class="font-bold">Leyla Mammadova</span>
+                                    <span data-i18n="notifLikedPost">liked your post</span></p>
+                                <span class="text-xs text-gray-400" data-i18n="time5MinAgo">5 minutes ago</span>
                             </div>
                             <div
                                 class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm">
@@ -1175,12 +1174,12 @@
 
                         <div
                             class="bg-teal-50/50 border border-primary/20 p-5 rounded-2xl flex items-start gap-4 transition hover:shadow-sm">
-                            <img src="https://i.pravatar.cc/150?u=leyla"
+                            <img src="https://randomuser.me/api/portraits/women/63.jpg"
                                 class="w-12 h-12 rounded-full border border-white shadow-sm object-cover">
                             <div class="flex-1">
-                                <p class="text-sm text-gray-800"><span class="font-bold">Leyla Aslan</span> started
-                                    following you</p>
-                                <span class="text-xs text-gray-400">2 hours ago</span>
+                                <p class="text-sm text-gray-800"><span class="font-bold">Ayse Demir</span> <span data-i18n="notifStartedFollowing">started
+                                    following you</span></p>
+                                <span class="text-xs text-gray-400" data-i18n="time2HoursAgo">2 hours ago</span>
                             </div>
                             <div
                                 class="w-8 h-8 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center text-sm">
@@ -1191,12 +1190,12 @@
                     <div id="nview-reactions" class="nview-content hidden space-y-4">
                         <div
                             class="bg-white border border-gray-100 p-5 rounded-2xl flex items-start gap-4 transition hover:shadow-sm">
-                            <img src="https://i.pravatar.cc/150?u=mark"
+                            <img src="https://randomuser.me/api/portraits/men/65.jpg"
                                 class="w-12 h-12 rounded-full border border-white shadow-sm object-cover">
                             <div class="flex-1">
-                                <p class="text-sm text-gray-800"><span class="font-bold">Mark Chen</span> loved your
-                                    comment in <span class="font-medium">"Quantum Computing Future"</span></p>
-                                <span class="text-xs text-gray-400">Yesterday</span>
+                                <p class="text-sm text-gray-800"><span class="font-bold">Timur Bekzhanov</span> <span data-i18n="notifLovedComment">loved
+                                    your comment in</span> <span class="font-medium">"Quantum Collaboration Roadmap"</span></p>
+                                <span class="text-xs text-gray-400" data-i18n="timeYesterday">Yesterday</span>
                             </div>
                             <div
                                 class="w-8 h-8 bg-red-100 text-red-600 rounded-full flex items-center justify-center text-sm">
@@ -1215,9 +1214,9 @@
                                     +5</div>
                             </div>
                             <div class="flex-1 pl-2">
-                                <p class="text-sm text-gray-800"><span class="font-bold">Teknofest Team</span> reacted
-                                    to your file <span class="font-medium">"Project_Presentation.pptx"</span></p>
-                                <span class="text-xs text-gray-400">2 days ago</span>
+                                <p class="text-sm text-gray-800"><span class="font-bold">Bilig Innovation Team</span>
+                                    <span data-i18n="notifReactedFile">reacted to your file</span> <span class="font-medium">"Turkic_EdTech_Roadmap.pptx"</span></p>
+                                <span class="text-xs text-gray-400" data-i18n="time2DaysAgo">2 days ago</span>
                             </div>
                             <div
                                 class="w-8 h-8 bg-yellow-100 text-yellow-600 rounded-full flex items-center justify-center text-sm">
@@ -1228,18 +1227,18 @@
                     <div id="nview-comments" class="nview-content hidden space-y-4">
                         <div
                             class="bg-white border border-gray-100 p-5 rounded-2xl flex items-start gap-4 transition hover:shadow-sm">
-                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                            <img src="https://randomuser.me/api/portraits/men/57.jpg"
                                 class="w-12 h-12 rounded-full border border-white shadow-sm object-cover">
                             <div class="flex-1">
                                 <p class="text-sm text-gray-800 mb-2">
-                                    <span class="font-bold">James Wilson</span> commented on <span
-                                        class="font-medium text-primary">"Study notes on Differential Equations"</span>
+                                    <span class="font-bold">Nursultan Imanbek</span> <span data-i18n="notifCommentedOn">commented on</span> <span
+                                        class="font-medium text-primary">"New dataset on Turkic languages NLP"</span>
                                 </p>
                                 <div
                                     class="bg-gray-50 p-3 rounded-lg border-l-4 border-gray-300 text-sm text-gray-600 italic">
                                     "Great notes! Very helpful for my exam prep."
                                 </div>
-                                <span class="text-xs text-gray-400 mt-2 block">1 hour ago</span>
+                                <span class="text-xs text-gray-400 mt-2 block" data-i18n="time1HourAgo">1 hour ago</span>
                             </div>
                             <div
                                 class="w-8 h-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-sm">
@@ -1248,17 +1247,17 @@
 
                         <div
                             class="bg-white border border-gray-100 p-5 rounded-2xl flex items-start gap-4 transition hover:shadow-sm">
-                            <img src="https://i.pravatar.cc/150?u=kenan"
+                            <img src="https://randomuser.me/api/portraits/men/47.jpg"
                                 class="w-12 h-12 rounded-full border border-white shadow-sm object-cover">
                             <div class="flex-1">
                                 <p class="text-sm text-gray-800 mb-2">
-                                    <span class="font-bold">Kənan Qasımov</span> replied to your comment
+                                    <span class="font-bold">Kenan Gasimov</span> <span data-i18n="notifRepliedComment">replied to your comment</span>
                                 </p>
                                 <div
                                     class="bg-gray-50 p-3 rounded-lg border-l-4 border-gray-300 text-sm text-gray-600 italic">
-                                    "Bəli, Holberton təqaüdü barədə məlumatı ofisdən ala bilərsən."
+                                    "Yes, the scholarship details are now published on the Bilig call page."
                                 </div>
-                                <span class="text-xs text-gray-400 mt-2 block">Yesterday</span>
+                                <span class="text-xs text-gray-400 mt-2 block" data-i18n="timeYesterday">Yesterday</span>
                             </div>
                             <div
                                 class="w-8 h-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-sm">
@@ -1270,12 +1269,40 @@
         </div>
     </main>
 
+    <div id="pdfViewerModal" onclick="closePdfViewer()"
+        class="hidden fixed inset-0 z-[9999] bg-black/80 backdrop-blur-sm p-2 md:p-6">
+        <div onclick="event.stopPropagation()"
+            class="w-full h-full bg-white rounded-xl md:rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden">
+            <div class="h-14 md:h-16 px-3 md:px-5 border-b border-gray-200 bg-gray-50/90 flex items-center justify-between gap-2 md:gap-3">
+                <div class="min-w-0">
+                    <p id="pdfViewerTitle" class="text-sm md:text-base font-bold text-gray-800 truncate">PDF Document</p>
+                </div>
+                <div class="flex items-center gap-2 flex-shrink-0">
+                    <a id="pdfViewerDownload" href="#" download
+                        class="inline-flex items-center gap-2 bg-primary text-white text-xs md:text-sm font-semibold px-3 md:px-4 py-2 rounded-lg hover:bg-teal-700 transition">
+                        <i class="fa-solid fa-download"></i>
+                        <span data-i18n="downloadBtn">Download</span>
+                    </a>
+                    <button onclick="closePdfViewer()"
+                        class="w-9 h-9 rounded-lg border border-gray-300 text-gray-600 hover:bg-gray-100 transition flex items-center justify-center"
+                        aria-label="Close PDF viewer">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="flex-1 bg-gray-200 p-2 md:p-4">
+                <iframe id="pdfViewerFrame" src="" class="w-full h-full rounded-lg bg-white"
+                    title="PDF Viewer"></iframe>
+            </div>
+        </div>
+    </div>
+
     <div id="createPostModal"
         class="fixed inset-0 bg-black/50 z-50 hidden flex items-center justify-center transition-opacity duration-300">
         <div
             class="bg-white rounded-xl w-full max-w-lg mx-4 overflow-hidden shadow-2xl transform transition-all scale-100">
             <div class="flex justify-between items-center p-4 border-b border-gray-100">
-                <h3 class="font-bold text-lg text-gray-800">Create Post</h3>
+                <h3 id="createPostTitle" data-i18n="createPostTitle" class="font-bold text-lg text-gray-800">Create Post</h3>
                 <button onclick="closePostModal()" class="text-gray-400 hover:text-gray-600 transition">
                     <i class="fa-solid fa-xmark text-xl"></i>
                 </button>
@@ -1283,16 +1310,16 @@
 
             <div class="p-4 space-y-4">
                 <div>
-                    <label class="block text-xs font-bold text-gray-700 mb-1">Post Type</label>
+                    <label id="postTypeLabel" data-i18n="postTypeLabel" class="block text-xs font-bold text-gray-700 mb-1">Post Type</label>
                     <div class="relative">
                         <select id="postTypeSelect" onchange="updateModalContent()"
                             class="w-full bg-gray-50 border border-gray-200 text-gray-700 text-sm rounded-lg focus:ring-2 focus:ring-primary focus:border-primary block p-2.5 appearance-none cursor-pointer">
-                            <option value="text">Text Post</option>
-                            <option value="photo">Photo</option>
-                            <option value="video">Video</option>
-                            <option value="file">File</option>
-                            <option value="question">Question</option>
-                            <option value="announcement">Announcement</option>
+                            <option id="optTextPost" data-i18n="optTextPost" value="text">Text Post</option>
+                            <option id="optPhoto" data-i18n="optPhoto" value="photo">Photo</option>
+                            <option id="optVideo" data-i18n="optVideo" value="video">Video</option>
+                            <option id="optFile" data-i18n="optFile" value="file">File</option>
+                            <option id="optQuestion" data-i18n="optQuestion" value="question">Question</option>
+                            <option id="optAnnouncement" data-i18n="optAnnouncement" value="announcement">Announcement</option>
                         </select>
                         <div
                             class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-500">
@@ -1301,7 +1328,7 @@
                     </div>
                 </div>
 
-                <textarea id="postTextInput" rows="3"
+                <textarea id="postTextInput" data-i18n-placeholder="postTextInput" rows="3"
                     class="w-full bg-gray-50 border border-gray-200 rounded-lg p-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 resize-none transition"
                     placeholder="Write something..."></textarea>
 
@@ -1311,8 +1338,8 @@
                         class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition">
                         <i id="uploadIcon" class="fa-regular fa-image text-xl text-gray-500"></i>
                     </div>
-                    <p class="text-sm font-medium text-gray-500">Click to upload or drag and drop</p>
-                    <p class="text-xs text-gray-400 mt-1">SVG, PNG, JPG or GIF (max. 800x400px)</p>
+                    <p id="uploadHelpText" data-i18n="uploadHelpText" class="text-sm font-medium text-gray-500">Click to upload or drag and drop</p>
+                    <p id="uploadHelpSubtext" data-i18n="uploadHelpSubtext" class="text-xs text-gray-400 mt-1">SVG, PNG, JPG or GIF (max. 800x400px)</p>
                 </div>
             </div>
 
@@ -1325,7 +1352,7 @@
                     <button onclick="setPostType('file')" class="hover:text-primary transition tooltip-btn"
                         title="File"><i class="fa-regular fa-file"></i></button>
                 </div>
-                <button
+                <button id="postSubmitBtn" data-i18n="postSubmitBtn"
                     class="bg-gray-900 text-white font-bold py-2 px-6 rounded-lg hover:bg-black transition transform active:scale-95 text-sm">Post</button>
             </div>
         </div>
@@ -1432,7 +1459,20 @@
 
         function updateModalContent() {
             const type = postTypeSelect.value;
-            postTextInput.placeholder = `Write your ${type}...`;
+            const selectedLang = document.getElementById('languageSelect')?.value || 'en';
+            const typeLabel = postTypeSelect.options[postTypeSelect.selectedIndex].text.toLowerCase();
+            const placeholderTemplates = {
+                en: 'Write your {type}...',
+                az: '{type} paylaşımını yaz...',
+                tr: '{type} gönderini yaz...',
+                kk: '{type} postyny jaz...',
+                uz: '{type} postingizni yozing...',
+                tk: '{type} postingi yaz...',
+                ky: '{type} postundu jaz...',
+                otk: '{type} bitigin yaz...'
+            };
+            const template = placeholderTemplates[selectedLang] || placeholderTemplates.en;
+            postTextInput.placeholder = template.replace('{type}', typeLabel);
             if (type === 'text' || type === 'question') {
                 uploadArea.classList.add('hidden');
             } else {
@@ -1448,21 +1488,21 @@
         // --- 2. GROUPS SYSTEM LOGIC ---
 
         const groupsData = [
-            { id: 1, name: "AI & Machine Learning Research", description: "A community for researchers and students working on artificial intelligence and machine learning models.", field: "Computer Science", country: "Global", university: "Multiple Universities", members: "15.4k", icon: "fa-solid fa-robot", color: "text-blue-600", bg: "bg-blue-100" },
-            { id: 2, name: "Karabakh Tech Innovators", description: "Official tech club for students of Karabakh University. Coding, hackathons and local startup ecosystem.", field: "Computer Science", country: "Azerbaijan", university: "Karabakh University", members: "2.1k", icon: "fa-solid fa-laptop-code", color: "text-green-600", bg: "bg-green-100" },
-            { id: 3, name: "Quantum Physics Discussion", description: "Exploring the mysteries of quantum mechanics and its applications in modern technology.", field: "Physics", country: "USA", university: "MIT", members: "9.2k", icon: "fa-solid fa-atom", color: "text-purple-600", bg: "bg-purple-100" },
-            { id: 4, name: "Molecular Biology & Genetics", description: "Discussion forum for molecular biology, genetics, CRISPR technology and DNA sequencing.", field: "Biology", country: "UK", university: "Cambridge University", members: "7.5k", icon: "fa-solid fa-dna", color: "text-red-500", bg: "bg-red-100" },
-            { id: 5, name: "Climate Change Research", description: "Collaborative space for researchers studying global warming trends and sustainable solutions.", field: "Environmental Science", country: "Germany", university: "Multiple Universities", members: "11.3k", icon: "fa-solid fa-earth-americas", color: "text-emerald-600", bg: "bg-emerald-100" },
-            { id: 6, name: "Global Macroeconomics", description: "Analyzing global market trends, inflation rates, and fiscal policies in developing nations.", field: "Economics", country: "USA", university: "Harvard University", members: "8.9k", icon: "fa-solid fa-chart-line", color: "text-yellow-600", bg: "bg-yellow-100" },
-            { id: 7, name: "Ancient Civilizations", description: "Digging into the past: From Egyptian pyramids to the Roman Empire and Mesopotamia.", field: "History", country: "Egypt", university: "Cairo University", members: "4.5k", icon: "fa-solid fa-landmark", color: "text-orange-600", bg: "bg-orange-100" },
-            { id: 8, name: "Cognitive Neuroscience", description: "Understanding brain function, neural pathways, and human behavior through modern science.", field: "Neuroscience", country: "UK", university: "Oxford University", members: "5.6k", icon: "fa-solid fa-brain", color: "text-pink-500", bg: "bg-pink-100" },
-            { id: 9, name: "Cyber Security Hub", description: "Latest trends in network security, ethical hacking, and data protection strategies.", field: "Computer Science", country: "Turkey", university: "Multiple Universities", members: "6.8k", icon: "fa-solid fa-shield-halved", color: "text-indigo-600", bg: "bg-indigo-100" },
-            { id: 10, name: "Astrophysics & Space", description: "Discussions about black holes, dark matter, and the future of space exploration.", field: "Physics", country: "USA", university: "Stanford University", members: "10.1k", icon: "fa-solid fa-meteor", color: "text-violet-600", bg: "bg-violet-100" },
-            { id: 11, name: "Renewable Energy Systems", description: "Engineering solar panels, wind turbines, and green energy storage solutions.", field: "Environmental Science", country: "China", university: "Multiple Universities", members: "8.2k", icon: "fa-solid fa-solar-panel", color: "text-lime-600", bg: "bg-lime-100" },
-            { id: 12, name: "Behavioral Economics", description: "Combining psychology and economics to understand human decision-making processes.", field: "Economics", country: "Japan", university: "Multiple Universities", members: "3.4k", icon: "fa-solid fa-coins", color: "text-amber-600", bg: "bg-amber-100" },
-            { id: 13, name: "Modern European History", description: "A deep dive into the political and social changes in Europe from 1900 to present.", field: "History", country: "Germany", university: "Multiple Universities", members: "2.8k", icon: "fa-solid fa-clock-rotate-left", color: "text-stone-600", bg: "bg-stone-100" },
-            { id: 14, name: "Marine Biology Explorers", description: "Study of ocean life, coral reefs, and marine ecosystems conservation.", field: "Biology", country: "Japan", university: "Multiple Universities", members: "5.9k", icon: "fa-solid fa-fish-fins", color: "text-cyan-600", bg: "bg-cyan-100" },
-            { id: 15, name: "Robotics & Automation", description: "Building the future with autonomous robots, drones, and industrial automation.", field: "Computer Science", country: "China", university: "Multiple Universities", members: "13.5k", icon: "fa-solid fa-microchip", color: "text-slate-600", bg: "bg-slate-200" }
+            { id: 1, name: "Turkic AI & Machine Learning", description: "Cross-border collaboration on AI methods, educational technologies, and open benchmarking projects.", field: "Computer Science", country: "Global", university: "Multiple Universities", members: "15.4k", icon: "fa-solid fa-robot", color: "text-blue-600", bg: "bg-blue-100" },
+            { id: 2, name: "Karabakh Tech Innovators", description: "Student-led innovation community from Karabakh University focused on software engineering and startup prototyping.", field: "Computer Science", country: "Azerbaijan", university: "Karabakh University", members: "2.1k", icon: "fa-solid fa-laptop-code", color: "text-green-600", bg: "bg-green-100" },
+            { id: 3, name: "Ankara-Baku Quantum Forum", description: "A physics community discussing quantum computing foundations and practical simulation pipelines.", field: "Physics", country: "Turkey", university: "Hacettepe University", members: "9.2k", icon: "fa-solid fa-atom", color: "text-purple-600", bg: "bg-purple-100" },
+            { id: 4, name: "Central Asian Molecular Biology", description: "Research forum for genetics, CRISPR practices, and reproducible wet-lab protocols.", field: "Biology", country: "Kazakhstan", university: "Al-Farabi Kazakh National University", members: "7.5k", icon: "fa-solid fa-dna", color: "text-red-500", bg: "bg-red-100" },
+            { id: 5, name: "Caspian Climate Research Circle", description: "Collaborative studies on climate adaptation, biodiversity, and sustainable infrastructure.", field: "Environmental Science", country: "Azerbaijan", university: "Multiple Universities", members: "11.3k", icon: "fa-solid fa-earth-americas", color: "text-emerald-600", bg: "bg-emerald-100" },
+            { id: 6, name: "Eurasian Macroeconomics Lab", description: "Data-driven analyses of inflation, labor dynamics, and regional trade in Turkic economies.", field: "Economics", country: "Turkey", university: "Hacettepe University", members: "8.9k", icon: "fa-solid fa-chart-line", color: "text-yellow-600", bg: "bg-yellow-100" },
+            { id: 7, name: "Steppe Civilizations and History", description: "Historical studies from early Turkic inscriptions to modern nation-state transformations.", field: "History", country: "Kyrgyzstan", university: "Kyrgyz-Turkish Manas University", members: "4.5k", icon: "fa-solid fa-landmark", color: "text-orange-600", bg: "bg-orange-100" },
+            { id: 8, name: "Neuroscience Across Turkic States", description: "Interdisciplinary neuroscience dialogue on cognition, language processing, and neuroimaging.", field: "Neuroscience", country: "Uzbekistan", university: "Tashkent State Technical University", members: "5.6k", icon: "fa-solid fa-brain", color: "text-pink-500", bg: "bg-pink-100" },
+            { id: 9, name: "Cyber Security Bilig Hub", description: "Best practices for cyber defense, secure architecture, and ethical penetration testing.", field: "Computer Science", country: "Turkey", university: "Multiple Universities", members: "6.8k", icon: "fa-solid fa-shield-halved", color: "text-indigo-600", bg: "bg-indigo-100" },
+            { id: 10, name: "Astrophysics and Space Systems", description: "Joint discussions on telescope data, orbital engineering, and deep-space observation.", field: "Physics", country: "Kazakhstan", university: "Al-Farabi Kazakh National University", members: "10.1k", icon: "fa-solid fa-meteor", color: "text-violet-600", bg: "bg-violet-100" },
+            { id: 11, name: "Renewable Energy Systems", description: "Engineering-focused conversations on solar storage, wind optimization, and smart grids.", field: "Environmental Science", country: "Uzbekistan", university: "Tashkent State Technical University", members: "8.2k", icon: "fa-solid fa-solar-panel", color: "text-lime-600", bg: "bg-lime-100" },
+            { id: 12, name: "Behavioral Economics in Eurasia", description: "Combining economics and cognitive science to model policy and human decision behavior.", field: "Economics", country: "Turkmenistan", university: "Multiple Universities", members: "3.4k", icon: "fa-solid fa-coins", color: "text-amber-600", bg: "bg-amber-100" },
+            { id: 13, name: "Modern Turkic History", description: "Comparative studies of social and political development in Turkic-speaking regions.", field: "History", country: "Azerbaijan", university: "Baku State University", members: "2.8k", icon: "fa-solid fa-clock-rotate-left", color: "text-stone-600", bg: "bg-stone-100" },
+            { id: 14, name: "Biodiversity and Ecology Network", description: "Field and laboratory insights on ecosystems, species protection, and conservation policy.", field: "Biology", country: "Kyrgyzstan", university: "Kyrgyz-Turkish Manas University", members: "5.9k", icon: "fa-solid fa-fish-fins", color: "text-cyan-600", bg: "bg-cyan-100" },
+            { id: 15, name: "Robotics and Automation Frontier", description: "Applied robotics projects, autonomous navigation, and industrial control systems.", field: "Computer Science", country: "Kazakhstan", university: "Al-Farabi Kazakh National University", members: "13.5k", icon: "fa-solid fa-microchip", color: "text-slate-600", bg: "bg-slate-200" }
         ];
 
         function renderGroups(groups) {
@@ -1472,7 +1512,7 @@
             countSpan.innerText = groups.length;
 
             if (groups.length === 0) {
-                list.innerHTML = `<div class="col-span-2 text-center py-10 text-gray-400">No groups found matching your criteria.</div>`;
+                list.innerHTML = `<div class="col-span-2 text-center py-10 text-gray-400">${t('noGroupsFound')}</div>`;
                 return;
             }
 
@@ -1483,7 +1523,7 @@
                             <div class="w-12 h-12 ${group.bg} rounded-xl flex items-center justify-center ${group.color} text-xl">
                                 <i class="${group.icon}"></i>
                             </div>
-                            ${group.university === 'Karabakh University' ? '<span class="bg-primary/10 text-primary text-xs px-2 py-1 rounded font-bold border border-primary/20">Featured</span>' : ''}
+                            ${group.university === 'Karabakh University' ? `<span class="bg-primary/10 text-primary text-xs px-2 py-1 rounded font-bold border border-primary/20">${t('featured')}</span>` : ''}
                         </div>
                         <h3 class="font-bold text-lg mb-1 text-gray-800">${group.name}</h3>
                         <p class="text-sm text-gray-500 mb-4 flex-1 line-clamp-2">${group.description}</p>
@@ -1493,9 +1533,9 @@
                         </div>
                         <div class="flex items-center justify-between mt-auto pt-3 border-t border-gray-50">
                             <div class="text-xs text-gray-500">
-                                <span class="font-bold text-gray-700"><i class="fa-solid fa-user-group mr-1"></i> ${group.members}</span> members
+                                <span class="font-bold text-gray-700"><i class="fa-solid fa-user-group mr-1"></i> ${group.members}</span> ${t('membersWord')}
                             </div>
-                            <button class="border border-gray-200 text-gray-700 text-sm font-semibold px-4 py-2 rounded-lg hover:bg-gray-900 hover:text-white transition">View</button>
+                            <button class="border border-gray-200 text-gray-700 text-sm font-semibold px-4 py-2 rounded-lg hover:bg-gray-900 hover:text-white transition">${t('viewBtn')}</button>
                         </div>
                     </div>
                 `;
@@ -1524,47 +1564,91 @@
 
         const conversationsData = [
             {
-                id: 1, name: "Dr. Sarah Mitchell", avatar: "https://i.pravatar.cc/150?u=sarah", status: "Online", unread: 2, lastMsg: "Thanks for sharing that paper!", time: "2 min ago",
+                id: 1, name: "Leyla Mammadova", avatar: "https://randomuser.me/api/portraits/women/44.jpg", status: "Online", unread: 2, lastMsg: "I shared the bilingual corpus link.", time: "2 min ago",
                 messages: [
-                    { type: "received", text: "Hi! I saw your post about neural networks. Very interesting approach!", time: "10:30 AM" },
-                    { type: "sent", text: "Thank you! I've been working on this for months.", time: "10:32 AM" },
-                    { type: "received", text: "I have a paper that might be relevant to your research. Let me send it to you.", time: "10:36 AM" },
-                    { type: "file", fileName: "Neural_Network_Architecture_2024.pdf", size: "2.4 MB", time: "10:36 AM" }
+                    { type: "received", text: "Salam! I uploaded the Azerbaijani-Turkish corpus package.", time: "10:30 AM" },
+                    { type: "sent", text: "Great, I will run baseline experiments tonight.", time: "10:32 AM" },
+                    { type: "received", text: "Perfect. Please share your precision and recall tables as well.", time: "10:36 AM" },
+                    { type: "file", fileName: "AZ_TR_Corpus_v2.zip", size: "2.4 MB", time: "10:36 AM" }
                 ]
             },
             {
-                id: 2, name: "AI Research Group", avatar: "https://ui-avatars.com/api/?name=AI+Research+Group&background=0f766e&color=ffffff&rounded=true&bold=true&size=150", status: "Group chat • 35 members online", isGroup: true, unread: 0, lastMsg: "Meeting at 3 PM tomorrow", time: "1 hour ago",
+                id: 2, name: "Nursultan Bekov", avatar: "https://randomuser.me/api/portraits/men/52.jpg", status: "Offline", unread: 0, lastMsg: "Let's compare model accuracy tonight.", time: "1 hour ago",
                 messages: [
-                    { type: "received", text: "Guys, don't forget the deadline for the Teknofest submission!", time: "09:00 AM", senderName: "Ali" },
-                    { type: "sent", text: "I'm almost done with the backend documentation.", time: "09:15 AM" },
-                    { type: "received", text: "Great! We will review it in the meeting at 3 PM.", time: "09:20 AM", senderName: "Team Lead" }
+                    { type: "received", text: "Hi! I finished the Kazakh tokenizer update.", time: "09:00 AM" },
+                    { type: "sent", text: "Nice. I can test it on the shared benchmark set.", time: "09:15 AM" },
+                    { type: "received", text: "Good idea. Let's compare model accuracy tonight.", time: "09:20 AM" }
                 ]
             },
             {
-                id: 3, name: "Kənan Qasımov", avatar: "https://ui-avatars.com/api/?name=Kenan+Qasimov&background=1f2937&color=ffffff&rounded=true&bold=true&size=150", status: "Offline", unread: 1, lastMsg: "Qarabağ Universitetinin saytına baxdın?", time: "Yesterday",
+                id: 3, name: "Dilnoza Karimova", avatar: "https://randomuser.me/api/portraits/women/68.jpg", status: "Online", unread: 1, lastMsg: "Can you review my abstract draft?", time: "Yesterday",
                 messages: [
-                    { type: "received", text: "Salam, necəsən? Layihə nə yerdədi?", time: "Yesterday 14:00" },
-                    { type: "sent", text: "Salam, yaxşıyam. Frontendi bitirmək üzrəyəm.", time: "Yesterday 14:10" },
-                    { type: "received", text: "Əla! Qarabağ Universitetinin saytına baxdın? Dizaynı səninknə oxşayır.", time: "Yesterday 14:15" }
+                    { type: "received", text: "Hello! I prepared the Uzbek side of the workshop abstract.", time: "Yesterday 14:00" },
+                    { type: "sent", text: "Great work. Send me the final paragraph for proofreading.", time: "Yesterday 14:10" },
+                    { type: "received", text: "Sure, can you review my abstract draft today?", time: "Yesterday 14:15" }
                 ]
             },
             {
-                id: 4, name: "Emily Chen", avatar: "https://i.pravatar.cc/150?u=emily", status: "Online", unread: 0, lastMsg: "Do you have the Python script?", time: "2 days ago",
+                id: 4, name: "Bakyt Kadyrov", avatar: "https://randomuser.me/api/portraits/men/32.jpg", status: "Online", unread: 0, lastMsg: "Manas lab meeting starts at 15:00.", time: "2 days ago",
                 messages: [
-                    { type: "sent", text: "Hey Emily, are you joining the hackathon?", time: "Monday" },
-                    { type: "received", text: "I'm not sure yet. Do you have the Python script for the data scraping?", time: "Monday" }
+                    { type: "sent", text: "Will you join the model evaluation session today?", time: "Monday" },
+                    { type: "received", text: "Yes. Manas lab meeting starts at 15:00, then I am free.", time: "Monday" }
+                ]
+            },
+            {
+                id: 5, name: "Begench Atayev", avatar: "https://randomuser.me/api/portraits/men/71.jpg", status: "Offline", unread: 0, lastMsg: "Dataset cleaning script is ready.", time: "3 days ago",
+                messages: [
+                    { type: "received", text: "I finished cleaning the Turkmen text dataset.", time: "Sunday" },
+                    { type: "sent", text: "Excellent. Please push the script to the shared repository.", time: "Sunday" },
+                    { type: "received", text: "Done. I added usage notes in the README file.", time: "Sunday" }
                 ]
             }
         ];
 
         const groupProfiles = {
-            2: {
-                membersText: "35 members online • 128 total",
-                description: "AI papers, model discussions, and weekly project syncs for all members.",
+            1: {
+                membersText: "Azerbaijan • Baku State University",
+                description: "Computational linguistics researcher focusing on Azerbaijani-Turkish parallel corpora.",
                 pinned: [
-                    "Weekly meeting: Tuesday 3:00 PM",
-                    "Paper review deadline: Friday 11:59 PM",
-                    "Use #help channel for technical blockers"
+                    "Bilingual corpus v2 uploaded",
+                    "Evaluation report due on Thursday",
+                    "Focus: tokenizer and normalization"
+                ]
+            },
+            2: {
+                membersText: "Kazakhstan • Al-Farabi Kazakh National University",
+                description: "NLP engineer working on Kazakh tokenization and transformer fine-tuning.",
+                pinned: [
+                    "Tokenizer patch shared",
+                    "Benchmark rerun tonight",
+                    "Focus: morphology-aware models"
+                ]
+            },
+            3: {
+                membersText: "Uzbekistan • Tashkent University of Information Technologies",
+                description: "Graduate researcher coordinating workshop abstracts and dataset annotation.",
+                pinned: [
+                    "Workshop abstract draft ready",
+                    "Annotation guideline v1 published",
+                    "Focus: low-resource transfer"
+                ]
+            },
+            4: {
+                membersText: "Kyrgyzstan • Manas University",
+                description: "Applied AI researcher managing evaluation sessions and lab coordination.",
+                pinned: [
+                    "Model evaluation session at 15:00",
+                    "Meeting notes shared",
+                    "Focus: cross-university experiments"
+                ]
+            },
+            5: {
+                membersText: "Turkmenistan • Turkmen State University",
+                description: "Data specialist preparing clean Turkmen corpora for multilingual experiments.",
+                pinned: [
+                    "Cleaning script pushed to repo",
+                    "README usage notes updated",
+                    "Focus: corpus quality checks"
                 ]
             }
         };
@@ -1611,7 +1695,9 @@
             conversationsData.forEach(chat => {
                 const isActive = chat.id === currentChatId ? 'bg-primary/5 border-l-4 border-primary' : 'hover:bg-gray-50 border-l-4 border-transparent';
                 const unreadBadge = chat.unread > 0 ? `<span class="bg-gray-800 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">${chat.unread}</span>` : '';
-                const groupBadge = chat.isGroup ? `<span class="bg-primary/10 text-primary text-[10px] px-1.5 py-0.5 rounded-full font-semibold">Group</span>` : '';
+                const groupBadge = chat.isGroup ? `<span class="bg-primary/10 text-primary text-[10px] px-1.5 py-0.5 rounded-full font-semibold">${t('groupBadge')}</span>` : '';
+                const displayTime = localizeTimeLabel(chat.time);
+                const displayStatus = localizeStatusLabel(chat.status, !!chat.isGroup);
 
                 const html = `
                     <div onclick="loadChat(${chat.id})" class="flex items-center space-x-3 p-4 cursor-pointer transition ${isActive}">
@@ -1622,7 +1708,7 @@
                         <div class="flex-1 min-w-0">
                             <div class="flex justify-between">
                                 <h4 class="font-bold text-sm truncate text-gray-800">${chat.name}</h4>
-                                <span class="text-xs text-gray-500">${chat.time}</span>
+                                <span class="text-xs text-gray-500">${displayTime}</span>
                             </div>
                             <div class="flex items-center gap-1.5">
                                 <p class="text-xs text-gray-500 truncate">${chat.lastMsg}</p>
@@ -1647,22 +1733,22 @@
             const statusEl = document.getElementById('chatHeaderStatus');
             if (chat.isGroup) {
                 statusEl.className = "text-xs text-primary flex items-center gap-1";
-                statusEl.innerHTML = `<i class="fa-solid fa-user-group text-[10px]"></i> ${chat.status}`;
-                infoBtn.classList.remove('hidden');
+                statusEl.innerHTML = `<i class="fa-solid fa-user-group text-[10px]"></i> ${localizeStatusLabel(chat.status, true)}`;
                 renderGroupInfo(chat);
                 closeGroupInfoPanel();
             } else
             if (chat.status === 'Online' || chat.status.includes('online')) {
                 statusEl.className = "text-xs text-green-500 flex items-center gap-1";
-                statusEl.innerHTML = `<span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span> ${chat.status}`;
-                infoBtn.classList.add('hidden');
+                statusEl.innerHTML = `<span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span> ${localizeStatusLabel(chat.status, false)}`;
+                renderGroupInfo(chat);
                 closeGroupInfoPanel();
             } else {
                 statusEl.className = "text-xs text-gray-400";
-                statusEl.innerText = chat.status;
-                infoBtn.classList.add('hidden');
+                statusEl.innerText = localizeStatusLabel(chat.status, false);
+                renderGroupInfo(chat);
                 closeGroupInfoPanel();
             }
+            infoBtn.classList.remove('hidden');
 
             // Messages
             const container = document.getElementById('chatContainer');
@@ -1741,13 +1827,13 @@
             const chat = conversationsData.find(c => c.id === currentChatId);
             chat.messages.push({ type: "sent", text: text, time: timeString });
             chat.lastMsg = text;
-            chat.time = "Just now";
+            chat.time = t('justNow');
             renderConversationList();
 
             // Fake Reply logic
             if (currentChatId === 1 || currentChatId === 3) {
                 setTimeout(() => {
-                    const replyText = currentChatId === 1 ? "That's interesting!" : "Oldu, danışarıq.";
+                    const replyText = currentChatId === 1 ? t('autoReplyInteresting') : t('autoReplySync');
                     const replyHtml = `
                         <div class="flex items-start space-x-3 animate-fade-in">
                             <img src="${chat.avatar}" class="w-8 h-8 rounded-full">
@@ -1768,6 +1854,39 @@
         function handleKeyPress(event) {
             if (event.key === "Enter") sendMessage();
         }
+
+        // --- 3.6 PDF VIEWER MODAL ---
+        function openPdfViewer(pdfPath, title) {
+            const modal = document.getElementById('pdfViewerModal');
+            const frame = document.getElementById('pdfViewerFrame');
+            const titleEl = document.getElementById('pdfViewerTitle');
+            const downloadBtn = document.getElementById('pdfViewerDownload');
+
+            if (!modal || !frame || !titleEl || !downloadBtn) return;
+
+            titleEl.innerText = title || 'PDF Document';
+            frame.src = `${pdfPath}#toolbar=1&navpanes=0&scrollbar=1`;
+            downloadBtn.href = pdfPath;
+
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePdfViewer() {
+            const modal = document.getElementById('pdfViewerModal');
+            const frame = document.getElementById('pdfViewerFrame');
+
+            if (modal) modal.classList.add('hidden');
+            if (frame) frame.src = '';
+
+            document.body.style.overflow = '';
+        }
+
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape') {
+                closePdfViewer();
+            }
+        });
 
         // --- 3.5 PROFILE TAB SYSTEM ---
         function switchProfileTab(tabName) {
@@ -1841,8 +1960,391 @@
                 activeContent.classList.remove('hidden');
             }
         }
+
+        // --- 6. LANGUAGE SWITCHER (DICTIONARY-BASED I18N) ---
+        const baseEn = {
+            langLabel: 'Language', brandName: 'Bilig',
+            navHome: 'Home', navMessages: 'Messages', navGroups: 'Groups', navLibrary: 'Library', navProfile: 'My Profile', navSaved: 'Saved',
+            joinCardTitle: 'Join AI & Data Science', joinCardDesc: 'Connect with researchers worldwide', joinCardBtn: 'Join',
+            globalSearchInput: 'Search...', userMenuLabel: 'You', ddProfile: 'Profile', ddSaved: 'Saved', ddSettings: 'Settings', ddLogout: 'Logout',
+            shareInput: 'What do you want to share?', postBtnPhoto: 'Photo', postBtnVideo: 'Video', postBtnFile: 'File', postBtnQuestion: 'Question', postBtnAnnouncement: 'Announcement',
+            likesLabel: 'Likes', commentsLabel: 'Comments', shareLabel: 'Share',
+            suggestedGroups: 'Suggested Groups', seeAll: 'See all', onlineFriends: 'Online Friends', trendingTopics: 'Trending Topics',
+            onlineFriend1Meta: 'Baku, Azerbaijan • PhD Student', onlineFriend2Meta: 'Almaty, Kazakhstan • Researcher',
+            onlineFriend3Meta: 'Tashkent, Uzbekistan • MSc Student', onlineFriend4Meta: 'Ashgabat, Turkmenistan • Engineer',
+            groupInfoTitle: 'Group Info', groupInfoMembersLabel: 'Members', groupInfoDescriptionLabel: 'Description', groupInfoPinnedLabel: 'Pinned',
+            discoverGroupsTitle: 'Discover Groups', discoverGroupsDesc: 'Find and join academic communities that match your interests',
+            groupSearchInput: 'Search groups...', fieldLabel: 'Field', allFields: 'All Fields', countryLabel: 'Country', allCountries: 'All Countries', universityLabel: 'University', allUniversities: 'All Universities',
+            fieldComputerScience: 'Computer Science', fieldPhysics: 'Physics', fieldBiology: 'Biology', fieldEnvironmentalScience: 'Environmental Science', fieldEconomics: 'Economics', fieldHistory: 'History', fieldNeuroscience: 'Neuroscience',
+            foundLabel: 'Found', groupsLabel: 'groups',
+            libraryTitle: 'Library & Resources', libraryDesc: 'Access research papers, datasets, and learning materials',
+            resourcesTab: 'Resources', savedPostsTab: 'Saved Posts', myCollectionsTab: 'My Collections',
+            searchResourcesInput: 'Search resources...', allCategories: 'All Categories', resourcesLabel: 'resources',
+            viewPostBtn: 'View Post', createCollection: 'Create Collection', organizeResources: 'Organize your resources', personalLabel: 'Personal',
+            viewBtn: 'View', downloadBtn: 'Download', downloadsWord: 'downloads',
+            discussionsWord: 'discussions', memberRole: 'Member', moderatorRole: 'Moderator', videoWord: 'Video', pdfWord: 'PDF',
+            photoPostLabel: 'Photo Post', videoPostLabel: 'Video Post',
+            saved2DaysAgo: 'Saved 2 days ago', saved5DaysAgo: 'Saved 5 days ago', saved1WeekAgo: 'Saved 1 week ago', savedLastWeek: 'Saved last week',
+            savedCard1Title: 'Joint AI symposium between Baku and Ankara', savedCard1By: 'by Ilkin Yilmaz',
+            savedCard2Title: 'New dataset on Turkic languages NLP', savedCard2By: 'by Ayse Demir',
+            savedCard3Title: 'PhD opportunities at Manas University', savedCard3By: 'by Prof. Aygul Saparova',
+            editProfileBtn: 'Edit Profile', profileTabPosts: 'Posts', profileTabAbout: 'About', profileTabGroups: 'Groups', profileTabSaved: 'Saved',
+            bioTitle: 'Bio', infoTitle: 'Info', skillsTitle: 'Skills',
+            savedItemsTitle: 'Saved Items',
+            notificationsTitle: 'Notifications', markAllRead: 'Mark all as read', allTab: 'All', unreadTab: 'Unread', reactionsTab: 'Reactions', commentsTab: 'Comments',
+            notifLikedPost: 'liked your post', notifStartedFollowing: 'started following you', notifAndOthersReacted: 'and others reacted to your post',
+            notifPostedAnnouncement: 'posted a new announcement:', notifLovedComment: 'loved your comment in', notifReactedFile: 'reacted to your file',
+            notifCommentedOn: 'commented on', notifRepliedComment: 'replied to your comment',
+            time5MinAgo: '5 minutes ago', time10MinAgo: '10 minutes ago', time1HourAgo: '1 hour ago', time2HoursAgo: '2 hours ago', time5HoursAgo: '5 hours ago', time2DaysAgo: '2 days ago', timeYesterday: 'Yesterday',
+            messagesTitle: 'Messages', searchConversationsInput: 'Search conversations...', messageInput: 'Type a message...',
+            createPostTitle: 'Create Post', postTypeLabel: 'Post Type', optTextPost: 'Text Post', optPhoto: 'Photo', optVideo: 'Video', optFile: 'File', optQuestion: 'Question', optAnnouncement: 'Announcement',
+            postTextInput: 'Write something...', uploadHelpText: 'Click to upload or drag and drop', uploadHelpSubtext: 'SVG, PNG, JPG or GIF (max. 800x400px)', postSubmitBtn: 'Post',
+            noGroupsFound: 'No groups found matching your criteria.', featured: 'Featured', membersWord: 'members', viewBtn: 'View', groupBadge: 'Group',
+            justNow: 'Just now', autoReplyInteresting: "That's interesting!", autoReplySync: "Sounds good, let's sync tomorrow.",
+            agoWord: 'ago', minutesWord: 'minutes', hoursWord: 'hours', daysWord: 'days', onlineWord: 'Online', offlineWord: 'Offline', groupChatLabel: 'Group chat'
+        };
+
+        const translations = {
+            en: baseEn,
+            az: {
+                ...baseEn,
+                langLabel: 'Dil', navHome: 'Ana səhifə', navMessages: 'Mesajlar', navGroups: 'Qruplar', navLibrary: 'Kitabxana', navProfile: 'Profilim', navSaved: 'Saxlanılanlar',
+                joinCardTitle: 'AI və Data Science-a qoşul', joinCardDesc: 'Tədqiqatçılarla qlobal bağlantı qur', joinCardBtn: 'Qoşul',
+                globalSearchInput: 'Axtar...', userMenuLabel: 'Sən', ddProfile: 'Profil', ddSaved: 'Saxlanılanlar', ddSettings: 'Ayarlar', ddLogout: 'Çıxış',
+                shareInput: 'Nə paylaşmaq istəyirsən?', postBtnPhoto: 'Şəkil', postBtnVideo: 'Video', postBtnFile: 'Fayl', postBtnQuestion: 'Sual', postBtnAnnouncement: 'Elan',
+                messagesTitle: 'Mesajlar', searchConversationsInput: 'Söhbətlərdə axtar...', messageInput: 'Mesaj yaz...',
+                likesLabel: 'Bəyənmə', commentsLabel: 'Şərh', shareLabel: 'Paylaş',
+                suggestedGroups: 'Təklif olunan qruplar', seeAll: 'Hamısına bax', onlineFriends: 'Onlayn dostlar', trendingTopics: 'Trend mövzular',
+                onlineFriend1Meta: 'Bakı, Azərbaycan • PhD tələbəsi', onlineFriend2Meta: 'Almatı, Qazaxıstan • Tədqiqatçı',
+                onlineFriend3Meta: 'Daşkənd, Özbəkistan • MSc tələbəsi', onlineFriend4Meta: 'Aşqabad, Türkmənistan • Mühəndis',
+                groupInfoTitle: 'Qrup məlumatı', groupInfoMembersLabel: 'Üzvlər', groupInfoDescriptionLabel: 'Təsvir', groupInfoPinnedLabel: 'Sabitlənənlər',
+                discoverGroupsTitle: 'Qrupları kəşf et', discoverGroupsDesc: 'Maraqlarına uyğun akademik icmaları tap və qoşul',
+                groupSearchInput: 'Qruplarda axtar...', fieldLabel: 'Sahə', allFields: 'Bütün sahələr', countryLabel: 'Ölkə', allCountries: 'Bütün ölkələr', universityLabel: 'Universitet', allUniversities: 'Bütün universitetlər',
+                fieldComputerScience: 'Kompüter Elmləri', fieldPhysics: 'Fizika', fieldBiology: 'Biologiya', fieldEnvironmentalScience: 'Ətraf Mühit Elmi', fieldEconomics: 'İqtisadiyyat', fieldHistory: 'Tarix', fieldNeuroscience: 'Neyroelm',
+                foundLabel: 'Tapıldı', groupsLabel: 'qrup',
+                libraryTitle: 'Kitabxana və Resurslar', libraryDesc: 'Məqalələrə, datasetlərə və tədris materiallarına çıxış',
+                resourcesTab: 'Resurslar', savedPostsTab: 'Saxlanılan postlar', myCollectionsTab: 'Kolleksiyalarım',
+                searchResourcesInput: 'Resurslarda axtar...', allCategories: 'Bütün kateqoriyalar', resourcesLabel: 'resurs',
+                viewPostBtn: 'Posta bax', createCollection: 'Kolleksiya yarat', organizeResources: 'Resurslarını təşkil et', personalLabel: 'Şəxsi',
+                viewBtn: 'Bax', downloadBtn: 'Yüklə', downloadsWord: 'yükləmə',
+                discussionsWord: 'müzakirə', memberRole: 'Üzv', moderatorRole: 'Moderator', videoWord: 'Video', pdfWord: 'PDF',
+                photoPostLabel: 'Şəkil postu', videoPostLabel: 'Video postu',
+                saved2DaysAgo: '2 gün əvvəl saxlanılıb', saved5DaysAgo: '5 gün əvvəl saxlanılıb', saved1WeekAgo: '1 həftə əvvəl saxlanılıb', savedLastWeek: 'ötən həftə saxlanılıb',
+                savedCard1Title: 'Bakı və Ankara arasında ortaq AI simpoziumu', savedCard1By: 'İlkin Yılmaz tərəfindən',
+                savedCard2Title: 'Türk dilləri NLP üzrə yeni dataset', savedCard2By: 'Ayşe Dəmir tərəfindən',
+                savedCard3Title: 'Manas Universitetində PhD imkanları', savedCard3By: 'Prof. Aygül Saparova tərəfindən',
+                editProfileBtn: 'Profili redaktə et', profileTabPosts: 'Postlar', profileTabAbout: 'Haqqında', profileTabGroups: 'Qruplar', profileTabSaved: 'Saxlanılanlar',
+                bioTitle: 'Bio', infoTitle: 'Məlumat', skillsTitle: 'Bacarıqlar',
+                savedItemsTitle: 'Saxlanılanlar',
+                notificationsTitle: 'Bildirişlər', markAllRead: 'Hamısını oxunmuş et', allTab: 'Hamısı', unreadTab: 'Oxunmamış', reactionsTab: 'Reaksiyalar', commentsTab: 'Şərhlər',
+                notifLikedPost: 'sənin postunu bəyəndi', notifStartedFollowing: 'səni izləməyə başladı', notifAndOthersReacted: 'və digərləri postuna reaksiya verdi',
+                notifPostedAnnouncement: 'yeni elan paylaşdı:', notifLovedComment: 'şərhini bəyəndi:', notifReactedFile: 'faylına reaksiya verdi',
+                notifCommentedOn: 'bu paylaşıma şərh yazdı', notifRepliedComment: 'şərhinə cavab verdi',
+                time5MinAgo: '5 dəqiqə əvvəl', time10MinAgo: '10 dəqiqə əvvəl', time1HourAgo: '1 saat əvvəl', time2HoursAgo: '2 saat əvvəl', time5HoursAgo: '5 saat əvvəl', time2DaysAgo: '2 gün əvvəl', timeYesterday: 'Dünən',
+                createPostTitle: 'Post yarat', postTypeLabel: 'Post növü', optTextPost: 'Mətn postu', optPhoto: 'Şəkil', optVideo: 'Video', optFile: 'Fayl', optQuestion: 'Sual', optAnnouncement: 'Elan',
+                postTextInput: 'Nəsə yaz...', uploadHelpText: 'Yükləmək üçün kliklə və ya sürüklə', uploadHelpSubtext: 'SVG, PNG, JPG və ya GIF (maks. 800x400px)', postSubmitBtn: 'Paylaş',
+                noGroupsFound: 'Meyarlara uyğun qrup tapılmadı.', featured: 'Seçilmiş', membersWord: 'üzv', viewBtn: 'Bax', groupBadge: 'Qrup',
+                justNow: 'İndi', autoReplyInteresting: 'Maraqlıdır!', autoReplySync: 'Əla, sabah sinxronlaşaq.',
+                agoWord: 'əvvəl', minutesWord: 'dəqiqə', hoursWord: 'saat', daysWord: 'gün', onlineWord: 'Onlayn', offlineWord: 'Oflayn', groupChatLabel: 'Qrup çat'
+            },
+            tr: {
+                ...baseEn,
+                langLabel: 'Dil', navHome: 'Ana Sayfa', navMessages: 'Mesajlar', navGroups: 'Gruplar', navLibrary: 'Kütüphane', navProfile: 'Profilim', navSaved: 'Kaydedilenler',
+                joinCardTitle: 'AI ve Veri Bilimine Katıl', joinCardDesc: 'Araştırmacılarla dünya çapında bağ kur', joinCardBtn: 'Katıl',
+                globalSearchInput: 'Ara...', userMenuLabel: 'Sen', ddProfile: 'Profil', ddSaved: 'Kaydedilenler', ddSettings: 'Ayarlar', ddLogout: 'Çıkış',
+                discoverGroupsTitle: 'Grupları Keşfet', discoverGroupsDesc: 'İlgi alanlarına uygun akademik toplulukları bul ve katıl',
+                groupSearchInput: 'Gruplarda ara...', fieldLabel: 'Alan', allFields: 'Tüm Alanlar', countryLabel: 'Ülke', allCountries: 'Tüm Ülkeler', universityLabel: 'Üniversite', allUniversities: 'Tüm Üniversiteler',
+                fieldComputerScience: 'Bilgisayar Bilimi', fieldPhysics: 'Fizik', fieldBiology: 'Biyoloji', fieldEnvironmentalScience: 'Çevre Bilimi', fieldEconomics: 'Ekonomi', fieldHistory: 'Tarih', fieldNeuroscience: 'Nörobilim',
+                shareInput: 'Ne paylaşmak istersin?', postBtnPhoto: 'Fotoğraf', postBtnVideo: 'Video', postBtnFile: 'Dosya', postBtnQuestion: 'Soru', postBtnAnnouncement: 'Duyuru',
+                messagesTitle: 'Mesajlar', searchConversationsInput: 'Sohbetlerde ara...', messageInput: 'Mesaj yaz...',
+                likesLabel: 'Beğeni', commentsLabel: 'Yorum', shareLabel: 'Paylaş', notificationsTitle: 'Bildirimler', markAllRead: 'Tümünü okundu işaretle',
+                suggestedGroups: 'Önerilen Gruplar', seeAll: 'Tümünü gör', onlineFriends: 'Çevrimiçi Arkadaşlar', trendingTopics: 'Trend Konular',
+                onlineFriend1Meta: 'Bakü, Azerbaycan • Doktora öğrencisi', onlineFriend2Meta: 'Almatı, Kazakistan • Araştırmacı',
+                onlineFriend3Meta: 'Taşkent, Özbekistan • Yüksek lisans öğrencisi', onlineFriend4Meta: 'Aşkabat, Türkmenistan • Mühendis',
+                libraryTitle: 'Kütüphane ve Kaynaklar', libraryDesc: 'Araştırma makalelerine, veri setlerine ve öğrenme materyallerine erişin',
+                searchResourcesInput: 'Kaynaklarda ara...', allCategories: 'Tüm Kategoriler',
+                viewBtn: 'Görüntüle', downloadBtn: 'İndir', downloadsWord: 'indirme', timeYesterday: 'Dün',
+                allTab: 'Tümü', unreadTab: 'Okunmamış', reactionsTab: 'Tepkiler', commentsTab: 'Yorumlar',
+                notifLikedPost: 'gönderini beğendi', notifStartedFollowing: 'seni takip etmeye başladı', notifAndOthersReacted: 've diğerleri gönderine tepki verdi',
+                notifPostedAnnouncement: 'yeni bir duyuru paylaştı:', notifLovedComment: 'yorumunu beğendi:', notifReactedFile: 'dosyana tepki verdi',
+                notifCommentedOn: 'şuna yorum yaptı', notifRepliedComment: 'yorumuna yanıt verdi',
+                time5MinAgo: '5 dakika önce', time10MinAgo: '10 dakika önce', time1HourAgo: '1 saat önce', time2HoursAgo: '2 saat önce', time5HoursAgo: '5 saat önce', time2DaysAgo: '2 gün önce',
+                resourcesTab: 'Kaynaklar', savedPostsTab: 'Kaydedilen Gönderiler', myCollectionsTab: 'Koleksiyonlarım',
+                savedItemsTitle: 'Kaydedilen Öğeler', viewPostBtn: 'Gönderiyi Gör', optAnnouncement: 'Duyuru',
+                foundLabel: 'Bulundu', groupsLabel: 'grup', resourcesLabel: 'kaynak', createCollection: 'Koleksiyon Oluştur', organizeResources: 'Kaynaklarını düzenle', personalLabel: 'Kişisel',
+                createPostTitle: 'Gönderi Oluştur', postTypeLabel: 'Gönderi Türü', optTextPost: 'Metin Gönderisi', optPhoto: 'Fotoğraf', optVideo: 'Video', optFile: 'Dosya', optQuestion: 'Soru',
+                editProfileBtn: 'Profili Düzenle', profileTabPosts: 'Gönderiler', profileTabAbout: 'Hakkında', profileTabGroups: 'Gruplar', profileTabSaved: 'Kaydedilenler',
+                discussionsWord: 'tartışma', memberRole: 'Üye', moderatorRole: 'Moderatör', videoWord: 'Video', pdfWord: 'PDF',
+                photoPostLabel: 'Fotoğraf gönderisi', videoPostLabel: 'Video gönderisi',
+                saved2DaysAgo: '2 gün önce kaydedildi', saved5DaysAgo: '5 gün önce kaydedildi', saved1WeekAgo: '1 hafta önce kaydedildi', savedLastWeek: 'geçen hafta kaydedildi',
+                savedCard1Title: 'Bakü ve Ankara arasında ortak AI sempozyumu', savedCard1By: 'İlkin Yılmaz tarafından',
+                savedCard2Title: 'Türk dilleri NLP için yeni veri seti', savedCard2By: 'Ayşe Demir tarafından',
+                savedCard3Title: 'Manas Üniversitesinde PhD fırsatları', savedCard3By: 'Prof. Aygül Saparova tarafından',
+                agoWord: 'önce', minutesWord: 'dakika', hoursWord: 'saat', daysWord: 'gün', onlineWord: 'Çevrimiçi', offlineWord: 'Çevrimdışı', groupChatLabel: 'Grup sohbeti'
+            },
+            kk: {
+                langLabel: 'Тіл', navHome: 'Басты бет', navMessages: 'Хабарламалар', navGroups: 'Топтар', navLibrary: 'Кітапхана', navProfile: 'Менің профилім', navSaved: 'Сақталғандар',
+                globalSearchInput: 'Іздеу...', shareInput: 'Не бөліскіңіз келеді?', messagesTitle: 'Хабарламалар', searchConversationsInput: 'Сөйлесулерден іздеу...', messageInput: 'Хабарлама жазыңыз...',
+                discoverGroupsTitle: 'Топтарды табу', discoverGroupsDesc: 'Қызығушылығыңызға сай академиялық қауымдастықтарды тауып, қосылыңыз',
+                groupSearchInput: 'Топтардан іздеу...', fieldLabel: 'Бағыт', allFields: 'Барлық бағыттар', countryLabel: 'Ел', allCountries: 'Барлық елдер', universityLabel: 'Университет', allUniversities: 'Барлық университеттер',
+                fieldComputerScience: 'Компьютерлік ғылым', fieldPhysics: 'Физика', fieldBiology: 'Биология', fieldEnvironmentalScience: 'Экология ғылымы', fieldEconomics: 'Экономика', fieldHistory: 'Тарих', fieldNeuroscience: 'Нейроғылым',
+                likesLabel: 'Ұнатулар', commentsLabel: 'Пікірлер', shareLabel: 'Бөлісу',
+                discussionsWord: 'талқылау',
+                postBtnPhoto: 'Фото', postBtnVideo: 'Видео', postBtnFile: 'Файл', postBtnQuestion: 'Сұрақ', postBtnAnnouncement: 'Хабарландыру',
+                createPostTitle: 'Жазба жасау', postTypeLabel: 'Жазба түрі', optTextPost: 'Мәтін жазбасы', optPhoto: 'Фото', optVideo: 'Видео', optFile: 'Файл', optQuestion: 'Сұрақ', optAnnouncement: 'Хабарландыру',
+                editProfileBtn: 'Профильді өңдеу', profileTabPosts: 'Жазбалар', profileTabAbout: 'Туралы', profileTabGroups: 'Топтар', profileTabSaved: 'Сақталғандар',
+                notificationsTitle: 'Хабарландырулар', markAllRead: 'Барлығын оқылған деп белгіле', allTab: 'Барлығы', unreadTab: 'Оқылмаған', reactionsTab: 'Реакциялар', commentsTab: 'Пікірлер',
+                viewBtn: 'Көру', viewPostBtn: 'Жазбаны көру', downloadBtn: 'Жүктеп алу', downloadsWord: 'жүктеу',
+                resourcesTab: 'Ресурстар', savedPostsTab: 'Сақталған жазбалар', myCollectionsTab: 'Жинақтарым', savedItemsTitle: 'Сақталғандар',
+                foundLabel: 'Табылды', groupsLabel: 'топ', resourcesLabel: 'ресурс', createCollection: 'Жинақ жасау', organizeResources: 'Ресурстарыңызды реттеңіз', personalLabel: 'Жеке',
+                libraryTitle: 'Кітапхана және Ресурстар', libraryDesc: 'Зерттеу мақалаларына, деректер жиындарына және оқу материалдарына қол жеткізіңіз',
+                searchResourcesInput: 'Ресурстардан іздеу...', allCategories: 'Барлық санаттар',
+                photoPostLabel: 'Фото жазба', videoPostLabel: 'Видео жазба',
+                saved2DaysAgo: '2 күн бұрын сақталды', saved5DaysAgo: '5 күн бұрын сақталды', saved1WeekAgo: '1 апта бұрын сақталды', savedLastWeek: 'өткен аптада сақталды',
+                savedCard1Title: 'Баку мен Анкара арасындағы ортақ AI симпозиумы', savedCard1By: 'Ілкін Йылмаз тарапынан',
+                savedCard2Title: 'Түркі тілдері NLP үшін жаңа деректер жиыны', savedCard2By: 'Айше Демир тарапынан',
+                savedCard3Title: 'Манас университетіндегі PhD мүмкіндіктері', savedCard3By: 'Проф. Айгүл Сапарова тарапынан',
+                suggestedGroups: 'Ұсынылған топтар', seeAll: 'Барлығын көру', onlineFriends: 'Онлайн достар', trendingTopics: 'Тренд тақырыптар',
+                onlineFriend1Meta: 'Баку, Әзірбайжан • PhD студенті', onlineFriend2Meta: 'Алматы, Қазақстан • Зерттеуші',
+                onlineFriend3Meta: 'Ташкент, Өзбекстан • Магистр студенті', onlineFriend4Meta: 'Ашғабат, Түрікменстан • Инженер',
+                notifLikedPost: 'жазбаңызды ұнатты', notifStartedFollowing: 'сізге жазылды', notifAndOthersReacted: 'және басқалар жазбаңызға реакция берді',
+                notifPostedAnnouncement: 'жаңа хабарландыру жариялады:', notifLovedComment: 'пікіріңізді ұнатты:', notifReactedFile: 'файлыңызға реакция берді',
+                notifCommentedOn: 'мына жазбаға пікір қалдырды', notifRepliedComment: 'пікіріңізге жауап берді',
+                time5MinAgo: '5 минут бұрын', time10MinAgo: '10 минут бұрын', time1HourAgo: '1 сағат бұрын', time2HoursAgo: '2 сағат бұрын', time5HoursAgo: '5 сағат бұрын', time2DaysAgo: '2 күн бұрын', timeYesterday: 'Кеше',
+                agoWord: 'бұрын', minutesWord: 'минут', hoursWord: 'сағат', daysWord: 'күн', onlineWord: 'Онлайн', offlineWord: 'Офлайн'
+            },
+            uz: {
+                langLabel: 'Til', navHome: 'Bosh sahifa', navMessages: 'Xabarlar', navGroups: 'Guruhlar', navLibrary: 'Kutubxona', navProfile: 'Mening profilim', navSaved: 'Saqlanganlar',
+                globalSearchInput: 'Qidirish...', shareInput: 'Nimani ulashmoqchisiz?', messagesTitle: 'Xabarlar', searchConversationsInput: 'Suhbatlardan qidirish...', messageInput: 'Xabar yozing...',
+                discoverGroupsTitle: 'Guruhlarni kashf eting', discoverGroupsDesc: 'Qiziqishlaringizga mos akademik hamjamiyatlarni toping va qo\'shiling',
+                groupSearchInput: 'Guruhlardan qidiring...', fieldLabel: 'Yo\'nalish', allFields: 'Barcha yo\'nalishlar', countryLabel: 'Mamlakat', allCountries: 'Barcha mamlakatlar', universityLabel: 'Universitet', allUniversities: 'Barcha universitetlar',
+                fieldComputerScience: 'Kompyuter fanlari', fieldPhysics: 'Fizika', fieldBiology: 'Biologiya', fieldEnvironmentalScience: 'Atrof-muhit fani', fieldEconomics: 'Iqtisodiyot', fieldHistory: 'Tarix', fieldNeuroscience: 'Neyrofan',
+                likesLabel: 'Layklar', commentsLabel: 'Izohlar', shareLabel: 'Ulashish',
+                discussionsWord: 'munozaralar',
+                postBtnPhoto: 'Rasm', postBtnVideo: 'Video', postBtnFile: 'Fayl', postBtnQuestion: 'Savol', postBtnAnnouncement: 'E`lon',
+                createPostTitle: 'Post yaratish', postTypeLabel: 'Post turi', optTextPost: 'Matn posti', optPhoto: 'Rasm', optVideo: 'Video', optFile: 'Fayl', optQuestion: 'Savol', optAnnouncement: 'E`lon',
+                editProfileBtn: 'Profilni Tahrirlash', profileTabPosts: 'Postlar', profileTabAbout: 'Haqida', profileTabGroups: 'Guruhlar', profileTabSaved: 'Saqlanganlar',
+                notificationsTitle: 'Bildirishnomalar', markAllRead: 'Barchasini oqilgan qilish', allTab: 'Barchasi', unreadTab: 'Oqilmagan', reactionsTab: 'Reaksiyalar', commentsTab: 'Izohlar',
+                viewBtn: 'Korish', viewPostBtn: 'Postni korish', downloadBtn: 'Yuklab olish', downloadsWord: 'yuklab olishlar',
+                libraryTitle: 'Kutubxona va Resurslar', libraryDesc: 'Tadqiqot maqolalari, datasetlar va oquv materiallariga kirish',
+                searchResourcesInput: 'Resurslardan qidirish...', allCategories: 'Barcha kategoriyalar',
+                resourcesTab: 'Resurslar', savedPostsTab: 'Saqlangan postlar', myCollectionsTab: 'Kolleksiyalarim', savedItemsTitle: 'Saqlanganlar',
+                foundLabel: 'Topildi', groupsLabel: 'guruh', resourcesLabel: 'resurs', createCollection: 'Kolleksiya yaratish', organizeResources: 'Resurslaringizni tartiblang', personalLabel: 'Shaxsiy',
+                photoPostLabel: 'Rasm posti', videoPostLabel: 'Video posti',
+                saved2DaysAgo: '2 kun oldin saqlandi', saved5DaysAgo: '5 kun oldin saqlandi', saved1WeekAgo: '1 hafta oldin saqlandi', savedLastWeek: 'otgan hafta saqlandi',
+                savedCard1Title: 'Boku va Anqara ortasidagi umumiy AI simpoziumi', savedCard1By: 'Ilkin Yilmaz tomonidan',
+                savedCard2Title: 'Turkiy tillar NLP uchun yangi dataset', savedCard2By: 'Ayse Demir tomonidan',
+                savedCard3Title: 'Manas universitetida PhD imkoniyatlari', savedCard3By: 'Prof. Aygul Saparova tomonidan',
+                onlineFriends: 'Onlayn dostlar', trendingTopics: 'Trend mavzular', suggestedGroups: 'Tavsiya etilgan guruhlar', seeAll: 'Barchasi',
+                onlineFriend1Meta: 'Boku, Ozarbayjon • PhD talabasi', onlineFriend2Meta: 'Olmaota, Qozogiston • Tadqiqotchi',
+                onlineFriend3Meta: 'Toshkent, Ozbekiston • Magistr talabasi', onlineFriend4Meta: 'Ashxobod, Turkmaniston • Muhandis',
+                time5MinAgo: '5 daqiqa oldin', time10MinAgo: '10 daqiqa oldin', time1HourAgo: '1 soat oldin', time2HoursAgo: '2 soat oldin', time5HoursAgo: '5 soat oldin', time2DaysAgo: '2 kun oldin', timeYesterday: 'Kecha',
+                agoWord: 'oldin', minutesWord: 'daqiqa', hoursWord: 'soat', daysWord: 'kun', onlineWord: 'Onlayn', offlineWord: 'Oflayn'
+            },
+            tk: {
+                langLabel: 'Dil', navHome: 'Bas sahypa', navMessages: 'Habarlar', navGroups: 'Toparlar', navLibrary: 'Kitaphana', navProfile: 'Meni profili', navSaved: 'Saklananlar',
+                globalSearchInput: 'Gözle...', shareInput: 'Näme paýlaşmak isleýärsiňiz?', messagesTitle: 'Habarlar', searchConversationsInput: 'Söhbetlerde gözle...', messageInput: 'Habar ýaz...',
+                discoverGroupsTitle: 'Toparlary aç', discoverGroupsDesc: 'Gyzyklanmalaryňa laýyk akademik toparlary tap we goşul',
+                groupSearchInput: 'Toparlarda gözle...', fieldLabel: 'Ugyr', allFields: 'Ähli ugurlar', countryLabel: 'Ýurt', allCountries: 'Ähli ýurtlar', universityLabel: 'Uniwersitet', allUniversities: 'Ähli uniwersitetler',
+                fieldComputerScience: 'Kompýuter ylymlary', fieldPhysics: 'Fizika', fieldBiology: 'Biologiýa', fieldEnvironmentalScience: 'Daşky gurşaw ylmy', fieldEconomics: 'Ykdysadyýet', fieldHistory: 'Taryh', fieldNeuroscience: 'Neýroylm',
+                likesLabel: 'Halamalar', commentsLabel: 'Teswirler', shareLabel: 'Paylas',
+                discussionsWord: 'maslahatlar',
+                postBtnPhoto: 'Surat', postBtnVideo: 'Video', postBtnFile: 'Fayl', postBtnQuestion: 'Sorag', postBtnAnnouncement: 'Bildiris',
+                createPostTitle: 'Post yarat', postTypeLabel: 'Post gornusi', optTextPost: 'Metin posty', optPhoto: 'Surat', optVideo: 'Video', optFile: 'Fayl', optQuestion: 'Sorag', optAnnouncement: 'Bildiris',
+                editProfileBtn: 'Profili Uytget', profileTabPosts: 'Yazgylar', profileTabAbout: 'Barada', profileTabGroups: 'Toparlar', profileTabSaved: 'Saklananlar',
+                notificationsTitle: 'Bildirisler', markAllRead: 'Hemmesini okalan et', allTab: 'Hemmesi', unreadTab: 'Okalmadyk', reactionsTab: 'Reaksiyalar', commentsTab: 'Teswirler',
+                viewBtn: 'Gor', viewPostBtn: 'Posty gor', downloadBtn: 'Yukle', downloadsWord: 'yuklemeler',
+                libraryTitle: 'Kitaphana we Resurslar', libraryDesc: 'Ylmy makalalara, maglumat toplumlaryna we okuw materiallaryna elyetim',
+                searchResourcesInput: 'Resurslarda gozle...', allCategories: 'Hemme kategoriýalar',
+                resourcesTab: 'Resurslar', savedPostsTab: 'Saklanan postlar', myCollectionsTab: 'Kolleksiyalarym', savedItemsTitle: 'Saklananlar',
+                foundLabel: 'Tapyldy', groupsLabel: 'topar', resourcesLabel: 'resurs', createCollection: 'Kolleksiya yarat', organizeResources: 'Resurslaryny tertiple', personalLabel: 'Shahsy',
+                photoPostLabel: 'Surat posty', videoPostLabel: 'Video posty',
+                saved2DaysAgo: '2 gun on saklandy', saved5DaysAgo: '5 gun on saklandy', saved1WeekAgo: '1 hepde on saklandy', savedLastWeek: 'gecen hepde saklandy',
+                savedCard1Title: 'Baku bilen Ankara arasyndaky ortaq AI simpoziumy', savedCard1By: 'Ilkin Yilmaz tarapyndan',
+                savedCard2Title: 'Turki diller NLP ucin yeni maglumat toplumy', savedCard2By: 'Ayse Demir tarapyndan',
+                savedCard3Title: 'Manas uniwersitetinde PhD mumkinchilikleri', savedCard3By: 'Prof. Aygul Saparova tarapyndan',
+                onlineFriends: 'Onlayn dostlar', trendingTopics: 'Trend temalar', suggestedGroups: 'Teklip edilen toparlar', seeAll: 'Hemmesi',
+                onlineFriend1Meta: 'Baku, Azerbayjan • PhD talyby', onlineFriend2Meta: 'Almaty, Gazagystan • Gözlegçi',
+                onlineFriend3Meta: 'Dashkent, Ozbekistan • Magistr talyby', onlineFriend4Meta: 'Ashgabat, Turkmenistan • Inzhener',
+                time5MinAgo: '5 minut on', time10MinAgo: '10 minut on', time1HourAgo: '1 sagat on', time2HoursAgo: '2 sagat on', time5HoursAgo: '5 sagat on', time2DaysAgo: '2 gun on', timeYesterday: 'Dunen',
+                agoWord: 'on', minutesWord: 'minut', hoursWord: 'sagat', daysWord: 'gun', onlineWord: 'Onlayn', offlineWord: 'Oflayn'
+            },
+            ky: {
+                langLabel: 'Тил', navHome: 'Башкы бет', navMessages: 'Кабарлар', navGroups: 'Топтор', navLibrary: 'Китепкана', navProfile: 'Менин профилим', navSaved: 'Сакталган',
+                globalSearchInput: 'Издөө...', shareInput: 'Эмне бөлүшкүңүз келет?', messagesTitle: 'Кабарлар', searchConversationsInput: 'Маектерден издөө...', messageInput: 'Кабар жазыңыз...',
+                discoverGroupsTitle: 'Топторду табуу', discoverGroupsDesc: 'Кызыгууңузга туура келген академиялык коомчулуктарды табып, кошулуңуз',
+                groupSearchInput: 'Топтордон издөө...', fieldLabel: 'Тармак', allFields: 'Бардык тармактар', countryLabel: 'Өлкө', allCountries: 'Бардык өлкөлөр', universityLabel: 'Университет', allUniversities: 'Бардык университеттер',
+                fieldComputerScience: 'Компьютер илимдери', fieldPhysics: 'Физика', fieldBiology: 'Биология', fieldEnvironmentalScience: 'Айлана-чөйрө илими', fieldEconomics: 'Экономика', fieldHistory: 'Тарых', fieldNeuroscience: 'Нейроилим',
+                likesLabel: 'Жактыруулар', commentsLabel: 'Пикирлер', shareLabel: 'Бөлүшүү',
+                discussionsWord: 'талкуулар',
+                postBtnPhoto: 'Сүрөт', postBtnVideo: 'Видео', postBtnFile: 'Файл', postBtnQuestion: 'Суроо', postBtnAnnouncement: 'Жарыя',
+                createPostTitle: 'Жазуу түзүү', postTypeLabel: 'Жазуу түрү', optTextPost: 'Текст жазуу', optPhoto: 'Сүрөт', optVideo: 'Видео', optFile: 'Файл', optQuestion: 'Суроо', optAnnouncement: 'Жарыя',
+                editProfileBtn: 'Профилди өзгөртүү', profileTabPosts: 'Жазуулар', profileTabAbout: 'Жөнүндө', profileTabGroups: 'Топтор', profileTabSaved: 'Сакталган',
+                notificationsTitle: 'Билдирүүлөр', markAllRead: 'Баарын окулду деп белгиле', allTab: 'Баары', unreadTab: 'Окулбаган', reactionsTab: 'Реакциялар', commentsTab: 'Пикирлер',
+                viewBtn: 'Көрүү', viewPostBtn: 'Жазууну көрүү', downloadBtn: 'Жүктөө', downloadsWord: 'жүктөө',
+                libraryTitle: 'Китепкана жана Ресурстар', libraryDesc: 'Изилдөө макалаларына, дата жыйнактарына жана окуу материалдарына жетүү',
+                searchResourcesInput: 'Ресурстардан издөө...', allCategories: 'Бардык категориялар',
+                resourcesTab: 'Ресурстар', savedPostsTab: 'Сакталган посттор', myCollectionsTab: 'Жыйнактарым', savedItemsTitle: 'Сакталган',
+                foundLabel: 'Табылды', groupsLabel: 'топ', resourcesLabel: 'ресурс', createCollection: 'Жыйнак түзүү', organizeResources: 'Ресурстарыңызды иреттеңиз', personalLabel: 'Жеке',
+                photoPostLabel: 'Сүрөт посту', videoPostLabel: 'Видео посту',
+                saved2DaysAgo: '2 күн мурун сакталган', saved5DaysAgo: '5 күн мурун сакталган', saved1WeekAgo: '1 жума мурун сакталган', savedLastWeek: 'өткөн жумада сакталган',
+                savedCard1Title: 'Баку менен Анкаранын биргелешкен AI симпозиуму', savedCard1By: 'Илкин Йылмаз тарабынан',
+                savedCard2Title: 'Түрк тилдери NLP үчүн жаңы дата жыйындысы', savedCard2By: 'Айше Демир тарабынан',
+                savedCard3Title: 'Манас университетиндеги PhD мүмкүнчүлүктөрү', savedCard3By: 'Проф. Айгүл Сапарова тарабынан',
+                onlineFriends: 'Онлайн достор', trendingTopics: 'Тренд темалар', suggestedGroups: 'Сунушталган топтор', seeAll: 'Баарын көр',
+                onlineFriend1Meta: 'Баку, Азербайжан • PhD студенти', onlineFriend2Meta: 'Алматы, Казакстан • Изилдөөчү',
+                onlineFriend3Meta: 'Ташкент, Өзбекстан • Магистр студенти', onlineFriend4Meta: 'Ашхабад, Түркмөнстан • Инженер',
+                time5MinAgo: '5 мүнөт мурун', time10MinAgo: '10 мүнөт мурун', time1HourAgo: '1 саат мурун', time2HoursAgo: '2 саат мурун', time5HoursAgo: '5 саат мурун', time2DaysAgo: '2 күн мурун', timeYesterday: 'Кече',
+                agoWord: 'мурун', minutesWord: 'мүнөт', hoursWord: 'саат', daysWord: 'күн', onlineWord: 'Онлайн', offlineWord: 'Офлайн'
+            },
+            otk: {
+                langLabel: 'Til', navHome: 'Ordu', navMessages: 'Bitig', navGroups: 'Bodun', navLibrary: 'Bitiglik', navProfile: 'Oz Profil', navSaved: 'Saklanmish',
+                joinCardTitle: 'Bilge AI toplugina kir', joinCardDesc: 'Bilgeler birikib orun alur', joinCardBtn: 'Kir',
+                globalSearchInput: 'Izde...', shareInput: 'Ne bitig berursen?', messagesTitle: 'Bitigler', searchConversationsInput: 'Bitigler icinde izde...', messageInput: 'Bitig yaz...',
+                discoverGroupsTitle: 'Bodunlarny tap', discoverGroupsDesc: 'Oz ilgine uygun akademik bodunlarny tap we kosul',
+                groupSearchInput: 'Bodunlarda izde...', fieldLabel: 'Bolum', allFields: 'Barcha bolumler', countryLabel: 'Il', allCountries: 'Barcha iller', universityLabel: 'Universitet', allUniversities: 'Barcha universitetler',
+                fieldComputerScience: 'Kompiyuter bilimi', fieldPhysics: 'Fizik', fieldBiology: 'Biyologiya', fieldEnvironmentalScience: 'Tabiat bilimi', fieldEconomics: 'Iqtisad', fieldHistory: 'Tarikh', fieldNeuroscience: 'Neuro bilim',
+                postBtnPhoto: 'Suret', postBtnVideo: 'Video', postBtnFile: 'Bitig', postBtnQuestion: 'Surag', postBtnAnnouncement: 'Yarlig', groupBadge: 'Bodun',
+                createPostTitle: 'Bitig yarat', postTypeLabel: 'Bitig turi', optTextPost: 'Metin bitig', optPhoto: 'Suret', optVideo: 'Video', optFile: 'Bitig', optQuestion: 'Surag', optAnnouncement: 'Yarlig',
+                likesLabel: 'Begeni', commentsLabel: 'Yorum', shareLabel: 'Paylash',
+                discussionsWord: 'munazaralar',
+                editProfileBtn: 'Profilni Tuzet', profileTabPosts: 'Bitigler', profileTabAbout: 'Hakkinda', profileTabGroups: 'Bodunlar', profileTabSaved: 'Saklanmish',
+                notificationsTitle: 'Bildirigler', markAllRead: 'Barcha okalmis et', allTab: 'Barcha', unreadTab: 'Okalmis degil', reactionsTab: 'Qaytarimlar', commentsTab: 'Yorum',
+                viewBtn: 'Kor', viewPostBtn: 'Bitig kor', downloadBtn: 'Yukle', downloadsWord: 'yuklemeler',
+                libraryTitle: 'Bitiglik ve Resurslar', libraryDesc: 'Arastirma makaleleri, datasetler ve ogrenme materyallerine erisim',
+                searchResourcesInput: 'Resurslar icinde izde...', allCategories: 'Barcha kategoriler',
+                resourcesTab: 'Bitigler', savedPostsTab: 'Saklanmish bitigler', myCollectionsTab: 'Jiyinlarim', savedItemsTitle: 'Saklanmishlar',
+                foundLabel: 'Tapildi', groupsLabel: 'bodun', resourcesLabel: 'resurs', createCollection: 'Jiyin yarat', organizeResources: 'Resurslarini tertiple', personalLabel: 'Shahsy',
+                photoPostLabel: 'Suret bitig', videoPostLabel: 'Video bitig',
+                saved2DaysAgo: '2 kun burun saklanmish', saved5DaysAgo: '5 kun burun saklanmish', saved1WeekAgo: '1 hefte burun saklanmish', savedLastWeek: 'otgan hefte saklanmish',
+                savedCard1Title: 'Baku ve Ankara arasy ortaq AI simpozyumu', savedCard1By: 'Ilkin Yilmaz tarafindan',
+                savedCard2Title: 'Turk tilleri NLP ucun yangi dataset', savedCard2By: 'Ayse Demir tarafindan',
+                savedCard3Title: 'Manas universitetinde PhD imkaniyatlari', savedCard3By: 'Prof. Aygul Saparova tarafindan',
+                onlineFriends: 'Onlayn dostlar', trendingTopics: 'Trend konular', suggestedGroups: 'Sunulgan bodunlar', seeAll: 'Barcha',
+                onlineFriend1Meta: 'Baku, Azerbayjan • PhD talib', onlineFriend2Meta: 'Almaty, Qazaqstan • Arastirmaci',
+                onlineFriend3Meta: 'Tashkent, Ozbekistan • Magistr talib', onlineFriend4Meta: 'Ashgabat, Turkmenistan • Muhendis',
+                time5MinAgo: '5 dakika burun', time10MinAgo: '10 dakika burun', time1HourAgo: '1 saat burun', time2HoursAgo: '2 saat burun', time5HoursAgo: '5 saat burun', time2DaysAgo: '2 kun burun', timeYesterday: 'Tunu gun',
+                agoWord: 'burun', minutesWord: 'dakika', hoursWord: 'saat', daysWord: 'kun', onlineWord: 'Onlayn', offlineWord: 'Oflayn'
+            }
+        };
+
+        let currentLanguage = 'en';
+
+        const languageAdaptationRules = {
+            kk: [['əvvəl', 'buryn'], ['dəqiqə', 'minut'], ['saat', 'sagat'], ['gün', 'kun'], ['Dünən', 'Keshe'], ['Bildirişlər', 'Habarlandyrular'], ['Hamısı', 'Bari'], ['Oxunmamış', 'Okylmagan'], ['Şərhlər', 'Pikirler'], ['Bax', 'Karau'], ['Yüklə', 'Juktep alu'], ['Ana səhifə', 'Basty bet'], ['Mesajlar', 'Habarlar'], ['Qruplar', 'Toptar'], ['Kitabxana', 'Kitaphana'], ['Profilim', 'Menin profilim'], ['Saxlanılanlar', 'Saqtalgan']],
+            uz: [['əvvəl', 'oldin'], ['dəqiqə', 'daqiqa'], ['saat', 'soat'], ['gün', 'kun'], ['Dünən', 'Kecha'], ['Bildirişlər', 'Bildirishnomalar'], ['Hamısı', 'Barchasi'], ['Oxunmamış', 'Oqilmagan'], ['Şərhlər', 'Izohlar'], ['Bax', 'Korish'], ['Yüklə', 'Yuklab olish'], ['Ana səhifə', 'Bosh sahifa'], ['Mesajlar', 'Xabarlar'], ['Qruplar', 'Guruhlar'], ['Kitabxana', 'Kutubxona'], ['Profilim', 'Mening profilim'], ['Saxlanılanlar', 'Saqlanganlar']],
+            tk: [['əvvəl', 'on'], ['dəqiqə', 'minut'], ['saat', 'sagat'], ['gün', 'gun'], ['Dünən', 'Dunen'], ['Bildirişlər', 'Bildirisler'], ['Hamısı', 'Hemmesi'], ['Oxunmamış', 'Okalmadyk'], ['Şərhlər', 'Teswirler'], ['Bax', 'Gor'], ['Yüklə', 'Yukle'], ['Ana səhifə', 'Bas sahypa'], ['Mesajlar', 'Habarlar'], ['Qruplar', 'Toparlar'], ['Kitabxana', 'Kitaphana'], ['Profilim', 'Meni profili'], ['Saxlanılanlar', 'Saklananlar']],
+            ky: [['əvvəl', 'murun'], ['dəqiqə', 'munot'], ['saat', 'saat'], ['gün', 'kun'], ['Dünən', 'Keche'], ['Bildirişlər', 'Bildiruu'], ['Hamısı', 'Bary'], ['Oxunmamış', 'Okulbagan'], ['Şərhlər', 'Pikirler'], ['Bax', 'Koru'], ['Yüklə', 'Juktoo'], ['Ana səhifə', 'Bashky bet'], ['Mesajlar', 'Kabarlar'], ['Qruplar', 'Toptor'], ['Kitabxana', 'Kitapkana'], ['Profilim', 'Menin profilim'], ['Saxlanılanlar', 'Saktalgan']],
+            otk: [['əvvəl', 'burun'], ['dəqiqə', 'dakika'], ['saat', 'saat'], ['gün', 'kun'], ['Dünən', 'Tunu gun'], ['Bildirişlər', 'Bildirigler'], ['Hamısı', 'Barcha'], ['Oxunmamış', 'Okalmis degil'], ['Şərhlər', 'Yorum'], ['Bax', 'Kor'], ['Yüklə', 'Yukle'], ['Ana səhifə', 'Ordu'], ['Mesajlar', 'Bitig'], ['Qruplar', 'Bodun'], ['Kitabxana', 'Bitiglik'], ['Profilim', 'Oz Profil'], ['Saxlanılanlar', 'Saklanmish']]
+        };
+
+        const azCharMaps = {
+            kk: [['ə', 'e'], ['Ə', 'E'], ['ğ', 'g'], ['Ğ', 'G'], ['ı', 'i'], ['İ', 'I'], ['ş', 's'], ['Ş', 'S'], ['ç', 'c'], ['Ç', 'C'], ['ö', 'o'], ['Ö', 'O'], ['ü', 'u'], ['Ü', 'U']],
+            uz: [['ə', 'a'], ['Ə', 'A'], ['ğ', 'g'], ['Ğ', 'G'], ['ı', 'i'], ['İ', 'I'], ['ş', 'sh'], ['Ş', 'Sh'], ['ç', 'ch'], ['Ç', 'Ch'], ['ö', 'o'], ['Ö', 'O'], ['ü', 'u'], ['Ü', 'U']],
+            tk: [['ə', 'a'], ['Ə', 'A'], ['ğ', 'g'], ['Ğ', 'G'], ['ı', 'y'], ['İ', 'I'], ['ş', 's'], ['Ş', 'S'], ['ç', 'c'], ['Ç', 'C'], ['ö', 'o'], ['Ö', 'O'], ['ü', 'u'], ['Ü', 'U']],
+            ky: [['ə', 'e'], ['Ə', 'E'], ['ğ', 'g'], ['Ğ', 'G'], ['ı', 'i'], ['İ', 'I'], ['ş', 'sh'], ['Ş', 'Sh'], ['ç', 'ch'], ['Ç', 'Ch'], ['ö', 'o'], ['Ö', 'O'], ['ü', 'u'], ['Ü', 'U']],
+            otk: [['ə', 'e'], ['Ə', 'E'], ['ğ', 'g'], ['Ğ', 'G'], ['ı', 'i'], ['İ', 'I'], ['ş', 's'], ['Ş', 'S'], ['ç', 'c'], ['Ç', 'C'], ['ö', 'o'], ['Ö', 'O'], ['ü', 'u'], ['Ü', 'U']]
+        };
+
+        function adaptFromAz(text, langCode) {
+            if (!text || typeof text !== 'string') return text;
+            const rules = languageAdaptationRules[langCode];
+            if (!rules) return text;
+            let adapted = text;
+            rules.forEach(([from, to]) => {
+                adapted = adapted.split(from).join(to);
+            });
+            const charMap = azCharMaps[langCode] || [];
+            charMap.forEach(([from, to]) => {
+                adapted = adapted.split(from).join(to);
+            });
+            return adapted;
+        }
+
+        function buildCompletePack(langCode) {
+            const current = translations[langCode] || {};
+            const completed = {};
+            Object.keys(baseEn).forEach((key) => {
+                if (current[key]) {
+                    completed[key] = current[key];
+                    return;
+                }
+                if (['uz', 'tk', 'otk'].includes(langCode)) {
+                    completed[key] = adaptFromAz(translations.az[key] || baseEn[key], langCode);
+                    return;
+                }
+                completed[key] = baseEn[key];
+            });
+            translations[langCode] = completed;
+        }
+
+        ['az', 'tr', 'kk', 'uz', 'tk', 'ky', 'otk'].forEach(buildCompletePack);
+
+        function t(key) {
+            const currentPack = translations[currentLanguage] || translations.en;
+            return currentPack[key] || translations.en[key] || key;
+        }
+
+        function localizeTimeLabel(label) {
+            if (!label) return label;
+            const l = label.trim();
+            if (l === 'Just now') return t('justNow');
+            if (l === 'Yesterday') return t('timeYesterday');
+
+            const minMatch = l.match(/^(\d+)\s+min\s+ago$/i) || l.match(/^(\d+)\s+minutes?\s+ago$/i);
+            if (minMatch) return `${minMatch[1]} ${t('minutesWord')} ${t('agoWord')}`;
+
+            const hourMatch = l.match(/^(\d+)\s+hours?\s+ago$/i);
+            if (hourMatch) return `${hourMatch[1]} ${t('hoursWord')} ${t('agoWord')}`;
+
+            const dayMatch = l.match(/^(\d+)\s+days?\s+ago$/i);
+            if (dayMatch) return `${dayMatch[1]} ${t('daysWord')} ${t('agoWord')}`;
+
+            return l;
+        }
+
+        function localizeStatusLabel(status, isGroup) {
+            if (!status) return status;
+            if (isGroup) {
+                const m = status.match(/^Group chat •\s*(\d+)\s+members\s+online$/i);
+                if (m) return `${t('groupChatLabel')} • ${m[1]} ${t('membersWord')} ${t('onlineWord')}`;
+                return status;
+            }
+            if (status === 'Online') return t('onlineWord');
+            if (status === 'Offline') return t('offlineWord');
+            return status;
+        }
+
+        function applyLanguage(languageCode) {
+            currentLanguage = translations[languageCode] ? languageCode : 'en';
+            document.documentElement.lang = currentLanguage;
+
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                element.textContent = t(key);
+            });
+
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
+                const key = element.getAttribute('data-i18n-placeholder');
+                element.placeholder = t(key);
+            });
+
+            filterGroups();
+            renderConversationList();
+            loadChat(currentChatId);
+            updateModalContent();
+        }
+
         // --- 4. INITIALIZATION ---
         document.addEventListener("DOMContentLoaded", () => {
+            const languageSelect = document.getElementById('languageSelect');
+            if (languageSelect) {
+                languageSelect.addEventListener('change', (event) => {
+                    applyLanguage(event.target.value);
+                });
+                applyLanguage(languageSelect.value);
+            }
+
             renderGroups(groupsData); // Qrupları yüklə
             renderConversationList(); // Çat siyahısını yüklə
             loadChat(1); // İlk çatı aç
