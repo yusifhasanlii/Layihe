@@ -497,10 +497,10 @@
                 </div>
             </div>
 
-            <div id="messages" class="page-section hidden h-full flex flex-col">
+            <div id="messages" class="page-section hidden h-full flex flex-col overflow-hidden">
                 <div
-                    class="flex flex-col md:flex-row h-full min-h-[70vh] md:h-[calc(100vh-140px)] bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden relative">
-                    <div class="w-full md:w-1/3 border-b md:border-b-0 md:border-r border-gray-200 flex flex-col max-h-72 md:max-h-none">
+                    class="flex flex-col md:flex-row h-[calc(100dvh-190px)] md:h-[calc(100vh-140px)] min-h-0 bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden relative">
+                    <div id="messagesListPane" class="w-full md:w-1/3 border-b md:border-b-0 md:border-r border-gray-200 flex flex-col h-full md:h-auto">
                         <div class="p-4 border-b border-gray-100">
                             <h2 id="messagesTitle" data-i18n="messagesTitle" class="text-lg font-bold mb-3">Messages</h2>
                             <div class="relative">
@@ -514,9 +514,13 @@
                         </div>
                     </div>
 
-                    <div class="w-full md:flex-1 flex flex-col min-h-0">
+                    <div id="messagesChatPane" class="w-full md:flex-1 h-full flex flex-col min-h-0">
                         <div class="p-4 border-b border-gray-100 flex items-center justify-between">
                             <div class="flex items-center space-x-3">
+                                <button id="chatBackBtn" onclick="backToConversationList()"
+                                    class="md:hidden w-8 h-8 rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50 transition flex items-center justify-center">
+                                    <i class="fa-solid fa-arrow-left"></i>
+                                </button>
                                 <img id="chatHeaderImage" src="https://randomuser.me/api/portraits/women/44.jpg"
                                     class="w-10 h-10 rounded-full">
                                 <div>
@@ -526,9 +530,17 @@
                                     </p>
                                 </div>
                             </div>
-                            <button id="chatInfoBtn" onclick="toggleGroupInfoPanel()"
-                                class="text-gray-400 hover:text-gray-600"><i
-                                    class="fa-solid fa-circle-info"></i></button>
+                            <div class="flex items-center gap-2">
+                                <button id="chatVideoBtn" class="w-8 h-8 rounded-lg border border-gray-200 text-gray-500 hover:text-primary hover:border-primary/30 transition flex items-center justify-center">
+                                    <i class="fa-solid fa-video text-sm"></i>
+                                </button>
+                                <button id="chatCallBtn" class="w-8 h-8 rounded-lg border border-gray-200 text-gray-500 hover:text-primary hover:border-primary/30 transition flex items-center justify-center">
+                                    <i class="fa-solid fa-phone text-sm"></i>
+                                </button>
+                                <button id="chatInfoBtn" onclick="toggleGroupInfoPanel()"
+                                    class="w-8 h-8 rounded-lg border border-gray-200 text-gray-400 hover:text-gray-600 transition flex items-center justify-center"><i
+                                        class="fa-solid fa-circle-info"></i></button>
+                            </div>
                         </div>
 
                         <div id="chatContainer" class="flex-1 p-3 md:p-6 space-y-4 overflow-y-auto bg-gray-50 custom-scroll">
@@ -550,7 +562,7 @@
                     </div>
 
                     <aside id="groupInfoPanel"
-                        class="hidden fixed md:absolute md:static inset-x-0 bottom-0 z-30 max-h-[70vh] md:max-h-none w-full md:w-80 lg:w-80 border-t md:border-t-0 md:border-l border-gray-200 bg-white p-4 space-y-4 overflow-y-auto custom-scroll rounded-t-2xl md:rounded-none shadow-2xl md:shadow-none">
+                        class="hidden fixed inset-x-0 bottom-0 z-30 max-h-[70vh] w-full border-t border-gray-200 bg-white p-4 space-y-4 overflow-y-auto custom-scroll rounded-t-2xl shadow-2xl md:inset-auto md:top-0 md:right-0 md:bottom-0 md:h-full md:max-h-none md:w-80 md:rounded-none md:border-t-0 md:border-l md:shadow-xl">
                         <div class="flex items-start justify-between">
                             <div>
                                 <p data-i18n="groupInfoTitle" class="text-xs uppercase tracking-wide text-primary font-semibold">Group Info</p>
@@ -1416,7 +1428,10 @@
             }
             // Əgər Messages səhifəsidirsə, siyahını yenilə
             if (pageId === 'messages') {
+                currentChatId = null;
                 renderConversationList();
+                resetMessagePane();
+                updateMessagesViewMode();
             }
 
             if (window.innerWidth < 768) {
@@ -1663,7 +1678,66 @@
             }
         };
 
-        let currentChatId = 1;
+        let currentChatId = null;
+
+        function resetMessagePane() {
+            const infoBtn = document.getElementById('chatInfoBtn');
+            const videoBtn = document.getElementById('chatVideoBtn');
+            const callBtn = document.getElementById('chatCallBtn');
+            const statusEl = document.getElementById('chatHeaderStatus');
+            const container = document.getElementById('chatContainer');
+            const input = document.getElementById('messageInput');
+
+            document.getElementById('chatHeaderImage').src = 'https://randomuser.me/api/portraits/lego/1.jpg';
+            document.getElementById('chatHeaderName').innerText = t('selectChatTitle');
+            statusEl.className = 'text-xs text-gray-400';
+            statusEl.innerText = t('selectChatSubtitle');
+            infoBtn.classList.add('hidden');
+            videoBtn.classList.add('hidden');
+            callBtn.classList.add('hidden');
+            closeGroupInfoPanel();
+
+            container.innerHTML = `
+                <div class="h-full min-h-[220px] flex items-center justify-center text-center px-4">
+                    <div>
+                        <div class="w-14 h-14 mx-auto rounded-full bg-gray-200 text-gray-500 flex items-center justify-center mb-3">
+                            <i class="fa-regular fa-comments text-xl"></i>
+                        </div>
+                        <p class="text-sm font-semibold text-gray-700">${t('selectChatTitle')}</p>
+                        <p class="text-xs text-gray-500 mt-1">${t('selectChatHint')}</p>
+                    </div>
+                </div>
+            `;
+
+            input.value = '';
+            input.disabled = true;
+            updateMessagesViewMode();
+        }
+
+        function updateMessagesViewMode() {
+            const listPane = document.getElementById('messagesListPane');
+            const chatPane = document.getElementById('messagesChatPane');
+            if (!listPane || !chatPane) return;
+
+            if (window.innerWidth < 768) {
+                if (currentChatId == null) {
+                    listPane.classList.remove('hidden');
+                    chatPane.classList.add('hidden');
+                } else {
+                    listPane.classList.add('hidden');
+                    chatPane.classList.remove('hidden');
+                }
+            } else {
+                listPane.classList.remove('hidden');
+                chatPane.classList.remove('hidden');
+            }
+        }
+
+        function backToConversationList() {
+            currentChatId = null;
+            renderConversationList();
+            resetMessagePane();
+        }
 
         function renderGroupInfo(chat) {
             const profile = groupProfiles[chat.id];
@@ -1733,9 +1807,21 @@
         }
 
         function loadChat(id) {
+            if (id == null) {
+                resetMessagePane();
+                return;
+            }
+
             currentChatId = id;
             const chat = conversationsData.find(c => c.id === id);
+            if (!chat) {
+                resetMessagePane();
+                return;
+            }
+            updateMessagesViewMode();
             const infoBtn = document.getElementById('chatInfoBtn');
+            const videoBtn = document.getElementById('chatVideoBtn');
+            const callBtn = document.getElementById('chatCallBtn');
 
             // Header
             document.getElementById('chatHeaderImage').src = chat.avatar;
@@ -1759,10 +1845,14 @@
                 closeGroupInfoPanel();
             }
             infoBtn.classList.remove('hidden');
+            videoBtn.classList.remove('hidden');
+            callBtn.classList.remove('hidden');
 
             // Messages
             const container = document.getElementById('chatContainer');
+            const input = document.getElementById('messageInput');
             container.innerHTML = "";
+            input.disabled = false;
 
             chat.messages.forEach(msg => {
                 let msgHtml = "";
@@ -1810,6 +1900,8 @@
         }
 
         function sendMessage() {
+            if (currentChatId == null) return;
+
             const input = document.getElementById('messageInput');
             const text = input.value.trim();
             if (text === "") return;
@@ -2007,6 +2099,7 @@
             notifCommentedOn: 'commented on', notifRepliedComment: 'replied to your comment',
             time5MinAgo: '5 minutes ago', time10MinAgo: '10 minutes ago', time1HourAgo: '1 hour ago', time2HoursAgo: '2 hours ago', time5HoursAgo: '5 hours ago', time2DaysAgo: '2 days ago', timeYesterday: 'Yesterday',
             messagesTitle: 'Messages', searchConversationsInput: 'Search conversations...', messageInput: 'Type a message...',
+            selectChatTitle: 'Select a conversation', selectChatSubtitle: 'No chat selected', selectChatHint: 'Choose any chat from the left panel to start messaging.',
             createPostTitle: 'Create Post', postTypeLabel: 'Post Type', optTextPost: 'Text Post', optPhoto: 'Photo', optVideo: 'Video', optFile: 'File', optQuestion: 'Question', optAnnouncement: 'Announcement',
             postTextInput: 'Write something...', uploadHelpText: 'Click to upload or drag and drop', uploadHelpSubtext: 'SVG, PNG, JPG or GIF (max. 800x400px)', postSubmitBtn: 'Post',
             noGroupsFound: 'No groups found matching your criteria.', featured: 'Featured', membersWord: 'members', viewBtn: 'View', groupBadge: 'Group',
@@ -2023,6 +2116,7 @@
                 globalSearchInput: 'Axtar...', userMenuLabel: 'Sən', ddProfile: 'Profil', ddSaved: 'Saxlanılanlar', ddSettings: 'Ayarlar', ddLogout: 'Çıxış',
                 shareInput: 'Nə paylaşmaq istəyirsən?', postBtnPhoto: 'Şəkil', postBtnVideo: 'Video', postBtnFile: 'Fayl', postBtnQuestion: 'Sual', postBtnAnnouncement: 'Elan',
                 messagesTitle: 'Mesajlar', searchConversationsInput: 'Söhbətlərdə axtar...', messageInput: 'Mesaj yaz...',
+                selectChatTitle: 'Söhbət seçin', selectChatSubtitle: 'Çat seçilməyib', selectChatHint: 'Mesajlaşmağa başlamaq üçün soldan bir söhbət seçin.',
                 likesLabel: 'Bəyənmə', commentsLabel: 'Şərh', shareLabel: 'Paylaş',
                 suggestedGroups: 'Təklif olunan qruplar', seeAll: 'Hamısına bax', onlineFriends: 'Onlayn dostlar', trendingTopics: 'Trend mövzular',
                 onlineFriend1Meta: 'Bakı, Azərbaycan • PhD tələbəsi', onlineFriend2Meta: 'Almatı, Qazaxıstan • Tədqiqatçı',
@@ -2067,6 +2161,7 @@
                 fieldComputerScience: 'Bilgisayar Bilimi', fieldPhysics: 'Fizik', fieldBiology: 'Biyoloji', fieldEnvironmentalScience: 'Çevre Bilimi', fieldEconomics: 'Ekonomi', fieldHistory: 'Tarih', fieldNeuroscience: 'Nörobilim',
                 shareInput: 'Ne paylaşmak istersin?', postBtnPhoto: 'Fotoğraf', postBtnVideo: 'Video', postBtnFile: 'Dosya', postBtnQuestion: 'Soru', postBtnAnnouncement: 'Duyuru',
                 messagesTitle: 'Mesajlar', searchConversationsInput: 'Sohbetlerde ara...', messageInput: 'Mesaj yaz...',
+                selectChatTitle: 'Bir sohbet seçin', selectChatSubtitle: 'Sohbet seçilmedi', selectChatHint: 'Mesajlaşmaya başlamak için soldan bir sohbet seçin.',
                 likesLabel: 'Beğeni', commentsLabel: 'Yorum', shareLabel: 'Paylaş', notificationsTitle: 'Bildirimler', markAllRead: 'Tümünü okundu işaretle',
                 suggestedGroups: 'Önerilen Gruplar', seeAll: 'Tümünü gör', onlineFriends: 'Çevrimiçi Arkadaşlar', trendingTopics: 'Trend Konular',
                 onlineFriend1Meta: 'Bakü, Azerbaycan • Doktora öğrencisi', onlineFriend2Meta: 'Almatı, Kazakistan • Araştırmacı',
@@ -2094,6 +2189,7 @@
             },
             kk: {
                 langLabel: 'Тіл', navHome: 'Басты бет', navMessages: 'Хабарламалар', navGroups: 'Топтар', navLibrary: 'Кітапхана', navProfile: 'Менің профилім', navSaved: 'Сақталғандар',
+                selectChatTitle: 'Сөйлесуді таңдаңыз', selectChatSubtitle: 'Чат таңдалмады', selectChatHint: 'Хабарласуды бастау үшін сол жақтан кез келген чатты таңдаңыз.',
                 globalSearchInput: 'Іздеу...', shareInput: 'Не бөліскіңіз келеді?', messagesTitle: 'Хабарламалар', searchConversationsInput: 'Сөйлесулерден іздеу...', messageInput: 'Хабарлама жазыңыз...',
                 discoverGroupsTitle: 'Топтарды табу', discoverGroupsDesc: 'Қызығушылығыңызға сай академиялық қауымдастықтарды тауып, қосылыңыз',
                 groupSearchInput: 'Топтардан іздеу...', fieldLabel: 'Бағыт', allFields: 'Барлық бағыттар', countryLabel: 'Ел', allCountries: 'Барлық елдер', universityLabel: 'Университет', allUniversities: 'Барлық университеттер',
@@ -2125,6 +2221,7 @@
             },
             uz: {
                 langLabel: 'Til', navHome: 'Bosh sahifa', navMessages: 'Xabarlar', navGroups: 'Guruhlar', navLibrary: 'Kutubxona', navProfile: 'Mening profilim', navSaved: 'Saqlanganlar',
+                selectChatTitle: 'Suhbatni tanlang', selectChatSubtitle: 'Chat tanlanmagan', selectChatHint: 'Xabar yozishni boshlash uchun chap paneldan istalgan chatni tanlang.',
                 globalSearchInput: 'Qidirish...', shareInput: 'Nimani ulashmoqchisiz?', messagesTitle: 'Xabarlar', searchConversationsInput: 'Suhbatlardan qidirish...', messageInput: 'Xabar yozing...',
                 discoverGroupsTitle: 'Guruhlarni kashf eting', discoverGroupsDesc: 'Qiziqishlaringizga mos akademik hamjamiyatlarni toping va qo\'shiling',
                 groupSearchInput: 'Guruhlardan qidiring...', fieldLabel: 'Yo\'nalish', allFields: 'Barcha yo\'nalishlar', countryLabel: 'Mamlakat', allCountries: 'Barcha mamlakatlar', universityLabel: 'Universitet', allUniversities: 'Barcha universitetlar',
@@ -2153,6 +2250,7 @@
             },
             tk: {
                 langLabel: 'Dil', navHome: 'Bas sahypa', navMessages: 'Habarlar', navGroups: 'Toparlar', navLibrary: 'Kitaphana', navProfile: 'Meni profili', navSaved: 'Saklananlar',
+                selectChatTitle: 'Sohbet sayla', selectChatSubtitle: 'Chat saylanmady', selectChatHint: 'Habarlaşmaga başlamak üçin çep panelden islendik chati saylaň.',
                 globalSearchInput: 'Gözle...', shareInput: 'Näme paýlaşmak isleýärsiňiz?', messagesTitle: 'Habarlar', searchConversationsInput: 'Söhbetlerde gözle...', messageInput: 'Habar ýaz...',
                 discoverGroupsTitle: 'Toparlary aç', discoverGroupsDesc: 'Gyzyklanmalaryňa laýyk akademik toparlary tap we goşul',
                 groupSearchInput: 'Toparlarda gözle...', fieldLabel: 'Ugyr', allFields: 'Ähli ugurlar', countryLabel: 'Ýurt', allCountries: 'Ähli ýurtlar', universityLabel: 'Uniwersitet', allUniversities: 'Ähli uniwersitetler',
@@ -2181,6 +2279,7 @@
             },
             ky: {
                 langLabel: 'Тил', navHome: 'Башкы бет', navMessages: 'Кабарлар', navGroups: 'Топтор', navLibrary: 'Китепкана', navProfile: 'Менин профилим', navSaved: 'Сакталган',
+                selectChatTitle: 'Сүйлөшүүнү тандаңыз', selectChatSubtitle: 'Чат тандалган жок', selectChatHint: 'Жазышууну баштоо үчүн сол жактан каалаган чатты тандаңыз.',
                 globalSearchInput: 'Издөө...', shareInput: 'Эмне бөлүшкүңүз келет?', messagesTitle: 'Кабарлар', searchConversationsInput: 'Маектерден издөө...', messageInput: 'Кабар жазыңыз...',
                 discoverGroupsTitle: 'Топторду табуу', discoverGroupsDesc: 'Кызыгууңузга туура келген академиялык коомчулуктарды табып, кошулуңуз',
                 groupSearchInput: 'Топтордон издөө...', fieldLabel: 'Тармак', allFields: 'Бардык тармактар', countryLabel: 'Өлкө', allCountries: 'Бардык өлкөлөр', universityLabel: 'Университет', allUniversities: 'Бардык университеттер',
@@ -2209,6 +2308,7 @@
             },
             otk: {
                 langLabel: 'Til', navHome: 'Ordu', navMessages: 'Bitig', navGroups: 'Bodun', navLibrary: 'Bitiglik', navProfile: 'Oz Profil', navSaved: 'Saklanmish',
+                selectChatTitle: 'Bitig sohbati sayla', selectChatSubtitle: 'Chat saylanmish degil', selectChatHint: 'Bitig bashlamak ucun soldaghy panelden bir chat sayla.',
                 joinCardTitle: 'Bilge AI toplugina kir', joinCardDesc: 'Bilgeler birikib orun alur', joinCardBtn: 'Kir',
                 globalSearchInput: 'Izde...', shareInput: 'Ne bitig berursen?', messagesTitle: 'Bitigler', searchConversationsInput: 'Bitigler icinde izde...', messageInput: 'Bitig yaz...',
                 discoverGroupsTitle: 'Bodunlarny tap', discoverGroupsDesc: 'Oz ilgine uygun akademik bodunlarny tap we kosul',
@@ -2341,7 +2441,12 @@
 
             filterGroups();
             renderConversationList();
-            loadChat(currentChatId);
+            if (currentChatId == null) {
+                resetMessagePane();
+            } else {
+                loadChat(currentChatId);
+            }
+            updateMessagesViewMode();
             updateModalContent();
         }
 
@@ -2357,12 +2462,14 @@
 
             renderGroups(groupsData); // Qrupları yüklə
             renderConversationList(); // Çat siyahısını yüklə
-            loadChat(1); // İlk çatı aç
+            resetMessagePane();
+            updateMessagesViewMode();
 
             window.addEventListener('resize', () => {
                 if (window.innerWidth >= 768) {
                     closeMobileSidebar();
                 }
+                updateMessagesViewMode();
             });
         });
 
