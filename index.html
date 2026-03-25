@@ -62,6 +62,16 @@
             border-right: 3px solid #009688;
         }
 
+        .page-section {
+            min-width: 0;
+        }
+
+        @media (max-width: 767px) {
+            main {
+                overflow: visible;
+            }
+        }
+
     </style>
 </head>
 
@@ -118,11 +128,11 @@
 
     </aside>
 
-    <main class="flex-1 flex flex-col h-full overflow-hidden relative">
+    <main class="flex-1 min-h-0 flex flex-col h-full overflow-hidden relative">
 
         <header
-            class="bg-white border-b border-gray-200 h-16 flex items-center justify-between px-4 md:px-8 gap-3 flex-shrink-0 z-20 relative">
-            <div class="flex items-center gap-3 w-full md:w-1/3">
+            class="bg-white border-b border-gray-200 h-auto md:h-16 flex flex-wrap md:flex-nowrap items-center justify-between px-4 md:px-8 py-2 md:py-0 gap-3 flex-shrink-0 z-20 relative">
+            <div class="flex items-center gap-3 w-full md:w-1/3 min-w-0 order-2 md:order-1">
                 <button onclick="toggleMobileSidebar()"
                     class="md:hidden w-10 h-10 rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50 transition flex items-center justify-center flex-shrink-0">
                     <i class="fa-solid fa-bars"></i>
@@ -135,7 +145,7 @@
                 </div>
             </div>
 
-            <div class="flex items-center space-x-3 md:space-x-6">
+            <div class="flex items-center space-x-3 md:space-x-6 w-full md:w-auto justify-between md:justify-end order-1 md:order-2">
                 <div class="flex items-center gap-2">
                     <select id="languageSelect" aria-label="Language selector"
                         class="bg-white border border-gray-200 rounded-full text-xs font-bold px-3 py-1.5 text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary/50 tracking-wide">
@@ -191,10 +201,10 @@
 
         <div class="flex-1 overflow-y-auto md:overflow-hidden p-3 md:p-8 bg-bglight" id="content-container">
 
-            <div id="home" class="page-section active-page max-w-6xl mx-auto h-full">
-                <div class="grid grid-cols-1 xl:grid-cols-12 gap-4 md:gap-8 h-full">
+            <div id="home" class="page-section active-page max-w-6xl mx-auto h-auto md:h-full">
+                <div class="grid grid-cols-1 xl:grid-cols-12 gap-4 md:gap-8 h-auto md:h-full">
 
-                    <div class="xl:col-span-8 space-y-6 h-full overflow-y-auto pr-0 md:pr-2 pb-20 custom-scroll">
+                    <div class="xl:col-span-8 space-y-6 h-auto md:h-full overflow-visible md:overflow-y-auto pr-0 md:pr-2 pb-20 custom-scroll">
 
                         <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
                             <div class="flex items-center space-x-4 mb-4">
@@ -264,7 +274,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="p-3 border-t border-gray-100 flex justify-between text-gray-500 text-sm px-6">
+                            <div class="p-3 border-t border-gray-100 flex flex-wrap gap-3 justify-between text-gray-500 text-sm px-6">
                                 <button class="flex items-center gap-2 hover:text-primary"><i
                                     class="fa-regular fa-heart"></i> 124 <span data-i18n="likesLabel">Likes</span></button>
                                 <button class="flex items-center gap-2 hover:text-primary"><i
@@ -301,7 +311,7 @@
                                         class="text-xs text-pink-600">import matplotlib.pyplot as plt<br>import pandas as pd<br>...</code>
                                 </div>
                             </div>
-                            <div class="p-3 border-t border-gray-100 flex justify-between text-gray-500 text-sm px-6">
+                            <div class="p-3 border-t border-gray-100 flex flex-wrap gap-3 justify-between text-gray-500 text-sm px-6">
                                 <button class="flex items-center gap-2 hover:text-primary"><i
                                     class="fa-regular fa-heart"></i> 87 <span data-i18n="likesLabel">Likes</span></button>
                                 <button class="flex items-center gap-2 hover:text-primary"><i
@@ -332,7 +342,7 @@
                             <div class="bg-gray-200 h-64 w-full"><img
                                     src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
                                     alt="Quantum" class="w-full h-full object-cover"></div>
-                            <div class="p-3 border-t border-gray-100 flex justify-between text-gray-500 text-sm px-6">
+                            <div class="p-3 border-t border-gray-100 flex flex-wrap gap-3 justify-between text-gray-500 text-sm px-6">
                                 <button class="flex items-center gap-2 hover:text-primary"><i
                                     class="fa-regular fa-heart"></i> 203 <span data-i18n="likesLabel">Likes</span></button>
                                 <button class="flex items-center gap-2 hover:text-primary"><i
@@ -343,7 +353,7 @@
                         </div>
                     </div>
 
-                    <div class="xl:col-span-4 h-full overflow-y-auto pl-0 md:pl-2 pb-20 custom-scroll">
+                    <div class="xl:col-span-4 h-auto md:h-full overflow-visible md:overflow-y-auto pl-0 md:pl-2 pb-20 custom-scroll">
                         <div class="space-y-6">
 
                             <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100">
@@ -352,8 +362,8 @@
                                     <a href="#" data-i18n="seeAll" class="text-xs text-primary font-medium hover:underline">See all</a>
                                 </div>
                                 <div class="space-y-4">
-                                    <div class="flex items-center justify-between">
-                                        <div class="flex items-center space-x-3">
+                                    <div class="flex items-start sm:items-center justify-between gap-2">
+                                        <div class="flex items-center space-x-3 min-w-0">
                                             <div
                                                 class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center text-blue-600">
                                                 <i class="fa-solid fa-laptop-code"></i>
@@ -366,8 +376,8 @@
                                         <button
                                             class="text-xs border border-gray-300 px-3 py-1 rounded-full hover:bg-gray-50 font-medium transition">Join</button>
                                     </div>
-                                    <div class="flex items-center justify-between">
-                                        <div class="flex items-center space-x-3">
+                                    <div class="flex items-start sm:items-center justify-between gap-2">
+                                        <div class="flex items-center space-x-3 min-w-0">
                                             <div
                                                 class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center text-purple-600">
                                                 <i class="fa-solid fa-chart-pie"></i>
@@ -380,8 +390,8 @@
                                         <button
                                             class="text-xs border border-gray-300 px-3 py-1 rounded-full hover:bg-gray-50 font-medium transition">Join</button>
                                     </div>
-                                    <div class="flex items-center justify-between">
-                                        <div class="flex items-center space-x-3">
+                                    <div class="flex items-start sm:items-center justify-between gap-2">
+                                        <div class="flex items-center space-x-3 min-w-0">
                                             <div
                                                 class="w-10 h-10 bg-teal-100 rounded-lg flex items-center justify-center text-teal-600">
                                                 <i class="fa-solid fa-staff-snake"></i>
@@ -640,15 +650,15 @@
                         class="fa-solid fa-book-open"></i> Library & Resources</h2>
                 <p data-i18n="libraryDesc" class="text-gray-500 mb-6">Access research papers, datasets, and learning materials</p>
 
-                <div class="bg-gray-100 p-1 rounded-xl flex mb-6 max-w-4xl">
+                <div class="bg-gray-100 p-1 rounded-xl flex mb-6 max-w-4xl overflow-x-auto">
                     <button onclick="switchLibTab('resources')"
-                        class="flex-1 py-2 text-sm font-semibold rounded-lg bg-white shadow-sm text-gray-800 text-center transition lib-tab-btn"
+                        class="flex-1 min-w-[130px] py-2 text-sm font-semibold rounded-lg bg-white shadow-sm text-gray-800 text-center transition lib-tab-btn whitespace-nowrap"
                         id="btn-resources" data-i18n="resourcesTab">Resources</button>
                     <button onclick="switchLibTab('saved-posts')"
-                        class="flex-1 py-2 text-sm font-semibold rounded-lg text-gray-500 hover:bg-white/50 text-center transition lib-tab-btn"
+                        class="flex-1 min-w-[130px] py-2 text-sm font-semibold rounded-lg text-gray-500 hover:bg-white/50 text-center transition lib-tab-btn whitespace-nowrap"
                         id="btn-saved-posts" data-i18n="savedPostsTab">Saved Posts</button>
                     <button onclick="switchLibTab('collections')"
-                        class="flex-1 py-2 text-sm font-semibold rounded-lg text-gray-500 hover:bg-white/50 text-center transition lib-tab-btn"
+                        class="flex-1 min-w-[130px] py-2 text-sm font-semibold rounded-lg text-gray-500 hover:bg-white/50 text-center transition lib-tab-btn whitespace-nowrap"
                         id="btn-collections" data-i18n="myCollectionsTab">My Collections</button>
                 </div>
 
@@ -682,7 +692,7 @@
                                     <i class="fa-solid fa-bookmark text-primary"></i>
                                 </div>
                                 <p class="text-sm text-gray-500 mb-2">by Dr. Andrew Ng</p>
-                                <div class="flex items-center gap-3 text-xs text-gray-400">
+                                <div class="flex flex-wrap items-center gap-3 text-xs text-gray-400">
                                     <span class="bg-gray-100 text-gray-600 px-2 py-0.5 rounded">Machine Learning</span>
                                     <span class="bg-gray-100 text-gray-600 px-2 py-0.5 rounded">PDF</span>
                                     <span><i class="fa-solid fa-download mr-1"></i> 12,453 <span data-i18n="downloadsWord">downloads</span></span>
@@ -710,7 +720,7 @@
                                     <i class="fa-regular fa-bookmark text-gray-400"></i>
                                 </div>
                                 <p class="text-sm text-gray-500 mb-2">by Al-Farabi Research Press</p>
-                                <div class="flex items-center gap-3 text-xs text-gray-400">
+                                <div class="flex flex-wrap items-center gap-3 text-xs text-gray-400">
                                     <span class="bg-gray-100 text-gray-600 px-2 py-0.5 rounded">Physics</span>
                                     <span class="bg-gray-100 text-gray-600 px-2 py-0.5 rounded">PDF</span>
                                     <span><i class="fa-solid fa-download mr-1"></i> 8,234 <span data-i18n="downloadsWord">downloads</span></span>
@@ -949,8 +959,8 @@
 
                 <div id="pview-saved" class="pview-content hidden px-1">
                     <div
-                        class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex justify-between items-center mb-3">
-                        <div class="flex items-center gap-3">
+                        class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col sm:flex-row justify-between sm:items-center gap-3 mb-3">
+                        <div class="flex items-center gap-3 min-w-0">
                             <div class="w-10 h-10 bg-red-50 text-red-600 rounded-lg flex items-center justify-center"><i
                                     class="fa-brands fa-youtube"></i></div>
                             <div>
@@ -962,8 +972,8 @@
                                 class="fa-solid fa-chevron-right"></i></button>
                     </div>
                     <div
-                        class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex justify-between items-center">
-                        <div class="flex items-center gap-3">
+                        class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col sm:flex-row justify-between sm:items-center gap-3">
+                        <div class="flex items-center gap-3 min-w-0">
                             <div
                                 class="w-10 h-10 bg-gray-100 text-gray-600 rounded-lg flex items-center justify-center">
                                 <i class="fa-solid fa-file-lines"></i>
@@ -1011,7 +1021,7 @@
                             </div>
                         </div>
                         <button data-i18n="viewPostBtn"
-                            class="border border-gray-200 text-sm font-medium px-4 py-2 rounded-lg hover:bg-gray-50">View Post</button>
+                            class="border border-gray-200 text-sm font-medium px-4 py-2 rounded-lg hover:bg-gray-50 w-full sm:w-auto">View Post</button>
                     </div>
 
                     <div
@@ -1032,7 +1042,7 @@
                             </div>
                         </div>
                         <button data-i18n="viewPostBtn"
-                            class="border border-gray-200 text-sm font-medium px-4 py-2 rounded-lg hover:bg-gray-50">View Post</button>
+                            class="border border-gray-200 text-sm font-medium px-4 py-2 rounded-lg hover:bg-gray-50 w-full sm:w-auto">View Post</button>
                     </div>
 
                     <div
@@ -1053,13 +1063,13 @@
                             </div>
                         </div>
                         <button data-i18n="viewPostBtn"
-                            class="border border-gray-200 text-sm font-medium px-4 py-2 rounded-lg hover:bg-gray-50">View Post</button>
+                            class="border border-gray-200 text-sm font-medium px-4 py-2 rounded-lg hover:bg-gray-50 w-full sm:w-auto">View Post</button>
                     </div>
                 </div>
             </div>
             <div id="notifications" class="page-section hidden h-full overflow-y-auto custom-scroll pb-20">
                 <div class="max-w-4xl mx-auto mt-6">
-                    <div class="flex justify-between items-center mb-6">
+                    <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-3 mb-6">
                         <h2 data-i18n="notificationsTitle" class="text-2xl font-bold text-gray-800 flex items-center gap-3">
                             <i class="fa-regular fa-bell"></i> Notifications
                         </h2>
@@ -1343,8 +1353,8 @@
                 </div>
             </div>
 
-            <div class="p-4 border-t border-gray-100 flex justify-between items-center bg-gray-50/50">
-                <div class="flex space-x-4 text-gray-500">
+            <div class="p-4 border-t border-gray-100 flex flex-wrap gap-3 justify-between items-center bg-gray-50/50">
+                <div class="flex items-center space-x-4 text-gray-500">
                     <button onclick="setPostType('photo')" class="hover:text-primary transition tooltip-btn"
                         title="Photo"><i class="fa-regular fa-image"></i></button>
                     <button onclick="setPostType('video')" class="hover:text-primary transition tooltip-btn"
