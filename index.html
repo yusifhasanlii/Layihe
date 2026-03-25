@@ -308,7 +308,7 @@
                             </div>
                         </div>
 
-                        <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden" data-translate-scope="post" data-post-key="post1">
                             <div class="p-4 flex justify-between items-start">
                                 <div class="flex space-x-3">
                                     <img src="https://randomuser.me/api/portraits/men/36.jpg" class="w-10 h-10 rounded-full">
@@ -325,9 +325,10 @@
                                         class="fa-solid fa-ellipsis"></i></button>
                             </div>
                             <div class="px-4 pb-3">
-                                <p class="text-sm text-gray-800">Joint AI symposium between Baku and Ankara is now
+                                <p class="post-translatable text-sm text-gray-800">Joint AI symposium between Baku and Ankara is now
                                     open for paper submissions. We are especially looking for work on multimodal
                                     learning and educational AI systems.</p>
+                                <div class="post-translation hidden mt-3 p-3 bg-primary/5 border border-primary/20 rounded-lg"></div>
                             </div>
                             <div class="bg-gray-200 h-72 w-full relative group cursor-pointer">
                                 <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
@@ -352,7 +353,7 @@
                             </div>
                         </div>
 
-                        <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden" data-translate-scope="post" data-post-key="post2">
                             <div class="p-4 flex justify-between items-start">
                                 <div class="flex space-x-3">
                                     <img src="https://randomuser.me/api/portraits/women/63.jpg"
@@ -370,9 +371,10 @@
                                         class="fa-solid fa-ellipsis"></i></button>
                             </div>
                             <div class="px-4 pb-3">
-                                <p class="text-sm text-gray-800">New dataset on Turkic languages natural language
+                                <p class="post-translatable text-sm text-gray-800">New dataset on Turkic languages natural language
                                     processing has been published today. It includes aligned corpora for Azerbaijani,
                                     Turkish, Kazakh, Uzbek, Turkmen, and Kyrgyz.</p>
+                                <div class="post-translation hidden mt-3 p-3 bg-primary/5 border border-primary/20 rounded-lg"></div>
                             </div>
                             <div class="px-4 pb-4">
                                 <div class="bg-gray-50 rounded-lg p-4 border border-gray-200"><code
@@ -391,7 +393,7 @@
                             </div>
                         </div>
 
-                        <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden" data-translate-scope="post" data-post-key="post3">
                             <div class="p-4 flex justify-between items-start">
                                 <div class="flex space-x-3">
                                         <img src="https://randomuser.me/api/portraits/men/65.jpg" class="w-10 h-10 rounded-full">
@@ -406,8 +408,9 @@
                                 </div>
                             </div>
                             <div class="px-4 pb-3">
-                                <p class="text-sm text-gray-800">PhD opportunities at Kyrgyz-Turkish Manas University
+                                <p class="post-translatable text-sm text-gray-800">PhD opportunities at Kyrgyz-Turkish Manas University
                                     are now available for regional candidates in Physics and Computational Modeling.</p>
+                                <div class="post-translation hidden mt-3 p-3 bg-primary/5 border border-primary/20 rounded-lg"></div>
                             </div>
                             <div class="bg-gray-200 h-64 w-full"><img
                                     src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
@@ -1365,14 +1368,14 @@
 
     <div id="translateMenu" onclick="event.stopPropagation()"
         class="hidden fixed z-[10001] w-44 bg-white border border-gray-200 rounded-xl shadow-xl p-2">
-        <button onclick="closeTranslateMenu()" class="w-full text-left px-3 py-2 rounded-lg text-sm hover:bg-gray-50">EN</button>
-        <button onclick="closeTranslateMenu()" class="w-full text-left px-3 py-2 rounded-lg text-sm hover:bg-gray-50">AZ</button>
-        <button onclick="closeTranslateMenu()" class="w-full text-left px-3 py-2 rounded-lg text-sm hover:bg-gray-50">TR</button>
-        <button onclick="closeTranslateMenu()" class="w-full text-left px-3 py-2 rounded-lg text-sm hover:bg-gray-50">KK</button>
-        <button onclick="closeTranslateMenu()" class="w-full text-left px-3 py-2 rounded-lg text-sm hover:bg-gray-50">UZ</button>
-        <button onclick="closeTranslateMenu()" class="w-full text-left px-3 py-2 rounded-lg text-sm hover:bg-gray-50">TK</button>
-        <button onclick="closeTranslateMenu()" class="w-full text-left px-3 py-2 rounded-lg text-sm hover:bg-gray-50">KY</button>
-        <button onclick="closeTranslateMenu()" class="w-full text-left px-3 py-2 rounded-lg text-sm hover:bg-gray-50">OTK</button>
+        <button onclick="selectTranslateLanguage('EN')" class="w-full text-left px-3 py-2 rounded-lg text-sm hover:bg-gray-50">EN</button>
+        <button onclick="selectTranslateLanguage('AZ')" class="w-full text-left px-3 py-2 rounded-lg text-sm hover:bg-gray-50">AZ</button>
+        <button onclick="selectTranslateLanguage('TR')" class="w-full text-left px-3 py-2 rounded-lg text-sm hover:bg-gray-50">TR</button>
+        <button onclick="selectTranslateLanguage('KZ')" class="w-full text-left px-3 py-2 rounded-lg text-sm hover:bg-gray-50">KZ</button>
+        <button onclick="selectTranslateLanguage('UZ')" class="w-full text-left px-3 py-2 rounded-lg text-sm hover:bg-gray-50">UZ</button>
+        <button onclick="selectTranslateLanguage('TK')" class="w-full text-left px-3 py-2 rounded-lg text-sm hover:bg-gray-50">TK</button>
+        <button onclick="selectTranslateLanguage('KY')" class="w-full text-left px-3 py-2 rounded-lg text-sm hover:bg-gray-50">KY</button>
+        <button onclick="selectTranslateLanguage('OTK')" class="w-full text-left px-3 py-2 rounded-lg text-sm hover:bg-gray-50">OTK</button>
     </div>
 
     <div id="pdfViewerModal" onclick="closePdfViewer()"
@@ -1509,8 +1512,63 @@
             applyTheme('light');
         }
 
+        let activeTranslateTrigger = null;
+
+        const translateLanguageLabels = {
+            EN: 'English',
+            AZ: 'Azerbaijani',
+            TR: 'Turkish',
+            KZ: 'Kazakh',
+            UZ: 'Uzbek',
+            TK: 'Turkmen',
+            KY: 'Kyrgyz',
+            OTK: 'Old Turkic'
+        };
+
+        const translateUiBySiteLanguage = {
+            en: { translated: 'Translated', showOriginal: 'Show original' },
+            az: { translated: 'Tərcümə olundu', showOriginal: 'Orijinalı göstər' },
+            tr: { translated: 'Çevrildi', showOriginal: 'Orijinali göster' },
+            kk: { translated: 'Аударылды', showOriginal: 'Түпнұсқаны көрсету' },
+            uz: { translated: 'Tarjima qilindi', showOriginal: 'Aslini ko`rsatish' },
+            tk: { translated: 'Terjime edildi', showOriginal: 'Aslyny görkez' },
+            ky: { translated: 'Которулду', showOriginal: 'Түп нускасын көрсөтүү' },
+            otk: { translated: 'Agtarildi', showOriginal: 'Aslin korguz' }
+        };
+
+        const postTranslations = {
+            post1: {
+                AZ: 'Baki ve Ankara arasynda birge AI simpoziumu üçün məqalə qəbulu açıldı. Xüsusilə multimodal öyrənmə və təhsil üçün AI sistemləri üzrə işlər gözlənilir.',
+                TR: 'Bakü ve Ankara arasında ortak AI sempozyumu için bildiri çağrısı açıldı. Özellikle çok kipli öğrenme ve eğitim odaklı AI sistemleri üzerine çalışmalar bekleniyor.',
+                KZ: 'Баку мен Анкара арасындағы ортақ AI симпозиумына мақала қабылдау басталды. Біз әсіресе мультимодалды оқыту және білім беру AI жүйелері туралы жұмыстарды күтеміз.',
+                UZ: 'Boku va Anqara ortasidagi qo`shma AI simpoziumi uchun maqola topshirish ochildi. Ayniqsa multimodal o`rganish va ta`limiy AI tizimlari bo`yicha ishlar kutilmoqda.',
+                TK: 'Baku bilen Ankara arasynda bilelikdäki AI simpoziumy üçin makala tabşyrmak açyldy. Aýratyn-da multimodal öwreniş we bilim beriş AI ulgamlary boýunça işler garaşylýar.',
+                KY: 'Баку менен Анкара ортосундагы биргелешкен AI симпозиумуна макала кабыл алуу ачылды. Айрыкча мультимодалдуу окутуу жана билим берүү AI системалары боюнча иштер күтүлүүдө.',
+                OTK: 'Baqu birle Ankara arasynda birikmis AI yigini ucun bitig sunum acildi. Kop koruklug ogrenis hem bilig AI tizimleri tagi isler kolenur.'
+            },
+            post2: {
+                AZ: 'Türk dillərinin təbii dil emalı üzrə yeni dataset bu gün dərc olundu. Buraya Azərbaycan, türk, qazax, özbək, türkmən və qırğız dilləri üçün uyğunlaşdırılmış korpuslar daxildir.',
+                TR: 'Türk dilleri doğal dil işleme için yeni bir veri seti bugün yayımlandı. Azerbaycan Türkçesi, Türkçe, Kazakça, Özbekçe, Türkmence ve Kırgızca için hizalanmış derlemler içeriyor.',
+                KZ: 'Түркі тілдерінің табиғи тіл өңдеуіне арналған жаңа dataset бүгін жарияланды. Онда әзербайжан, түрік, қазақ, өзбек, түрікмен және қырғыз тілдері үшін сәйкестендірілген корпустар бар.',
+                UZ: 'Turkiy tillar tabiiy tilni qayta ishlash uchun yangi dataset bugun e`lon qilindi. Unda ozarbayjon, turk, qozoq, o`zbek, turkman va qirg`iz tillari uchun moslashtirilgan korpuslar bor.',
+                TK: 'Türki dilleriň tebigy dil gaýtadan işlemesi üçin täze dataset şu gün çap edildi. Onda azerbaýjan, türk, gazak, özbek, türkmen we gyrgyz dilleri üçin deňeşdirilen korpuslar bar.',
+                KY: 'Түрк тилдеринин табигый тил иштетүүсү боюнча жаңы dataset бүгүн жарыяланды. Анда азербайжан, түрк, казак, өзбек, түркмөн жана кыргыз тилдери үчүн шайкештирилген корпустар бар.',
+                OTK: 'Turkik tiller ucun tabigi til islemi yeni dataset bugun tarqadi. Anda Azar, Turk, Qazaq, Ozbek, Turkmen, Qirghiz til birikmis yazuklar bar.'
+            },
+            post3: {
+                AZ: 'Qırğız-Türk Manas Universitetində fizika və hesablama modelləşdirməsi üzrə regional namizədlər üçün PhD imkanları artıq açıqdır.',
+                TR: 'Kırgız-Türk Manas Üniversitesinde Fizik ve Hesaplamalı Modelleme alanlarında bölgesel adaylar için doktora imkanları açıldı.',
+                KZ: 'Қырғыз-Түрік Манас университетінде физика және есептеу модельдеуі бағыттары бойынша өңірлік үміткерлер үшін PhD мүмкіндіктері ашылды.',
+                UZ: 'Qirg`iz-Turk Manas Universitetida Fizika va Hisoblash modellashtirish yo`nalishlarida mintaqaviy nomzodlar uchun PhD imkoniyatlari ochildi.',
+                TK: 'Gyrgyz-Türk Manas Uniwersitetinde Fizika we hasaplaýyş modellendiriş ugurlary boýunça sebit dalaşgärleri üçin PhD mümkinçilikleri açyldy.',
+                KY: 'Кыргыз-Түрк Манас университетинде физика жана эсептөө моделдештирүү багыттары боюнча аймактык талапкерлер үчүн PhD мүмкүнчүлүктөрү ачык.',
+                OTK: 'Qirghiz-Turk Manas bilim yurdunda Fizik hem sanak modelleme ucun boluk adaylargha doktorliq yolu acuq turur.'
+            }
+        };
+
         function openTranslateMenu(event) {
             event.stopPropagation();
+            activeTranslateTrigger = event.currentTarget || event.target.closest('button');
             const menu = document.getElementById('translateMenu');
             if (!menu) return;
 
@@ -1535,6 +1593,47 @@
             const menu = document.getElementById('translateMenu');
             if (!menu) return;
             menu.classList.add('hidden');
+        }
+
+        function hidePostTranslation(event) {
+            event.stopPropagation();
+            const btn = event.currentTarget;
+            if (!btn) return;
+            const outputEl = btn.closest('.post-translation');
+            if (!outputEl) return;
+            outputEl.classList.add('hidden');
+            outputEl.innerHTML = '';
+        }
+
+        function selectTranslateLanguage(langCode) {
+            const trigger = activeTranslateTrigger;
+            closeTranslateMenu();
+            if (!trigger) return;
+
+            const postScope = trigger.closest('[data-translate-scope="post"]');
+            if (!postScope) return;
+
+            const sourceEl = postScope.querySelector('.post-translatable');
+            const outputEl = postScope.querySelector('.post-translation');
+            const postKey = postScope.getAttribute('data-post-key');
+            if (!sourceEl || !outputEl || !postKey) return;
+
+            const originalText = sourceEl.innerText.trim();
+            const uiText = translateUiBySiteLanguage[currentLanguage] || translateUiBySiteLanguage.en;
+            const translatedText = langCode === 'EN'
+                ? originalText
+                : (postTranslations[postKey] && postTranslations[postKey][langCode])
+                    ? postTranslations[postKey][langCode]
+                    : originalText;
+
+            outputEl.innerHTML = `
+                <div class="flex items-center justify-between gap-2 mb-1">
+                    <p class="text-[11px] font-semibold text-primary">${uiText.translated} (${langCode} - ${translateLanguageLabels[langCode] || langCode})</p>
+                    <button onclick="hidePostTranslation(event)" class="text-[11px] font-medium text-gray-500 hover:text-primary">${uiText.showOriginal}</button>
+                </div>
+                <p class="text-sm text-gray-700">${translatedText}</p>
+            `;
+            outputEl.classList.remove('hidden');
         }
 
         function showPage(pageId, element) {
@@ -2129,6 +2228,7 @@
         document.addEventListener('keydown', function (event) {
             if (event.key === 'Escape') {
                 closePdfViewer();
+                closeTranslateMenu();
             }
         });
 
