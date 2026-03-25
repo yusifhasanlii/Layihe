@@ -347,6 +347,8 @@
                                     class="fa-regular fa-comment"></i> 29 <span data-i18n="commentsLabel">Comments</span></button>
                                 <button class="flex items-center gap-2 hover:text-primary"><i
                                     class="fa-solid fa-share-nodes"></i> 17 <span data-i18n="shareLabel">Share</span></button>
+                                <button onclick="openTranslateMenu(event)" class="flex items-center justify-center hover:text-primary" aria-label="Translate"><i
+                                    class="fa-solid fa-language"></i></button>
                             </div>
                         </div>
 
@@ -356,9 +358,9 @@
                                     <img src="https://randomuser.me/api/portraits/women/63.jpg"
                                         class="w-10 h-10 rounded-full border border-gray-200">
                                     <div>
-                                        <h4 class="font-bold text-sm">Ayse Demir <span
-                                                class="font-normal text-xs text-gray-500 bg-gray-100 px-2 py-0.5 rounded ml-2">Baku
-                                                State University</span></h4>
+                                        <h4 class="font-bold text-sm">Aysel Demirov <span
+                                            class="font-normal text-xs text-gray-500 bg-gray-100 px-2 py-0.5 rounded ml-2">Karabakh
+                                            University</span></h4>
                                         <p class="text-xs text-gray-500">MSc in Data Science</p>
                                         <p class="text-xs text-gray-400 mt-0.5"><span data-i18n="time2HoursAgo">2 hours ago</span> • <span
                                             class="text-primary font-medium">#NLP</span></p>
@@ -384,6 +386,8 @@
                                     class="fa-regular fa-comment"></i> 14 <span data-i18n="commentsLabel">Comments</span></button>
                                 <button class="flex items-center gap-2 hover:text-primary"><i
                                     class="fa-solid fa-share-nodes"></i> 9 <span data-i18n="shareLabel">Share</span></button>
+                                <button onclick="openTranslateMenu(event)" class="flex items-center justify-center hover:text-primary" aria-label="Translate"><i
+                                    class="fa-solid fa-language"></i></button>
                             </div>
                         </div>
 
@@ -415,6 +419,8 @@
                                     class="fa-regular fa-comment"></i> 46 <span data-i18n="commentsLabel">Comments</span></button>
                                 <button class="flex items-center gap-2 hover:text-primary"><i
                                     class="fa-solid fa-share-nodes"></i> 31 <span data-i18n="shareLabel">Share</span></button>
+                                <button onclick="openTranslateMenu(event)" class="flex items-center justify-center hover:text-primary" aria-label="Translate"><i
+                                    class="fa-solid fa-language"></i></button>
                             </div>
                         </div>
                     </div>
@@ -1111,7 +1117,7 @@
                             </div>
                             <div>
                                 <h4 data-i18n="savedCard2Title" class="font-bold text-gray-800">New dataset on Turkic languages NLP</h4>
-                                <p data-i18n="savedCard2By" class="text-xs text-gray-500 mt-1">by Ayse Demir</p>
+                                <p data-i18n="savedCard2By" class="text-xs text-gray-500 mt-1">by Aysel Demirov</p>
                                 <div class="flex gap-2 mt-1">
                                     <span
                                         class="bg-gray-100 text-[10px] px-1.5 py-0.5 rounded text-gray-600 font-bold" data-i18n="photoPostLabel">Photo Post</span>
@@ -1194,7 +1200,7 @@
                                 class="w-12 h-12 rounded-full border border-white shadow-sm object-cover">
                             <div class="flex-1">
                                 <p class="text-sm text-gray-800">
-                                    <span class="font-bold">Ayse Demir</span> <span data-i18n="notifStartedFollowing">started following you</span>
+                                    <span class="font-bold">Aysel Demirov</span> <span data-i18n="notifStartedFollowing">started following you</span>
                                 </p>
                                 <span class="text-xs text-gray-400" data-i18n="time2HoursAgo">2 hours ago</span>
                             </div>
@@ -1265,7 +1271,7 @@
                             <img src="https://randomuser.me/api/portraits/women/63.jpg"
                                 class="w-12 h-12 rounded-full border border-white shadow-sm object-cover">
                             <div class="flex-1">
-                                <p class="text-sm text-gray-800"><span class="font-bold">Ayse Demir</span> <span data-i18n="notifStartedFollowing">started
+                                <p class="text-sm text-gray-800"><span class="font-bold">Aysel Demirov</span> <span data-i18n="notifStartedFollowing">started
                                     following you</span></p>
                                 <span class="text-xs text-gray-400" data-i18n="time2HoursAgo">2 hours ago</span>
                             </div>
@@ -1356,6 +1362,18 @@
             </div>
         </div>
     </main>
+
+    <div id="translateMenu" onclick="event.stopPropagation()"
+        class="hidden fixed z-[10001] w-44 bg-white border border-gray-200 rounded-xl shadow-xl p-2">
+        <button onclick="closeTranslateMenu()" class="w-full text-left px-3 py-2 rounded-lg text-sm hover:bg-gray-50">English</button>
+        <button onclick="closeTranslateMenu()" class="w-full text-left px-3 py-2 rounded-lg text-sm hover:bg-gray-50">Azerbaijani</button>
+        <button onclick="closeTranslateMenu()" class="w-full text-left px-3 py-2 rounded-lg text-sm hover:bg-gray-50">Turkish</button>
+        <button onclick="closeTranslateMenu()" class="w-full text-left px-3 py-2 rounded-lg text-sm hover:bg-gray-50">Kazakh</button>
+        <button onclick="closeTranslateMenu()" class="w-full text-left px-3 py-2 rounded-lg text-sm hover:bg-gray-50">Uzbek</button>
+        <button onclick="closeTranslateMenu()" class="w-full text-left px-3 py-2 rounded-lg text-sm hover:bg-gray-50">Turkmen</button>
+        <button onclick="closeTranslateMenu()" class="w-full text-left px-3 py-2 rounded-lg text-sm hover:bg-gray-50">Kyrgyz</button>
+        <button onclick="closeTranslateMenu()" class="w-full text-left px-3 py-2 rounded-lg text-sm hover:bg-gray-50">Old Turkic</button>
+    </div>
 
     <div id="pdfViewerModal" onclick="closePdfViewer()"
         class="hidden fixed inset-0 z-[9999] bg-black/80 backdrop-blur-sm p-2 md:p-6">
@@ -1489,6 +1507,34 @@
                 return;
             }
             applyTheme('light');
+        }
+
+        function openTranslateMenu(event) {
+            event.stopPropagation();
+            const menu = document.getElementById('translateMenu');
+            if (!menu) return;
+
+            menu.classList.remove('hidden');
+
+            const gap = 8;
+            const menuWidth = 176;
+            const menuHeight = 300;
+            let left = event.clientX - menuWidth + 20;
+            let top = event.clientY + gap;
+
+            if (left < gap) left = gap;
+            if (left + menuWidth > window.innerWidth - gap) left = window.innerWidth - menuWidth - gap;
+            if (top + menuHeight > window.innerHeight - gap) top = event.clientY - menuHeight - gap;
+            if (top < gap) top = gap;
+
+            menu.style.left = `${left}px`;
+            menu.style.top = `${top}px`;
+        }
+
+        function closeTranslateMenu() {
+            const menu = document.getElementById('translateMenu');
+            if (!menu) return;
+            menu.classList.add('hidden');
         }
 
         function showPage(pageId, element) {
@@ -1955,6 +2001,7 @@
                             <div>
                                 ${msg.senderName ? `<p class="text-[10px] text-gray-400 ml-1 mb-0.5">${msg.senderName}</p>` : ''}
                                 <div class="bg-white p-3 rounded-lg rounded-tl-none shadow-sm text-sm text-gray-700 max-w-md border border-gray-100">${msg.text}</div>
+                                <button onclick="openTranslateMenu(event)" class="text-[10px] text-gray-400 hover:text-primary ml-1 mt-1 flex items-center justify-center" aria-label="Translate"><i class="fa-solid fa-language"></i></button>
                                 <p class="text-[10px] text-gray-400 mt-1 ml-1">${msg.time}</p>
                             </div>
                         </div>`;
@@ -1963,6 +2010,7 @@
                         <div class="flex items-end justify-end space-x-3">
                             <div>
                                 <div class="bg-primary text-white p-3 rounded-lg rounded-tr-none shadow-sm text-sm max-w-md text-left">${msg.text}</div>
+                                <div class="flex justify-end mt-1 mr-1"><button onclick="openTranslateMenu(event)" class="text-[10px] text-gray-400 hover:text-primary flex items-center justify-center" aria-label="Translate"><i class="fa-solid fa-language"></i></button></div>
                                 <div class="flex justify-end items-center gap-1 mt-1 mr-1">
                                     <p class="text-[10px] text-gray-400">${msg.time}</p>
                                     <i class="fa-solid fa-check-double text-[10px] text-primary"></i>
@@ -2007,6 +2055,7 @@
                 <div class="flex items-end justify-end space-x-3 animate-fade-in">
                     <div>
                         <div class="bg-primary text-white p-3 rounded-lg rounded-tr-none shadow-sm text-sm max-w-md text-left">${text}</div>
+                        <div class="flex justify-end mt-1 mr-1"><button onclick="openTranslateMenu(event)" class="text-[10px] text-gray-400 hover:text-primary flex items-center justify-center" aria-label="Translate"><i class="fa-solid fa-language"></i></button></div>
                         <div class="flex justify-end items-center gap-1 mt-1 mr-1">
                             <p class="text-[10px] text-gray-400">${timeString}</p>
                             <i class="fa-solid fa-check text-[10px] text-primary"></i>
@@ -2033,6 +2082,7 @@
                             <img src="${chat.avatar}" class="w-8 h-8 rounded-full">
                             <div>
                                 <div class="bg-white p-3 rounded-lg rounded-tl-none shadow-sm text-sm text-gray-700 max-w-md border border-gray-100">${replyText}</div>
+                                <button onclick="openTranslateMenu(event)" class="text-[10px] text-gray-400 hover:text-primary ml-1 mt-1 flex items-center justify-center" aria-label="Translate"><i class="fa-solid fa-language"></i></button>
                                 <p class="text-[10px] text-gray-400 mt-1 ml-1">${timeString}</p>
                             </div>
                         </div>`;
@@ -2162,7 +2212,7 @@
             joinCardTitle: 'Join AI & Data Science', joinCardDesc: 'Connect with researchers worldwide', joinCardBtn: 'Join',
             globalSearchInput: 'Search...', userMenuLabel: 'You', ddProfile: 'Profile', ddSaved: 'Saved', ddSettings: 'Settings', ddLogout: 'Logout',
             shareInput: 'What do you want to share?', postBtnPhoto: 'Photo', postBtnVideo: 'Video', postBtnFile: 'File', postBtnQuestion: 'Question', postBtnAnnouncement: 'Announcement',
-            likesLabel: 'Likes', commentsLabel: 'Comments', shareLabel: 'Share',
+            likesLabel: 'Likes', commentsLabel: 'Comments', shareLabel: 'Share', translateBtn: 'Translate',
             suggestedGroups: 'Suggested Groups', seeAll: 'See all', onlineFriends: 'Online Friends', trendingTopics: 'Trending Topics',
             onlineFriend1Meta: 'Baku, Azerbaijan • PhD Student', onlineFriend2Meta: 'Almaty, Kazakhstan • Researcher',
             onlineFriend3Meta: 'Tashkent, Uzbekistan • MSc Student', onlineFriend4Meta: 'Ashgabat, Turkmenistan • Engineer',
@@ -2180,7 +2230,7 @@
             photoPostLabel: 'Photo Post', videoPostLabel: 'Video Post',
             saved2DaysAgo: 'Saved 2 days ago', saved5DaysAgo: 'Saved 5 days ago', saved1WeekAgo: 'Saved 1 week ago', savedLastWeek: 'Saved last week',
             savedCard1Title: 'Joint AI symposium between Baku and Ankara', savedCard1By: 'by Ilkin Yilmaz',
-            savedCard2Title: 'New dataset on Turkic languages NLP', savedCard2By: 'by Ayse Demir',
+            savedCard2Title: 'New dataset on Turkic languages NLP', savedCard2By: 'by Aysel Demirov',
             savedCard3Title: 'PhD opportunities at Manas University', savedCard3By: 'by Prof. Aygul Saparova',
             editProfileBtn: 'Edit Profile', profileTabPosts: 'Posts', profileTabAbout: 'About', profileTabGroups: 'Groups', profileTabSaved: 'Saved',
             bioTitle: 'Bio', infoTitle: 'Info', skillsTitle: 'Skills',
@@ -2209,7 +2259,7 @@
                 shareInput: 'Nə paylaşmaq istəyirsən?', postBtnPhoto: 'Şəkil', postBtnVideo: 'Video', postBtnFile: 'Fayl', postBtnQuestion: 'Sual', postBtnAnnouncement: 'Elan',
                 messagesTitle: 'Mesajlar', searchConversationsInput: 'Söhbətlərdə axtar...', messageInput: 'Mesaj yaz...',
                 selectChatTitle: 'Söhbət seçin', selectChatSubtitle: 'Çat seçilməyib', selectChatHint: 'Mesajlaşmağa başlamaq üçün soldan bir söhbət seçin.',
-                likesLabel: 'Bəyənmə', commentsLabel: 'Şərh', shareLabel: 'Paylaş',
+                likesLabel: 'Bəyənmə', commentsLabel: 'Şərh', shareLabel: 'Paylaş', translateBtn: 'Tərcümə et',
                 suggestedGroups: 'Təklif olunan qruplar', seeAll: 'Hamısına bax', onlineFriends: 'Onlayn dostlar', trendingTopics: 'Trend mövzular',
                 onlineFriend1Meta: 'Bakı, Azərbaycan • PhD tələbəsi', onlineFriend2Meta: 'Almatı, Qazaxıstan • Tədqiqatçı',
                 onlineFriend3Meta: 'Daşkənd, Özbəkistan • MSc tələbəsi', onlineFriend4Meta: 'Aşqabad, Türkmənistan • Mühəndis',
@@ -2227,7 +2277,7 @@
                 photoPostLabel: 'Şəkil postu', videoPostLabel: 'Video postu',
                 saved2DaysAgo: '2 gün əvvəl saxlanılıb', saved5DaysAgo: '5 gün əvvəl saxlanılıb', saved1WeekAgo: '1 həftə əvvəl saxlanılıb', savedLastWeek: 'ötən həftə saxlanılıb',
                 savedCard1Title: 'Bakı və Ankara arasında ortaq AI simpoziumu', savedCard1By: 'İlkin Yılmaz tərəfindən',
-                savedCard2Title: 'Türk dilləri NLP üzrə yeni dataset', savedCard2By: 'Ayşe Dəmir tərəfindən',
+                savedCard2Title: 'Türk dilləri NLP üzrə yeni dataset', savedCard2By: 'Aysel Dəmir tərəfindən',
                 savedCard3Title: 'Manas Universitetində PhD imkanları', savedCard3By: 'Prof. Aygül Saparova tərəfindən',
                 editProfileBtn: 'Profili redaktə et', profileTabPosts: 'Postlar', profileTabAbout: 'Haqqında', profileTabGroups: 'Qruplar', profileTabSaved: 'Saxlanılanlar',
                 bioTitle: 'Bio', infoTitle: 'Məlumat', skillsTitle: 'Bacarıqlar',
@@ -2254,7 +2304,7 @@
                 shareInput: 'Ne paylaşmak istersin?', postBtnPhoto: 'Fotoğraf', postBtnVideo: 'Video', postBtnFile: 'Dosya', postBtnQuestion: 'Soru', postBtnAnnouncement: 'Duyuru',
                 messagesTitle: 'Mesajlar', searchConversationsInput: 'Sohbetlerde ara...', messageInput: 'Mesaj yaz...',
                 selectChatTitle: 'Bir sohbet seçin', selectChatSubtitle: 'Sohbet seçilmedi', selectChatHint: 'Mesajlaşmaya başlamak için soldan bir sohbet seçin.',
-                likesLabel: 'Beğeni', commentsLabel: 'Yorum', shareLabel: 'Paylaş', notificationsTitle: 'Bildirimler', markAllRead: 'Tümünü okundu işaretle',
+                likesLabel: 'Beğeni', commentsLabel: 'Yorum', shareLabel: 'Paylaş', translateBtn: 'Çevir', notificationsTitle: 'Bildirimler', markAllRead: 'Tümünü okundu işaretle',
                 suggestedGroups: 'Önerilen Gruplar', seeAll: 'Tümünü gör', onlineFriends: 'Çevrimiçi Arkadaşlar', trendingTopics: 'Trend Konular',
                 onlineFriend1Meta: 'Bakü, Azerbaycan • Doktora öğrencisi', onlineFriend2Meta: 'Almatı, Kazakistan • Araştırmacı',
                 onlineFriend3Meta: 'Taşkent, Özbekistan • Yüksek lisans öğrencisi', onlineFriend4Meta: 'Aşkabat, Türkmenistan • Mühendis',
@@ -2275,7 +2325,7 @@
                 photoPostLabel: 'Fotoğraf gönderisi', videoPostLabel: 'Video gönderisi',
                 saved2DaysAgo: '2 gün önce kaydedildi', saved5DaysAgo: '5 gün önce kaydedildi', saved1WeekAgo: '1 hafta önce kaydedildi', savedLastWeek: 'geçen hafta kaydedildi',
                 savedCard1Title: 'Bakü ve Ankara arasında ortak AI sempozyumu', savedCard1By: 'İlkin Yılmaz tarafından',
-                savedCard2Title: 'Türk dilleri NLP için yeni veri seti', savedCard2By: 'Ayşe Demir tarafından',
+                savedCard2Title: 'Türk dilleri NLP için yeni veri seti', savedCard2By: 'Aysel Demirov tarafından',
                 savedCard3Title: 'Manas Üniversitesinde PhD fırsatları', savedCard3By: 'Prof. Aygül Saparova tarafından',
                 agoWord: 'önce', minutesWord: 'dakika', hoursWord: 'saat', daysWord: 'gün', onlineWord: 'Çevrimiçi', offlineWord: 'Çevrimdışı', groupChatLabel: 'Grup sohbeti'
             },
@@ -2332,7 +2382,7 @@
                 photoPostLabel: 'Rasm posti', videoPostLabel: 'Video posti',
                 saved2DaysAgo: '2 kun oldin saqlandi', saved5DaysAgo: '5 kun oldin saqlandi', saved1WeekAgo: '1 hafta oldin saqlandi', savedLastWeek: 'otgan hafta saqlandi',
                 savedCard1Title: 'Boku va Anqara ortasidagi umumiy AI simpoziumi', savedCard1By: 'Ilkin Yilmaz tomonidan',
-                savedCard2Title: 'Turkiy tillar NLP uchun yangi dataset', savedCard2By: 'Ayse Demir tomonidan',
+                savedCard2Title: 'Turkiy tillar NLP uchun yangi dataset', savedCard2By: 'Aysel Demirov tomonidan',
                 savedCard3Title: 'Manas universitetida PhD imkoniyatlari', savedCard3By: 'Prof. Aygul Saparova tomonidan',
                 onlineFriends: 'Onlayn dostlar', trendingTopics: 'Trend mavzular', suggestedGroups: 'Tavsiya etilgan guruhlar', seeAll: 'Barchasi',
                 onlineFriend1Meta: 'Boku, Ozarbayjon • PhD talabasi', onlineFriend2Meta: 'Olmaota, Qozogiston • Tadqiqotchi',
@@ -2361,7 +2411,7 @@
                 photoPostLabel: 'Surat posty', videoPostLabel: 'Video posty',
                 saved2DaysAgo: '2 gun on saklandy', saved5DaysAgo: '5 gun on saklandy', saved1WeekAgo: '1 hepde on saklandy', savedLastWeek: 'gecen hepde saklandy',
                 savedCard1Title: 'Baku bilen Ankara arasyndaky ortaq AI simpoziumy', savedCard1By: 'Ilkin Yilmaz tarapyndan',
-                savedCard2Title: 'Turki diller NLP ucin yeni maglumat toplumy', savedCard2By: 'Ayse Demir tarapyndan',
+                savedCard2Title: 'Turki diller NLP ucin yeni maglumat toplumy', savedCard2By: 'Aysel Demirov tarapyndan',
                 savedCard3Title: 'Manas uniwersitetinde PhD mumkinchilikleri', savedCard3By: 'Prof. Aygul Saparova tarapyndan',
                 onlineFriends: 'Onlayn dostlar', trendingTopics: 'Trend temalar', suggestedGroups: 'Teklip edilen toparlar', seeAll: 'Hemmesi',
                 onlineFriend1Meta: 'Baku, Azerbayjan • PhD talyby', onlineFriend2Meta: 'Almaty, Gazagystan • Gözlegçi',
@@ -2420,7 +2470,7 @@
                 photoPostLabel: 'Suret bitig', videoPostLabel: 'Video bitig',
                 saved2DaysAgo: '2 kun burun saklanmish', saved5DaysAgo: '5 kun burun saklanmish', saved1WeekAgo: '1 hefte burun saklanmish', savedLastWeek: 'otgan hefte saklanmish',
                 savedCard1Title: 'Baku ve Ankara arasy ortaq AI simpozyumu', savedCard1By: 'Ilkin Yilmaz tarafindan',
-                savedCard2Title: 'Turk tilleri NLP ucun yangi dataset', savedCard2By: 'Ayse Demir tarafindan',
+                savedCard2Title: 'Turk tilleri NLP ucun yangi dataset', savedCard2By: 'Aysel Demirov tarafindan',
                 savedCard3Title: 'Manas universitetinde PhD imkaniyatlari', savedCard3By: 'Prof. Aygul Saparova tarafindan',
                 onlineFriends: 'Onlayn dostlar', trendingTopics: 'Trend konular', suggestedGroups: 'Sunulgan bodunlar', seeAll: 'Barcha',
                 onlineFriend1Meta: 'Baku, Azerbayjan • PhD talib', onlineFriend2Meta: 'Almaty, Qazaqstan • Arastirmaci',
@@ -2545,6 +2595,8 @@
         // --- 4. INITIALIZATION ---
         document.addEventListener("DOMContentLoaded", () => {
             initTheme();
+
+            document.addEventListener('click', closeTranslateMenu);
 
             const languageSelect = document.getElementById('languageSelect');
             if (languageSelect) {
